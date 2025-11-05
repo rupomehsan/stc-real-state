@@ -1,13 +1,15 @@
 <template>
   <div class="gallery-container">
-    <h3 class="page-title mt-50 mb-30 fadeinup wow">From Amazing Gallery</h3>
-    <div class="row gy-4 fadeinup wow">
+    <h3 class="page-title mt-50 mb-30 fadeinup wow">
+      Exclusive Property Gallery
+    </h3>
+    <div class="row gy-4 fadeinup wow m-0 p-0">
       <div
         v-for="(image, index) in gallery"
         :key="index"
-        :class="getColumnClass(index)"
+        class="col-md-3 m-0 p-0"
       >
-        <div class="property-gallery-card">
+        <div class="property-gallery-card m-0 p-0">
           <div class="property-gallery-card-img">
             <img
               class="w-100"
@@ -194,4 +196,151 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.property-gallery-card {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+  border: 3px solid #70707025;
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    border-radius: 0px !important;
+    .property-gallery-card-img img {
+      transform: scale(1.05);
+      border-radius: 0px !important;
+    }
+
+    .icon-btn {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+.property-gallery-card-img {
+  position: relative;
+  overflow: hidden;
+  height: 450px; // Increased height for better visual impact
+  border-radius: 0px !important;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: all 0.4s ease;
+    border-radius: 0px !important;
+  }
+}
+
+// Different heights for variety (like the reference image)
+.col-xl-7 .property-gallery-card-img {
+  height: 420px; // Larger images for bigger columns
+}
+
+.col-xl-5 .property-gallery-card-img {
+  height: 300px; // Smaller images for smaller columns
+}
+
+.icon-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #333;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+
+  &:hover {
+    background: #fff;
+    color: #007bff;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  i {
+    font-size: 22px;
+  }
+}
+
+// Professional title styling
+.page-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(45deg, #007bff, #0056b3);
+  }
+}
+.property-gallery-card::before {
+  border-radius: 0px !important;
+}
+// Add spacing for better visual hierarchy
+.gallery-container {
+  margin: 2rem 0;
+
+  .row {
+    margin-left: -10px;
+    margin-right: -10px;
+
+    [class*="col-"] {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 1199px) {
+  .property-gallery-card-img {
+    height: 280px;
+  }
+
+  .col-xl-7 .property-gallery-card-img,
+  .col-xl-5 .property-gallery-card-img {
+    height: 280px;
+  }
+}
+
+@media (max-width: 767px) {
+  .property-gallery-card-img {
+    height: 250px;
+  }
+
+  .page-title {
+    font-size: 1.8rem;
+  }
+
+  .icon-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+
+    i {
+      font-size: 20px;
+    }
+  }
+}
+</style>

@@ -1,5 +1,7 @@
 <template>
-  <h3 class="page-title mt-50 mb-25 fadeinup wow">Features & amenities</h3>
+  <h3 class="page-title mt-50 mb-25 fadeinup wow">
+    Premium Features & Amenities
+  </h3>
   <div class="fea-anim-checklist fadeinup wow">
     <div class="checklist style2 list-six-column">
       <ul>

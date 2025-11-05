@@ -12,17 +12,23 @@ class StoreData
             $requestData = $request->validated();
             $requestData['features'] = $requestData['features'] ?? [];
 
+            // if ($request->hasFile('primary_image')) {
+            //     foreach ($request->file('primary_image') as $key => $primary_image) {
+            //         $currentDate = now()->format('Y/m');
+            //         $requestData['primary_image'][$key] = uploader($primary_image, 'uploads/AboutUs/primary_image/' . $currentDate);
+            //     }
+            // }
+
             if ($request->hasFile('primary_image')) {
-                foreach ($request->file('primary_image') as $key => $primary_image) {
-                    $currentDate = now()->format('Y/m');
-                    $requestData['primary_image'][$key] = uploader($primary_image, 'uploads/AboutUs/primary_image/' . $currentDate);
-                }
+                $primary_image = $request->file('primary_image');
+                $currentDate = now()->format('Y/m');
+                $requestData['primary_image'] = uploader($primary_image, 'uploads/AboutUs/primary_image/' . $currentDate);
             }
 
             if ($request->hasFile('secondary_image')) {
                 $secondary_image = $request->file('secondary_image');
                 $currentDate = now()->format('Y/m');
-                $requestData['secondary_image'] = uploader($secondary_image, 'uploads/about/' . $currentDate);
+                $requestData['secondary_image'] = uploader($secondary_image, 'uploads/AboutUs/secondary_image/' . $currentDate);
             }
             if ($data = self::$model::query()->create($requestData)) {
                 return messageResponse('Item added successfully', $data, 201);

@@ -1,5 +1,7 @@
 <template>
-  <h3 class="page-title mt-50 mb-30 fadeinup wow">Location</h3>
+  <h3 class="page-title mt-50 mb-30 fadeinup wow">
+    Prime Location & Connectivity
+  </h3>
   <div class="location-map fadeinup wow">
     <div class="contact-map" v-if="isValidMapUrl">
       <iframe

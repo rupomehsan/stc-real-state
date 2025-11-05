@@ -100,9 +100,12 @@
         <div class="property-content">
           <div class="media-body">
             <h3 class="box-title">
-                <Link
+              <Link
                 :href="`/portfolio/property-details?slug=${property?.slug}`"
-                >{{ property?.property_name?.slice(0, 20) + (property?.property_name?.length > 20 ? '..' : '') }}</Link
+                >{{
+                  property?.property_name?.slice(0, 20) +
+                  (property?.property_name?.length > 20 ? ".." : "")
+                }}</Link
               >
             </h3>
             <div class="box-text">

@@ -70,7 +70,7 @@
               <div
                 class="d-flex justify-content-between align-items-center pb-2 section-title"
               >
-                <h5 class="m-0">Add facts and features</h5>
+                <h5 class="m-0">Add Overview & Specifications</h5>
                 <button
                   class="btn btn-sm btn-outline-success"
                   @click.prevent="add_row('facts_and_features')"
@@ -302,7 +302,7 @@
             </div>
 
             <!-- for floor_plan list input start-->
-            <div class="col-md-12 pt-3">
+            <!-- <div class="col-md-12 pt-3">
               <div
                 class="d-flex justify-content-between align-items-center pb-2 section-title"
               >
@@ -336,7 +336,7 @@
                             errors['floor_plan'][index].floor_number,
                         }"
                       />
-                      <!-- <select
+                      <select
                         class="form-control form-control-square mb-2"
                         :name="`floor_plan[${index}][floor_number]`"
                         v-model="floor_plan.floor_number"
@@ -355,7 +355,7 @@
                         >
                           {{ number_of_floor.text }}
                         </option>
-                      </select> -->
+                      </select>
                     </div>
                     <div
                       v-if="
@@ -458,10 +458,10 @@
                   </button>
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <!-- for floor_plan_details list input start-->
-            <div class="col-md-12 pt-3 mt-2">
+            <!-- <div class="col-md-12 pt-3 mt-2">
               <div
                 class="d-flex justify-content-between align-items-center pb-2 section-title"
               >
@@ -478,7 +478,7 @@
                 v-for="(floor_plan_details, index) in floor_plan_details_data"
                 :key="index"
               >
-                <!-- <div class="col-md-2">
+                <div class="col-md-2">
                   <div class="form-group">
                     <label for="">floor_number</label>
                     <div class="mt-1 mb-3">
@@ -514,7 +514,7 @@
                       {{ errors["floor_plan_details"][index].floor_number }}
                     </div>
                   </div>
-                </div> -->
+                </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="">title</label>
@@ -594,7 +594,7 @@
                   </button>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -755,7 +755,6 @@ export default {
             }
 
             // Set summernote content for property_description
-           
           });
         });
         if (this.item.facts_and_features) {
@@ -793,10 +792,9 @@ export default {
     },
 
     submitHandler: async function ($event) {
-      
-      if (!this.validate_data()) {
-        return; // Stop submission if validation fails
-      }
+      // if (!this.validate_data()) {
+      //   return; // Stop submission if validation fails
+      // }
 
       this.set_only_latest_data(true);
       if (this.param_id) {
@@ -824,8 +822,6 @@ export default {
       target.setAttribute("name", "property_detail");
       target.value = markupStr;
       document.getElementById("property_detail").appendChild(target);
-
-     
     },
 
     //add row for json data

@@ -14,94 +14,38 @@
       </div>
     </div>
   </div>
+  <!-- {{ single_property }} -->
   <section class="property-details space overflow-hidden">
     <div class="container">
-      <div class="row gy-40 gx-50">
-        <div class="col-xxl-8 col-lg-7">
+      <!-- Hero Section with Image and At A Glance -->
+
+      <div class="row gy-40 gx-50 mb-5 justify-content-center">
+        <div class="col-lg-5">
+          <div
+            class="page-title-wrap fadeinup wow"
+            style="visibility: visible; animation-name: fadeinup"
+          >
+            <h2 class="page-title mb-2">Property Overview & Specifications</h2>
+          </div>
+          <BannerImageSlider
+            :banner_images="single_property?.banner_image || []"
+          />
+        </div>
+        <div class="col-lg-5">
+          <AtAGlance
+            :property="single_property?.facts_and_features"
+            v-if="single_property"
+          />
+        </div>
+      </div>
+
+      <!-- Main Content Section -->
+      <div class="row gy-40 gx-50 justify-content-center">
+        <div class="col-md-10">
           <div class="row gy-30">
-            <div class="col-12">
-              <BannerImageSlider
-                :banner_images="single_property?.banner_image || []"
-              />
-            </div>
             <div class="col-12">
               <div class="property-page-single">
                 <div class="page-content">
-                  <div class="property-meta-wrap mb-55 fadeinup wow">
-                    <div class="property-meta">
-                      <Link
-                        class="property-tag"
-                        :href="`/portfolio?property_category_id=${single_property?.category?.id}`"
-                        >{{ single_property?.category?.name }}</Link
-                      >
-                      <a href="javascript:void(0)"
-                        ><i class="fa-solid fa-calendar-days"></i>
-                        {{
-                          new Date(single_property?.date)
-                            .toLocaleDateString("en-GB", {
-                              day: "2-digit",
-                              month: "short",
-                              year: "numeric",
-                            })
-                            .replace(/ (\d{4})$/, ", $1")
-                        }}</a
-                      >
-                      <a href="javascript:void(0)"
-                        ><i class="fa-solid fa-diagram-project"></i>
-                        {{
-                          single_property?.property_status == "sale"
-                            ? "For Sale"
-                            : "For Rent"
-                        }}</a
-                      >
-                    </div>
-                    <!-- <div class="wishlist-icon">
-                      <a href="wishlist.html" class="icon-btn"
-                        ><i class="fa-solid fa-heart"></i
-                      ></a>
-                    </div> -->
-                  </div>
-                  <div class="page-title-wrap fadeinup wow">
-                    <h2 class="page-title mb-2">
-                      {{ single_property?.property_name }}
-                    </h2>
-                    <h4 class="page-title">
-                      ৳ {{ single_property?.price?.toLocaleString() }}
-                    </h4>
-                  </div>
-                  <div class="page-features fadeinup wow">
-                    <div class="box-text">
-                      <div class="icon">
-                        <img
-                          src="/assets/frontend/img/icon/popular-location.svg"
-                          alt="icon"
-                        />
-                      </div>
-                      {{
-                        single_property?.property_address ||
-                        "298 South Goran ,Khilgaon ,Dhaka-1219"
-                      }}
-                    </div>
-                    <ul class="property-featured">
-                      <li
-                        v-for="feature in (
-                          single_property?.facts_and_features || []
-                        ).slice(0, 3)"
-                        :key="feature"
-                      >
-                        <div class="icon">
-                          <!-- <img src="/assets/frontend/img/icon/bed.svg" alt="icon" /> -->
-                          <i :class="feature?.icon"></i>
-                        </div>
-                        {{ feature?.title }}
-                      </li>
-                    </ul>
-                  </div>
-                  <p
-                    class="mb-30 fadeinup wow"
-                    v-html="single_property?.property_description"
-                  ></p>
-
                   <!-- ----------------------------------------------------------------------
                   ---------------------- PropertyDetail Component ----------------------
                   ---------------------------------------------------------------------- -->
@@ -117,9 +61,9 @@
                   <!-- ----------------------------------------------------------------------
                   ---------------------- FactsAndFeatures Component ----------------------
                   ---------------------------------------------------------------------- -->
-                  <FactsAndFeatures
+                  <!-- <FactsAndFeatures
                     :facts_and_features="single_property?.facts_and_features"
-                  />
+                  /> -->
 
                   <!-- ----------------------------------------------------------------------
                   ---------------------- Gallery Component ----------------------
@@ -131,14 +75,6 @@
                   ---------------------------------------------------------------------- -->
                   <Amenities :amenities="single_property?.amenities" />
 
-                  <!-- ----------------------------------------------------------------------
-                  ---------------------- FloorPlan Component ----------------------
-                  ---------------------------------------------------------------------- -->
-                  <FloorPlan :floor_plan="single_property?.floor_plan" />
-
-                  <!-- ----------------------------------------------------------------------
-                  ---------------------- Location Component ----------------------
-                  ---------------------------------------------------------------------- -->
                   <Location
                     :map_location_url="single_property?.map_location_url"
                     :property_address="single_property?.property_address"
@@ -148,15 +84,16 @@
             </div>
           </div>
         </div>
-        <div class="col-xl-4 col-lg-5">
-          <SidebarArea />
-        </div>
+        <!-- <div class="col-xl-4 col-lg-5">
+          <SidebarArea :property="single_property" />
+        </div> -->
       </div>
     </div>
   </section>
 </template>
 
 <script>
+import AtAGlance from "./components/AtAGlance.vue";
 import SidebarArea from "./components/SidebarArea.vue";
 import BannerImageSlider from "./components/property_details/BannerImageSlider.vue";
 import PropertyDetail from "./components/property_details/PropertyDetail.vue";
@@ -174,6 +111,7 @@ import { mapActions, mapState } from "pinia";
 
 export default {
   components: {
+    AtAGlance,
     SidebarArea,
     BannerImageSlider,
     PropertyDetail,

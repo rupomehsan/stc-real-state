@@ -17,12 +17,15 @@ export const store = defineStore("why_choose_us_store", {
       this.error = null;
 
       try {
-        const response = await axios.get("/why-choose-uses", {
-          params: {
-            get_all: 1,
-            limit: 6,
-          },
-        });
+        const response = await axios.get(
+          "/why-choose-uses?sort_by_col=id&sort_type=asc",
+          {
+            params: {
+              get_all: 1,
+              limit: 6,
+            },
+          }
+        );
 
         this.services = response.data.data || response.data;
 

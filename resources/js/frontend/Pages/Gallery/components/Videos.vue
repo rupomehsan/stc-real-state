@@ -7,15 +7,19 @@
     <div class="video-card">
       <div class="video-wrapper">
         <iframe
-          v-if="item.video"
-          :src="item.video + '?autoplay=0&mute=0&controls=1'"
+          v-if="item.video && getEmbedUrl(item.video)"
+          :src="getEmbedUrl(item.video)"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen
+          referrerpolicy="strict-origin-when-cross-origin"
           width="100%"
-          height="250"
+          height="450"
           loading="lazy"
           class="video-iframe"
+          :title="item.title || 'Video'"
+          @error="handleVideoError(item)"
+          @load="handleVideoLoad(item)"
         ></iframe>
         <div v-else class="no-video">
           <i class="fa-solid fa-video-slash"></i>
@@ -51,6 +55,45 @@ export default {
         month: "short",
         day: "numeric",
       });
+    },
+    getEmbedUrl(videoUrl) {
+      if (!videoUrl) {
+        console.warn("No video URL provided");
+        return "";
+      }
+
+      console.log("Original video URL:", videoUrl);
+
+      // YouTube video URL patterns
+      const youtubeRegex =
+        /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+      const match = videoUrl.match(youtubeRegex);
+
+      if (match) {
+        // Extract video ID and return embed URL
+        const videoId = match[1];
+        const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+        console.log("Converted to embed URL:", embedUrl);
+        return embedUrl;
+      }
+
+      // If it's already an embed URL, return as is
+      if (videoUrl.includes("youtube.com/embed/")) {
+        console.log("Already an embed URL:", videoUrl);
+        return videoUrl;
+      }
+
+      // For other video platforms or direct links, return as is
+      console.log("Using original URL (not YouTube):", videoUrl);
+      return videoUrl;
+    },
+    handleVideoError(item) {
+      console.error("Video failed to load:", item);
+      console.error("Video URL:", item.video);
+      console.error("Embed URL:", this.getEmbedUrl(item.video));
+    },
+    handleVideoLoad(item) {
+      console.log("Video loaded successfully:", item.title);
     },
   },
   mounted() {

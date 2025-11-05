@@ -231,27 +231,36 @@
               <ul>
                 <li>
                   <div class="th-social">
-                    <a :href="getFirstSettingValueByTitle('whatsapp')"
-                      ><i class="fab fa-whatsapp"></i
-                    ></a>
+                    <a
+                      :href="`https://wa.me/${getFirstSettingValueByTitle(
+                        'whatsapp'
+                      ).replace(/[^0-9]/g, '')}`"
+                      target="_blank"
+                      class="social-whatsapp"
+                      ><i class="fab fa-whatsapp"></i>
+                    </a>
                     <a
                       :href="getFirstSettingValueByTitle('facebook')"
                       target="_blank"
-                      ><i class="fab fa-facebook-f"></i
-                    ></a>
+                      class="social-facebook"
+                      ><i class="fab fa-facebook-f"></i>
+                    </a>
                     <a
                       :href="getFirstSettingValueByTitle('twitter')"
                       target="_blank"
+                      class="social-twitter"
                       ><i class="fab fa-twitter"></i
                     ></a>
                     <a
                       :href="getFirstSettingValueByTitle('linkedin')"
                       target="_blank"
+                      class="social-linkedin"
                       ><i class="fab fa-linkedin-in"></i
                     ></a>
                     <a
                       :href="getFirstSettingValueByTitle('youtube')"
                       target="_blank"
+                      class="social-youtube"
                       ><i class="fab fa-youtube"></i
                     ></a>
                   </div>
@@ -410,5 +419,40 @@ export default {
   max-height: 500px;
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Social media colors - always show brand colors */
+.social-whatsapp {
+  color: #25d366 !important;
+  transition: color 0.3s ease;
+}
+
+.social-facebook {
+  color: #1877f2 !important;
+  transition: color 0.3s ease;
+}
+
+.social-twitter {
+  color: #1da1f2 !important;
+  transition: color 0.3s ease;
+}
+
+.social-linkedin {
+  color: #0a66c2 !important;
+  transition: color 0.3s ease;
+}
+
+.social-youtube {
+  color: #ff0000 !important;
+  transition: color 0.3s ease;
+}
+
+/* On hover, change to theme color (inherit from parent) */
+.social-whatsapp:hover,
+.social-facebook:hover,
+.social-twitter:hover,
+.social-linkedin:hover,
+.social-youtube:hover {
+  color: var(--theme-color) !important;
 }
 </style>

@@ -40,17 +40,30 @@
               <button
                 v-if="images?.data?.length >= 0"
                 data-filter="*"
-                class="th-btn tab-btn active"
+                :class="[
+                  'th-btn',
+                  'tab-btn',
+                  {
+                    active:
+                      image_category_id === null ||
+                      image_category_id === undefined ||
+                      image_category_id === 'all',
+                  },
+                ]"
                 type="button"
-                @click.prevent="set_image_category_id('all')"
+                @click.prevent="handleCategoryClick(null)"
               >
                 View All
               </button>
               <button
                 v-for="category in image_categories?.data"
                 :key="category.id"
-                @click.prevent="set_image_category_id(category?.id)"
-                class="th-btn tab-btn"
+                @click.prevent="handleCategoryClick(category?.id)"
+                :class="[
+                  'th-btn',
+                  'tab-btn',
+                  { active: image_category_id === category.id },
+                ]"
                 type="button"
               >
                 {{ category?.name }}
@@ -65,8 +78,7 @@
       >
         <Images :images="images?.data" />
       </div>
-      <div class="text-center" v-else> No images found </div>
-
+      <div class="text-center" v-else>No images found</div>
     </div>
   </section>
 </template>
@@ -96,6 +108,10 @@ export default {
       "set_image_category_id",
       "set_video_category_id",
     ]),
+    handleCategoryClick(categoryId) {
+      console.log("Image category clicked:", categoryId);
+      this.set_image_category_id(categoryId);
+    },
   },
   computed: {
     ...mapState(gallery_store, [
@@ -107,5 +123,46 @@ export default {
       "video_category_id",
     ]),
   },
+  watch: {
+    image_category_id(newVal, oldVal) {
+      console.log("Image category ID changed from", oldVal, "to", newVal);
+    },
+  },
+  mounted() {
+    console.log(
+      "GalleryImages component mounted. Initial image_category_id:",
+      this.image_category_id
+    );
+  },
 };
 </script>
+
+<style lang="scss" scoped>
+.gallery-inner-sec {
+  .title-area {
+    .sec-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+  }
+}
+
+.filter-menu {
+  .tab-btn {
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &.active {
+      background-color: var(--theme-color, #007bff) !important;
+      color: white !important;
+      border-color: var(--theme-color, #007bff) !important;
+      font-weight: 600;
+    }
+  }
+}
+</style>

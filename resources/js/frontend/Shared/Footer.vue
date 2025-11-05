@@ -9,7 +9,9 @@
         <div class="footer-all-widget-wrapper">
           <div class="footer-all-widget-item">
             <div class="widget footer-widget">
-              <h3 class="widget_title">{{ getFirstSettingValueByTitle("site_name") }}</h3>
+              <h3 class="widget_title">
+                {{ getFirstSettingValueByTitle("site_name") }}
+              </h3>
               <div class="th-widget-about">
                 <p class="about-text">
                   {{ getFirstSettingValueByTitle("short_intro") }}
@@ -62,8 +64,14 @@
                     <h3 class="widget_title">Featured Houses</h3>
                     <div class="menu-all-pages-container">
                       <ul class="menu">
-                        <li v-for="(category, index) in property_categories?.data" :key="index">
-                          <Link :href="`/portfolio?property_category_id=${category.id}`"># {{ category?.name }}</Link>
+                        <li
+                          v-for="(category, index) in property_categories?.data"
+                          :key="index"
+                        >
+                          <Link
+                            :href="`/portfolio?property_category_id=${category.id}`"
+                            ># {{ category?.name }}</Link
+                          >
                         </li>
                       </ul>
                     </div>
@@ -75,7 +83,9 @@
                     <div class="menu-all-pages-container">
                       <ul class="menu">
                         <li v-for="(page, index) in custom_pages" :key="index">
-                          <Link :href="`/pages/${page.page_permalink}`">{{ page.title }}</Link>
+                          <Link :href="`/pages/${page.page_permalink}`">{{
+                            page.title
+                          }}</Link>
                         </li>
                       </ul>
                     </div>
@@ -131,41 +141,55 @@
         <div
           class="row gy-3 justify-content-lg-between justify-content-center align-items-center"
         >
-          <div class="col-lg-7"> 
+          <div class="col-lg-7">
             <p class="copyright-text">
               Copyright © {{ getFirstSettingValueByTitle("copy_right") }}. All
               Rights Reserved .
             </p>
-            <span>Developed by <a target="_blank" href="https://techparkit.info">TechPark</a></span>
+            <span
+              >Developed by
+              <a target="_blank" href="https://techparkit.info"
+                >TechPark</a
+              ></span
+            >
           </div>
-          
+
           <div class="col-auto">
             <div class="footer-default-copy-right">
               <p>Social Media:</p>
               <div class="th-social">
-                <a :href="getFirstSettingValueByTitle('whatsapp')"
-                  ><i class="fab fa-whatsapp"></i
-                ></a>
+                <a
+                  :href="`https://wa.me/${getFirstSettingValueByTitle(
+                    'whatsapp'
+                  ).replace(/[^0-9]/g, '')}`"
+                  target="_blank"
+                  class="social-whatsapp"
+                  ><i class="fab fa-whatsapp"></i>
+                </a>
                 <a
                   :href="getFirstSettingValueByTitle('facebook')"
                   target="_blank"
-                  ><i class="fab fa-facebook-f"></i
-                ></a>
+                  class="social-facebook"
+                  ><i class="fab fa-facebook-f"></i>
+                </a>
                 <a
                   :href="getFirstSettingValueByTitle('twitter')"
                   target="_blank"
-                  ><i class="fab fa-twitter"></i
-                ></a>
+                  class="social-twitter"
+                  ><i class="fab fa-twitter"></i>
+                </a>
                 <a
                   :href="getFirstSettingValueByTitle('linkedin')"
                   target="_blank"
-                  ><i class="fab fa-linkedin-in"></i
-                ></a>
+                  class="social-linkedin"
+                  ><i class="fab fa-linkedin-in"></i>
+                </a>
                 <a
                   :href="getFirstSettingValueByTitle('youtube')"
                   target="_blank"
-                  ><i class="fab fa-youtube"></i
-                ></a>
+                  class="social-youtube"
+                  ><i class="fab fa-youtube"></i>
+                </a>
               </div>
             </div>
           </div>
@@ -205,11 +229,11 @@ export default {
   },
   computed: {
     ...mapState(footer_store, [
-      "website_settings", 
-      "addresses", 
-      "images", 
+      "website_settings",
+      "addresses",
+      "images",
       "custom_pages",
-      "property_categories"
+      "property_categories",
     ]),
   },
   methods: {
@@ -257,5 +281,40 @@ export default {
   -webkit-transition: 0.4s;
   transition: 0.4s;
   color: var(--theme-color);
+}
+
+/* Social Media Icon Colors */
+.th-social a {
+  transition: color 0.3s ease;
+}
+
+/* WhatsApp - Original Green */
+.social-whatsapp i {
+  color: #25d366;
+}
+
+/* Facebook - Original Blue */
+.social-facebook i {
+  color: #1877f2;
+}
+
+/* Twitter/X - Original Light Blue */
+.social-twitter i {
+  color: #1da1f2;
+}
+
+/* LinkedIn - Original Blue */
+.social-linkedin i {
+  color: #0a66c2;
+}
+
+/* YouTube - Original Red */
+.social-youtube i {
+  color: #ff0000;
+}
+
+/* Hover Effect - Change to Theme Color */
+.th-social a:hover i {
+  color: #fff;
 }
 </style>

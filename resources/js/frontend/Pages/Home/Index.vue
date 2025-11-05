@@ -25,7 +25,7 @@
   <!-- TeamSlider section -->
   <!-- TeamSlider section -->
 
-  <TeamSlider />
+  <!-- <TeamSlider /> -->
 
   <!-- TeamSlider section -->
   <!-- TeamSlider section -->
@@ -57,7 +57,7 @@
   <!-- Service section -->
   <!-- Service section -->
 
-  <Service />
+  <!-- <Service /> -->
 
   <!-- Service section -->
   <!-- Service section -->
@@ -67,7 +67,7 @@
   <!-- PopularProperties section -->
   <!-- PopularProperties section -->
 
-  <PopularProperties />
+  <!-- <PopularProperties /> -->
 
   <!-- PopularProperties section -->
   <!-- PopularProperties section -->

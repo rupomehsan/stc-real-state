@@ -1,5 +1,5 @@
 <template>
-  <div class="marquee-section-3 overflow-hidden">
+  <div class="marquee-section-3 overflow-hidden position-relative">
     <div
       class="shape-mockup movingX d-none d-xl-block"
       style="bottom: 36%; left: 6%"

@@ -131,7 +131,11 @@
                 <!-- <img src="/assets/frontend/img/icon/bed.svg" alt="icon" /> -->
                 <span><i :class="feature?.icon"></i></span>
               </div>
-                {{ feature?.title?.length > 8 ? feature?.title?.substring(0, 8) + ".." : feature?.title }}
+              {{
+                feature?.title?.length > 8
+                  ? feature?.title?.substring(0, 8) + ".."
+                  : feature?.title
+              }}
             </li>
           </ul>
           <div class="property-bottom">

@@ -47,15 +47,21 @@ export default [
     value: "",
   },
 
+  // {
+  //   name: "primary_image",
+  //   label: "Enter your images (5 images for design purpose)",
+  //   type: "file",
+  //   multiple: "true",
+  //   accept: "image/*",
+  //   images_list: [],
+  // },
+
   {
     name: "primary_image",
-    label: "Enter your images (5 images for design purpose)",
+    label: "Enter your primary image",
     type: "file",
-    multiple: "true",
-    accept: "image/*",
-    images_list: [],
+    value: "",
   },
-
   {
     name: "secondary_image",
     label: "Enter your secondary image",

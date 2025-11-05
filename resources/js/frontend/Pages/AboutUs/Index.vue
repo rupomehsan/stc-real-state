@@ -1,18 +1,66 @@
 <template>
-  <!-- Breadcrumb Section -->
+  <!-- Professional Hero/Breadcrumb Section -->
   <div
-    class="breadcumb-wrapper"
+    class="professional-hero-section"
     data-bg-src="assets/frontend/img/common/2.jpeg"
     style="background-image: url('assets/frontend/img/common/2.jpeg')"
   >
+    <div class="hero-background-overlay"></div>
+    <div class="hero-pattern"></div>
     <div class="container">
-      <div class="breadcumb-content">
-        <h1 class="breadcumb-title mt-5">About Us</h1>
-        <ul class="breadcumb-menu">
-          <li><Link href="/">Home</Link></li>
-          <li>About Us</li>
-        </ul>
+      <div class="hero-content">
+        <!-- Enhanced Breadcrumb Navigation -->
+
+        <!-- Professional Hero Content -->
+        <div class="hero-text-content mt-5">
+          <h1 class="hero-title">
+            About <span class="title-highlight">Our Company</span>
+          </h1>
+          <p class="hero-subtitle">
+            Discover our journey, values, and commitment to excellence that
+            drives us forward every day
+          </p>
+        </div>
+
+        <!-- Trust Indicators -->
+        <div class="trust-indicators">
+          <div class="trust-item">
+            <div class="trust-icon">
+              <i class="fas fa-award"></i>
+            </div>
+            <div class="trust-text">
+              <span class="trust-number">10+</span>
+              <span class="trust-label">Years Experience</span>
+            </div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="trust-text">
+              <span class="trust-number">500+</span>
+              <span class="trust-label">Satisfied Clients</span>
+            </div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">
+              <i class="fas fa-star"></i>
+            </div>
+            <div class="trust-text">
+              <span class="trust-number">99%</span>
+              <span class="trust-label">Success Rate</span>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+      <div class="scroll-mouse">
+        <div class="scroll-wheel"></div>
+      </div>
+      <span class="scroll-text">Scroll Down</span>
     </div>
   </div>
 
@@ -232,41 +280,123 @@
           </div>
         </div>
         <div class="col-xl-8">
-          <div class="title-area text-left mb-50">
-            <p
-              class="sub-title fadeinup wow"
+          <!-- Professional Content Section -->
+          <div class="professional-content-area">
+            <!-- Section Badge -->
+            <div
+              class="content-badge fadeinup wow"
               data-wow-duration="1.5s"
               data-wow-delay="0.1s"
             >
-              <span class="double-line"></span> About Us
-            </p>
+              <i class="fas fa-building"></i>
+              <span>About Our Company</span>
+            </div>
+
+            <!-- Enhanced Title -->
             <h2
-              class="sec-title fadeinup wow"
+              class="professional-title fadeinup wow"
               data-wow-duration="1.5s"
               data-wow-delay="0.3s"
             >
-              Discover Our Luxury Property, with Full Amenities
+              {{ about_us?.title || "Excellence in Every Endeavor" }}
             </h2>
+
+            <!-- Professional Description -->
             <div
-              class="sec-text fadeinup wow"
+              class="professional-description fadeinup wow"
               data-wow-duration="1.5s"
               data-wow-delay="0.5s"
             >
-              <div v-html="about_us?.description"></div>
+              <div
+                v-if="about_us?.description"
+                v-html="about_us.description"
+                class="content-text"
+              ></div>
+              <div v-else class="content-text">
+                <p>
+                  We are dedicated to delivering exceptional results through
+                  innovation, expertise, and unwavering commitment to quality.
+                  Our team combines years of experience with cutting-edge
+                  solutions to exceed expectations and drive success.
+                </p>
+                <p>
+                  Built on a foundation of trust, integrity, and continuous
+                  improvement, we strive to create lasting partnerships that
+                  generate meaningful value for our clients and communities.
+                </p>
+              </div>
             </div>
-          </div>
-          <div class="row gy-4 gx-60 mb-4">
-            <div
-              class="col-lg-6 col-md-6 fadeinup wow"
-              v-for="(item, index) in about_us?.features"
-              :key="index"
+
+            <!-- Key Highlights -->
+            <!-- <div
+              class="key-highlights fadeinup wow"
+              data-wow-duration="1.5s"
+              data-wow-delay="0.7s"
             >
-              <div class="about-1-item">
-                <div class="icon">
-                  <span><i :class="item?.icon"></i></span>
+              <div class="highlight-item">
+                <div class="highlight-icon">
+                  <i class="fas fa-check-circle"></i>
                 </div>
-                <div class="content">
-                  <h3 class="box-title">{{ item?.title }}</h3>
+                <div class="highlight-content">
+                  <h4>Quality Assurance</h4>
+                  <p>Rigorous standards ensure exceptional outcomes</p>
+                </div>
+              </div>
+              <div class="highlight-item">
+                <div class="highlight-icon">
+                  <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="highlight-content">
+                  <h4>Innovation Focus</h4>
+                  <p>Cutting-edge solutions for modern challenges</p>
+                </div>
+              </div>
+              <div class="highlight-item">
+                <div class="highlight-icon">
+                  <i class="fas fa-handshake"></i>
+                </div>
+                <div class="highlight-content">
+                  <h4>Client Partnership</h4>
+                  <p>Collaborative approach to achieve your goals</p>
+                </div>
+              </div>
+            </div> -->
+          </div>
+
+          <!-- Enhanced Features Grid -->
+          <div class="professional-features-grid">
+            <div class="features-header">
+              <h3 class="features-title">Our Core Strengths</h3>
+              <p class="features-subtitle">
+                The key advantages that set us apart
+              </p>
+            </div>
+
+            <div class="features-container">
+              <div
+                class="professional-feature-card fadeinup wow"
+                v-for="(item, index) in about_us?.features || defaultFeatures"
+                :key="index"
+                :data-wow-delay="`${0.2 * (index + 1)}s`"
+              >
+                <div class="feature-number">
+                  {{ String(index + 1).padStart(2, "0") }}
+                </div>
+                <div class="feature-icon-wrapper">
+                  <div class="feature-icon">
+                    <i :class="item?.icon || 'fas fa-star'"></i>
+                  </div>
+                </div>
+                <div class="feature-content">
+                  <h4 class="feature-title">
+                    {{ item?.title || `Feature ${index + 1}` }}
+                  </h4>
+                  <p class="feature-description">
+                    {{
+                      item?.description ||
+                      "Professional excellence delivered through expertise and dedication to quality results."
+                    }}
+                  </p>
                 </div>
               </div>
             </div>
@@ -305,6 +435,21 @@
   </div>
 
   <!-- Add your custom sections here -->
+  <!-- TeamSlider section -->
+  <!-- TeamSlider section -->
+
+  <TeamSlider />
+
+  <!-- TeamSlider section -->
+  <!-- TeamSlider section -->
+
+  <!-- Service section -->
+  <!-- Service section -->
+
+  <Service />
+
+  <!-- Service section -->
+  <!-- Service section -->
 
   <!-- Debug Section (remove in production) -->
 </template>
@@ -315,12 +460,16 @@ import { Link } from "@inertiajs/vue3";
 import CircleText from "../Home/components/CircleText.vue";
 import { store as about_us_store } from "../../GlobalComponent/AboutUs/Store/aboutStore.js";
 import { mapActions, mapState } from "pinia";
+import TeamSlider from "../../GlobalComponent/TeamSlider/TeamSlider.vue";
+import Service from "../../GlobalComponent/Service/Service.vue";
 
 export default {
   name: "AboutUsPage",
   components: {
     Link,
     CircleText,
+    TeamSlider,
+    Service,
   },
 
   setup() {
@@ -487,76 +636,507 @@ export default {
       console.log("Show Content:", shouldShowContent);
       return shouldShowContent;
     },
+
+    defaultFeatures() {
+      return [
+        {
+          icon: "fas fa-shield-alt",
+          title: "Security First",
+          description:
+            "Advanced security protocols to protect your data and ensure complete privacy and confidentiality.",
+        },
+        {
+          icon: "fas fa-clock",
+          title: "24/7 Support",
+          description:
+            "Round-the-clock customer support with dedicated professionals ready to assist you anytime.",
+        },
+        {
+          icon: "fas fa-chart-line",
+          title: "Growth Focused",
+          description:
+            "Strategic solutions designed to accelerate your business growth and maximize potential.",
+        },
+        {
+          icon: "fas fa-cogs",
+          title: "Custom Solutions",
+          description:
+            "Tailored approaches that perfectly align with your unique business requirements and objectives.",
+        },
+      ];
+    },
   },
 };
 </script>
 
 <style scoped>
-/* Breadcrumb Styles */
-/* .breadcumb-wrapper {
+/* ========================================
+   PROFESSIONAL HERO SECTION
+   ======================================== */
+
+.professional-hero-section {
+  position: relative;
+  min-height: 70vh;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  padding: 100px 0;
-  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
 }
 
-.breadcumb-wrapper::before {
-  content: "";
+.hero-background-overlay {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: linear-gradient(
+    135deg,
+    rgb(5 15 36 / 80%) 0%,
+    rgb(17 36 90 / 80%) 50%,
+    rgba(134, 4, 4, 0.9) 100%
+  );
   z-index: 1;
-} */
-
-/* .breadcumb-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  color: white;
-} */
-
-/* .breadcumb-title {
-  font-size: 3rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-} */
-
-/* .breadcumb-menu {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin: 0;
-  padding: 0;
-} */
-
-/* .breadcumb-menu li {
-  position: relative;
 }
 
-.breadcumb-menu li:not(:last-child)::after {
-  content: "/";
-  margin-left: 1rem;
+.hero-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(
+      circle at 25% 25%,
+      rgba(255, 255, 255, 0.1) 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 75% 75%,
+      rgba(255, 255, 255, 0.1) 1px,
+      transparent 1px
+    );
+  background-size: 60px 60px;
+  z-index: 2;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  color: white;
+  text-align: center;
+}
+
+/* Modern Breadcrumb */
+.modern-breadcrumb {
+  margin-bottom: 40px;
+}
+
+.breadcrumb-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 15px;
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.breadcrumb-link:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.breadcrumb-separator {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.8rem;
+}
+
+.breadcrumb-item.active span {
+  color: white;
+  font-weight: 600;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 25px;
+  backdrop-filter: blur(10px);
+}
+
+/* Hero Text Content */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 25px;
+}
+
+.title-highlight {
+  background: linear-gradient(45deg, #fbbf24, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 600px;
+  margin: 0 auto 50px;
+}
+
+/* Trust Indicators */
+.trust-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px 25px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.trust-item:hover {
+  transform: translateY(-5px);
+}
+
+.trust-icon {
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+}
+
+.trust-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.trust-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fbbf24;
+}
+
+.trust-label {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
   color: rgba(255, 255, 255, 0.7);
 }
 
-.breadcumb-menu a {
-  color: rgba(255, 255, 255, 0.8);
-  text-decoration: none;
-  transition: color 0.3s ease;
+.scroll-mouse {
+  width: 24px;
+  height: 40px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  position: relative;
 }
 
-.breadcumb-menu a:hover {
+.scroll-wheel {
+  width: 4px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 2px;
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scroll-wheel 2s infinite;
+}
+
+@keyframes scroll-wheel {
+  0%,
+  20% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  80%,
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(16px);
+  }
+}
+
+.scroll-text {
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ========================================
+   PROFESSIONAL CONTENT STYLES
+   ======================================== */
+
+.about-1-wrapper {
+  padding: 100px 0;
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+}
+
+.professional-content-area {
+  margin-bottom: 60px;
+}
+
+.content-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #b72e26, #1d4ed8);
   color: white;
-} */
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+}
 
-/* Professional AboutUs Skeleton Loader Styles */
+.professional-title {
+  font-size: 2.75rem;
+  font-weight: 700;
+  color: #1f2937;
+  line-height: 1.3;
+  margin-bottom: 30px;
+}
 
-/* Base skeleton elements */
+.professional-description {
+  margin-bottom: 40px;
+}
+
+.content-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #4b5563;
+}
+
+.content-text p {
+  margin-bottom: 20px;
+}
+
+/* Key Highlights */
+.key-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.highlight-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 25px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border-left: 4px solid #2563eb;
+  transition: all 0.3s ease;
+}
+
+.highlight-item:hover {
+  transform: translateX(10px);
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.12);
+}
+
+.highlight-icon {
+  width: 55px;
+  height: 55px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.highlight-content h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 8px;
+}
+
+.highlight-content p {
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* ========================================
+   PROFESSIONAL FEATURES GRID
+   ======================================== */
+
+.professional-features-grid {
+  margin-top: 60px;
+}
+
+.features-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.features-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 15px;
+}
+
+.features-subtitle {
+  font-size: 1.1rem;
+  color: #6b7280;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.features-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.professional-feature-card {
+  position: relative;
+  background: white;
+  padding: 35px 25px;
+  border-radius: 20px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(37, 99, 235, 0.1);
+  overflow: hidden;
+}
+
+.professional-feature-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.professional-feature-card:hover::before {
+  transform: scaleX(1);
+}
+
+.professional-feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.feature-number {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: rgba(37, 99, 235, 0.1);
+  z-index: 1;
+}
+
+.feature-icon-wrapper {
+  margin-bottom: 25px;
+}
+
+.feature-icon {
+  width: 65px;
+  height: 65px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  transition: transform 0.3s ease;
+}
+
+.professional-feature-card:hover .feature-icon {
+  transform: scale(1.1);
+}
+
+.feature-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 12px;
+}
+
+.feature-description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* ========================================
+   SKELETON LOADER STYLES
+   ======================================== */
+
 .skeleton-line {
   border-radius: 8px;
   background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
@@ -565,7 +1145,6 @@ export default {
   overflow: hidden;
 }
 
-/* Skeleton line sizes */
 .skeleton-line-xs {
   height: 16px;
   width: 120px;
@@ -589,6 +1168,319 @@ export default {
 .skeleton-line-xl {
   height: 40px;
   width: 100%;
+}
+
+/* Skeleton images */
+.skeleton-image {
+  background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+  background-size: 200% 100%;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-image-small {
+  width: 100%;
+  height: 120px;
+  min-height: 120px;
+}
+
+.skeleton-image-large {
+  width: 100%;
+  height: 200px;
+  min-height: 200px;
+}
+
+.skeleton-image-middle {
+  width: 100%;
+  height: 300px;
+  min-height: 300px;
+  border-radius: 20px;
+}
+
+.skeleton-shape {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+  background-size: 200% 100%;
+  border-radius: 50%;
+  opacity: 0.3;
+}
+
+.skeleton-circle {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+  background-size: 200% 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.skeleton-icon {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+  background-size: 200% 100%;
+  border-radius: 12px;
+}
+
+.skeleton-button {
+  height: 48px;
+  width: 180px;
+  border-radius: 25px;
+  background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+  background-size: 200% 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-shimmer {
+  animation: shimmer 2s infinite linear;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-shimmer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: shimmerWave 2s infinite;
+}
+
+@keyframes shimmerWave {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.about-main-image .w-100 {
+  max-width: 100%;
+  height: auto;
+  min-height: 300px;
+}
+
+.about-main-image img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.5s ease;
+}
+
+.about-main-image img:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.fade-in {
+  animation: fadeInImage 0.6s ease-in-out;
+}
+
+@keyframes fadeInImage {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.sec-text {
+  text-align: justify;
+}
+
+.image-skeleton-placeholder,
+.no-image-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.skeleton-image-main {
+  width: 100%;
+  height: 300px;
+  min-height: 500px;
+  border-radius: 15px;
+  background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+  background-size: 200% 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 1200px) {
+  .hero-title {
+    font-size: 3rem;
+  }
+
+  .professional-title {
+    font-size: 2.5rem;
+  }
+
+  .trust-indicators {
+    gap: 25px;
+  }
+}
+
+@media (max-width: 992px) {
+  .professional-hero-section {
+    min-height: 60vh;
+    padding: 80px 0;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .trust-indicators {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .trust-item {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+
+  .features-container {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+  }
+
+  .key-highlights {
+    gap: 15px;
+  }
+
+  .highlight-item {
+    padding: 20px;
+  }
+
+  .highlight-item:hover {
+    transform: translateY(-5px);
+  }
+}
+
+@media (max-width: 768px) {
+  .professional-hero-section {
+    min-height: 50vh;
+    padding: 60px 0;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .breadcrumb-list {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .about-1-wrapper {
+    padding: 60px 0;
+  }
+
+  .professional-title {
+    font-size: 2rem;
+  }
+
+  .features-title {
+    font-size: 1.75rem;
+  }
+
+  .features-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .professional-feature-card {
+    padding: 25px 20px;
+  }
+
+  .highlight-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+
+  .trust-indicators {
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-title {
+    font-size: 1.75rem;
+  }
+
+  .hero-badge {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+
+  .professional-title {
+    font-size: 1.75rem;
+  }
+
+  .content-text {
+    font-size: 1rem;
+  }
+
+  .trust-item {
+    padding: 15px 20px;
+  }
+
+  .trust-text {
+    text-align: center;
+  }
+
+  .professional-feature-card {
+    padding: 20px 15px;
+  }
+
+  .feature-number {
+    font-size: 2rem;
+    top: 15px;
+    right: 20px;
+  }
 }
 
 /* Skeleton images */

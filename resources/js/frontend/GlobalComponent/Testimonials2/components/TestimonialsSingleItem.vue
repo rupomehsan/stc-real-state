@@ -18,7 +18,14 @@
           <i class="fa-sharp fa-solid fa-star"></i>
         </div> -->
         <div class="team-img">
-          <img :src="testimonial?.image ? '/' + testimonial.image : 'assets/frontend/img/testimonial/testi-2-1.jpg'" alt="Team" />
+          <img
+            :src="
+              testimonial?.image
+                ? '/' + testimonial.image
+                : 'assets/frontend/img/testimonial/testi-2-1.jpg'
+            "
+            alt="Team"
+          />
         </div>
         <div class="content">
           <h3 class="box-title">{{ testimonial?.name }}</h3>
@@ -40,4 +47,11 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.testi-block.style-2 .bottom-wrap .team-img img {
+  height: 180px !important;
+  width: 180px !important;
+  object-fit: cover !important;
+  object-position: top !important;
+}
+</style>

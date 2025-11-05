@@ -1,6 +1,6 @@
 <template>
   <div class="professional-gallery-container">
-    <div class="modern-gallery">
+    <div class="modern-gallery" :class="{ 'few-items': images.length <= 3 }">
       <div
         v-for="(item, index) in images"
         :key="index"
@@ -232,42 +232,54 @@ export default {
 // Professional Gallery Container
 .professional-gallery-container {
   width: 100%;
-  padding: 2rem 1rem;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  // padding: 2rem 1rem;
+  // background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
   min-height: 100vh;
   position: relative;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 200px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    opacity: 0.1;
-    z-index: 0;
-  }
 }
 
 // Modern Gallery Grid
 .modern-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  max-width: 1400px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
   margin: 0 auto;
   position: relative;
   z-index: 1;
 
+  // Ensure single items don't take full width
+  @supports (grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))) {
+    grid-template-columns: repeat(auto-fill, minmax(300px, min(400px, 1fr)));
+  }
+
   @media (min-width: 768px) {
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(350px, min(400px, 1fr)));
+    gap: 1rem;
   }
 
   @media (min-width: 1024px) {
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-    gap: 3rem;
+    grid-template-columns: repeat(auto-fill, minmax(380px, min(420px, 1fr)));
+    gap: 1.5rem;
+  }
+
+  // Special handling for few items to prevent full width expansion
+  &.few-items {
+    justify-content: center;
+
+    .gallery-item {
+      max-width: 400px;
+    }
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(auto-fill, 350px);
+      justify-content: center;
+    }
+
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(auto-fill, 380px);
+      justify-content: center;
+    }
   }
 }
 
@@ -277,7 +289,7 @@ export default {
   transform: translateY(30px);
   animation: fadeInUp 0.8s ease-out forwards;
   transition: all 0.3s ease;
-  height: 300px;
+  height: 450px;
 
   &.large {
     grid-row: span 2;
@@ -296,7 +308,7 @@ export default {
 .gallery-card {
   width: 100%;
   height: 100%;
-  border-radius: 20px;
+  border-radius: 0px;
   overflow: hidden;
   background: #ffffff;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
@@ -336,7 +348,7 @@ export default {
 .gallery-img-wrapper {
   position: relative;
   width: 100%;
-  height: 300px;
+  height: 450px;
   overflow: hidden;
   background: #f1f5f9;
 

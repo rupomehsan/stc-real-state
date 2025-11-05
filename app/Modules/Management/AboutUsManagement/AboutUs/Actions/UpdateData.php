@@ -33,6 +33,12 @@ class UpdateData
                 }
             }
 
+            if ($request->hasFile('primary_image')) {
+                $primary_image = $request->file('primary_image');
+                $currentDate = now()->format('Y/m');
+                $requestData['primary_image'] = uploader($primary_image, 'uploads/AboutUs/primary_image/' . $currentDate);
+            }
+            
             if ($request->hasFile('secondary_image')) {
                 $secondary_image = $request->file('secondary_image');
                 $currentDate = now()->format('Y/m');

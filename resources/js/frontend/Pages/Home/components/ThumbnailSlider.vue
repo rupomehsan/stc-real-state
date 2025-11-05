@@ -5,21 +5,21 @@
       <div class="category-blocks">
         <div class="category-block residential">
           <div class="category-icon">
-            <i class="fa-solid fa-house"></i>
+            <i class="fa-solid fa-building-user"></i>
           </div>
-          <h4>Residential</h4>
+          <h4>Real Estate</h4>
         </div>
         <div class="category-block commercial">
           <div class="category-icon">
-            <i class="fa-solid fa-building"></i>
+            <i class="fa-solid fa-person-digging"></i>
           </div>
-          <h4>Commercial</h4>
+          <h4>Construction</h4>
         </div>
         <div class="category-block landowner">
           <div class="category-icon">
-            <i class="fa-solid fa-map-location-dot"></i>
+            <i class="fa-solid fa-cubes"></i>
           </div>
-          <h4>Landowner</h4>
+          <h4>STC Bricks</h4>
         </div>
       </div>
     </div>
@@ -49,7 +49,7 @@
       @slideChange="onSlideChange"
       class="thumbnail-swiper"
     >
-      <swiper-slide>
+      <swiper-slide v-for="(banner, index) in banners" :key="index">
         <div class="slide-content">
           <div class="hero-img-shape-1">
             <div class="logo-icon-wrap border">
@@ -61,8 +61,11 @@
           </div>
           <div class="parallax-bg" data-swiper-parallax="-23%">
             <img
-              src="/assets/frontend/img/hero/hero_bg_1_3.jpg"
-              alt="Property 1"
+              :src="
+                '/' +
+                (banner?.image ?? '/assets/frontend/img/hero/hero_bg_1_3.jpg')
+              "
+              alt="Property "
             />
             <div class="overlay-gradient"></div>
           </div>
@@ -70,188 +73,23 @@
             <div class="row">
               <div class="slide-text">
                 <h3 data-swiper-parallax="100" class="typing-heading">
-                  Luxury Villa
+                  {{ banner?.short_title }}
                 </h3>
                 <p data-swiper-parallax="200">
-                  sf property with modern amenities and stunning fdsf
-                  getFirstSetting ValueByTitle modern amenities and stunning saf
-                  dfg property modern amenities and stunning sagfdsfdsf jgh
-                  property with amenities and stunning architecture
+                  {{ banner?.short_description }}
                 </p>
-                <button class="th-btn style2 pill" data-swiper-parallax="300">
+                <a
+                  :href="banner?.permalink ?? '#'"
+                  class="th-btn style2 pill"
+                  data-swiper-parallax="300"
+                >
                   View Details
-                </button>
+                </a>
               </div>
             </div>
           </div>
         </div>
       </swiper-slide>
-      <swiper-slide>
-        <div class="slide-content">
-          <div class="parallax-bg" data-swiper-parallax="-23%">
-            <img
-              src="/assets/frontend/img/hero/hero_bg_1_3.jpg"
-              alt="Property 1"
-            />
-            <div class="overlay-gradient"></div>
-          </div>
-          <div class="container">
-            <div class="row">
-              <div class="slide-text">
-                <h3 data-swiper-parallax="100" class="typing-heading">
-                  Luxury Villa
-                </h3>
-                <p data-swiper-parallax="200">
-                  Beautiful property with modern amenities and stunning
-                  architecture Beautiful modern amenities and stunning
-                  architecture Beautiful property modern amenities and stunning
-                  architecture Beautiful property with amenities and stunning
-                  architecture
-                </p>
-                <button class="th-btn style2 pill" data-swiper-parallax="300">
-                  View Details
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </swiper-slide>
-      <!-- <swiper-slide>
-        <div class="slide-content">
-          <div class="parallax-bg" data-swiper-parallax="-23%">
-            <img
-              src="/assets/frontend/img/hero/hero_bg_1_2.jpg"
-              alt="Property 2"
-            />
-            <div class="overlay-gradient"></div>
-          </div>
-          <div class="slide-text" data-swiper-parallax="-300">
-            <div class="property-badge new" data-swiper-parallax="-50">
-              New Listing
-            </div>
-            <h3 data-swiper-parallax="-100">Modern Apartment</h3>
-            <p data-swiper-parallax="-200">
-              Stunning city view with premium facilities and contemporary design
-            </p>
-            <div class="property-details" data-swiper-parallax="-250">
-              <span class="price">$1,890,000</span>
-              <span class="location">📍 Manhattan, NY</span>
-            </div>
-            <button class="cta-button" data-swiper-parallax="-300">
-              View Details
-            </button>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="slide-content">
-          <div class="parallax-bg" data-swiper-parallax="-23%">
-            <img
-              src="/assets/frontend/img/hero/hero_bg_1_3.jpg"
-              alt="Property 3"
-            />
-            <div class="overlay-gradient"></div>
-          </div>
-          <div class="slide-text" data-swiper-parallax="-300">
-            <div class="property-badge family" data-swiper-parallax="-50">
-              Family Friendly
-            </div>
-            <h3 data-swiper-parallax="-100">Family House</h3>
-            <p data-swiper-parallax="-200">
-              Perfect home for your growing family with spacious rooms and
-              garden
-            </p>
-            <div class="property-details" data-swiper-parallax="-250">
-              <span class="price">$950,000</span>
-              <span class="location">📍 Suburban Hills, TX</span>
-            </div>
-            <button class="cta-button" data-swiper-parallax="-300">
-              View Details
-            </button>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="slide-content">
-          <div class="parallax-bg" data-swiper-parallax="-23%">
-            <img
-              src="/assets/frontend/img/hero/hero_bg_1_4.jpg"
-              alt="Property 4"
-            />
-            <div class="overlay-gradient"></div>
-          </div>
-          <div class="slide-text" data-swiper-parallax="-300">
-            <div class="property-badge luxury" data-swiper-parallax="-50">
-              Luxury
-            </div>
-            <h3 data-swiper-parallax="-100">Penthouse Suite</h3>
-            <p data-swiper-parallax="-200">
-              Exclusive penthouse with panoramic views and world-class amenities
-            </p>
-            <div class="property-details" data-swiper-parallax="-250">
-              <span class="price">$5,200,000</span>
-              <span class="location">📍 Miami Beach, FL</span>
-            </div>
-            <button class="cta-button" data-swiper-parallax="-300">
-              View Details
-            </button>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="slide-content">
-          <div class="parallax-bg" data-swiper-parallax="-23%">
-            <img
-              src="/assets/frontend/img/hero/hero_bg_1_1.jpg"
-              alt="Property 5"
-            />
-            <div class="overlay-gradient"></div>
-          </div>
-          <div class="slide-text" data-swiper-parallax="-300">
-            <div class="property-badge waterfront" data-swiper-parallax="-50">
-              Waterfront
-            </div>
-            <h3 data-swiper-parallax="-100">Waterfront Condo</h3>
-            <p data-swiper-parallax="-200">
-              Luxurious living by the water with breathtaking ocean views
-            </p>
-            <div class="property-details" data-swiper-parallax="-250">
-              <span class="price">$3,750,000</span>
-              <span class="location">📍 Malibu, CA</span>
-            </div>
-            <button class="cta-button" data-swiper-parallax="-300">
-              View Details
-            </button>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="slide-content">
-          <div class="parallax-bg" data-swiper-parallax="-23%">
-            <img
-              src="/assets/frontend/img/hero/hero_bg_1_2.jpg"
-              alt="Property 6"
-            />
-            <div class="overlay-gradient"></div>
-          </div>
-          <div class="slide-text" data-swiper-parallax="-300">
-            <div class="property-badge garden" data-swiper-parallax="-50">
-              Garden View
-            </div>
-            <h3 data-swiper-parallax="-100">Garden Townhouse</h3>
-            <p data-swiper-parallax="-200">
-              Spacious home with private garden and modern architectural design
-            </p>
-            <div class="property-details" data-swiper-parallax="-250">
-              <span class="price">$1,350,000</span>
-              <span class="location">📍 Portland, OR</span>
-            </div>
-            <button class="cta-button" data-swiper-parallax="-300">
-              View Details
-            </button>
-          </div>
-        </div>
-      </swiper-slide> -->
     </swiper>
   </div>
   <div class="search-area">
@@ -316,6 +154,16 @@ export default {
       onSlideChange,
       modules: [Navigation, Pagination, A11y, Parallax, Autoplay, EffectFade],
     };
+  },
+  created() {
+    this.fetch_banners();
+  },
+
+  methods: {
+    ...mapActions(home_store, ["fetch_banners"]),
+  },
+  computed: {
+    ...mapState(home_store, ["banners"]),
   },
 };
 </script>
@@ -544,6 +392,7 @@ export default {
 
 .slide-text h3 {
   font-size: 80px;
+  line-height: 105px !important;
   font-weight: 800;
   margin-bottom: 45px;
   margin-top: -0.2em;
@@ -576,24 +425,10 @@ export default {
   animation: overlaySlideDown 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-.typing-heading::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 3px;
-  height: 100%;
-  background: var(--theme-color);
-  opacity: 0;
-}
-
-.swiper-slide-active .typing-heading::after {
-  animation: typingCursor 0.8s step-end 1.2s 3, fadeOut 0.3s ease 3.6s forwards;
-}
-
 .swiper-slide-active .slide-text h3 {
   animation: slideInFromLeft 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards,
-    typingReveal 1.5s steps(12) 1.2s forwards;
+    typingReveal 5s steps(12) 1.2s infinite;
+  animation-delay: 0.3s, 1.2s;
 }
 
 .slide-text p {
@@ -603,21 +438,45 @@ export default {
   font-family: var(--body-font);
   margin: 0 0 18px 0;
   line-height: 1.75;
-  animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   opacity: 0;
+  animation: fadeOutDown 0.6s cubic-bezier(0.4, 0, 0.6, 1) forwards;
 }
 
 .swiper-slide-active .slide-text p {
   animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
 }
 
-.slide-text button {
-  animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+.slide-text a {
   opacity: 0;
+  animation: fadeOutDown 0.6s cubic-bezier(0.4, 0, 0.6, 1) forwards;
 }
 
-.swiper-slide-active .slide-text button {
+.swiper-slide-active .slide-text a {
   animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) 0.7s forwards;
+}
+
+.th-btn.style2.pill {
+  background: linear-gradient(135deg, #d4af37, #f4d03f);
+  color: #1a1a1a;
+  border: none;
+  padding: 15px 35px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.th-btn.style2.pill:hover {
+  background: linear-gradient(135deg, #f4d03f, #d4af37);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(212, 175, 55, 0.6);
+  color: #000;
 }
 
 .property-details {
@@ -673,12 +532,13 @@ export default {
     rgba(255, 255, 255, 0.2),
     rgba(255, 255, 255, 0.1)
   ); */
-  width: 60px;
-  height: 60px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); */
   margin-top: -30px;
-  backdrop-filter: blur(10px);
+  margin-inline: 20px;
+  /* backdrop-filter: blur(10px); */
   /* border: 1px solid rgba(255, 255, 255, 0.2); */
   transition: all 0.3s ease;
 }
@@ -752,6 +612,7 @@ export default {
 
   .slide-text h3 {
     font-size: 60px;
+    line-height: 85px !important;
     margin-bottom: 25px;
   }
 
@@ -809,6 +670,7 @@ export default {
   } */
   .slide-text h3 {
     font-size: 40px;
+    line-height: 65px !important;
     margin-bottom: 25px;
   }
 
@@ -894,7 +756,7 @@ export default {
   }
 
   .category-blocks {
-    flex-direction: column;
+    /* flex-direction: column; */
     gap: 0;
   }
 
@@ -980,6 +842,17 @@ export default {
   }
 }
 
+@keyframes fadeOutDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
 @keyframes slideInFromLeft {
   0% {
     opacity: 0;
@@ -1009,26 +882,14 @@ export default {
   0% {
     clip-path: inset(0 100% 0 0);
   }
-  100% {
+  30% {
     clip-path: inset(0 0 0 0);
   }
-}
-
-/* Typing cursor blink */
-@keyframes typingCursor {
-  0%,
+  70% {
+    clip-path: inset(0 0 0 0);
+  }
   100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-}
-
-/* Fade out cursor */
-@keyframes fadeOut {
-  to {
-    opacity: 0;
+    clip-path: inset(0 100% 0 0);
   }
 }
 </style>

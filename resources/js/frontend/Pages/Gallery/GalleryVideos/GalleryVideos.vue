@@ -40,17 +40,29 @@
               <button
                 v-if="videos?.data?.length"
                 data-filter="*"
-                class="th-btn tab-btn active"
+                :class="[
+                  'th-btn',
+                  'tab-btn',
+                  {
+                    active:
+                      video_category_id === null ||
+                      video_category_id === undefined,
+                  },
+                ]"
                 type="button"
-                @click.prevent="set_video_category_id(null)"
+                @click.prevent="handleCategoryClick(null)"
               >
                 View All
               </button>
               <button
                 v-for="category in video_categories?.data"
                 :key="category.id"
-                @click.prevent="set_video_category_id(category?.id)"
-                class="th-btn tab-btn"
+                @click.prevent="handleCategoryClick(category?.id)"
+                :class="[
+                  'th-btn',
+                  'tab-btn',
+                  { active: video_category_id === category.id },
+                ]"
                 type="button"
               >
                 {{ category?.name }}
@@ -86,6 +98,13 @@ export default {
     this.fetch_video_categories();
     console.log("Gallery Videos component created");
   },
+  mounted() {
+    console.log(
+      "Component mounted. Initial video_category_id:",
+      this.video_category_id
+    );
+    console.log("Initial video_categories:", this.video_categories);
+  },
   methods: {
     ...mapActions(gallery_store, [
       "fetch_images",
@@ -95,6 +114,10 @@ export default {
       "set_image_category_id",
       "set_video_category_id",
     ]),
+    handleCategoryClick(categoryId) {
+      console.log("Category clicked:", categoryId);
+      this.set_video_category_id(categoryId);
+    },
   },
   computed: {
     ...mapState(gallery_store, [
@@ -106,6 +129,17 @@ export default {
       "video_category_id",
     ]),
   },
+  watch: {
+    video_category_id(newVal, oldVal) {
+      console.log("Video category ID changed from", oldVal, "to", newVal);
+    },
+    video_categories: {
+      handler(newVal) {
+        console.log("Video categories loaded:", newVal);
+      },
+      deep: true,
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -115,6 +149,24 @@ export default {
       font-size: 2.5rem;
       font-weight: 700;
       margin-bottom: 1.5rem;
+    }
+  }
+}
+
+.filter-menu {
+  .tab-btn {
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &.active {
+      background-color: var(--theme-color, #007bff) !important;
+      color: white !important;
+      border-color: var(--theme-color, #007bff) !important;
+      font-weight: 600;
     }
   }
 }
