@@ -113,4 +113,9 @@ export default {
     }
   }
 }
+@media (max-width: 767px) {
+  .page-title {
+    font-size: 20px !important;
+  }
+}
 </style>

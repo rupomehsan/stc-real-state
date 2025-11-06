@@ -23,4 +23,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+@media (max-width: 767px) {
+  .page-title {
+    font-size: 20px !important;
+  }
+}
+</style>

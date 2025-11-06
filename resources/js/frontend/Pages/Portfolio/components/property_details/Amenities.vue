@@ -56,4 +56,10 @@ export default {
   font-weight: 400;
   color: var(--theme-color); /* Green color for checked items */
 }
+
+@media (max-width: 767px) {
+  .page-title {
+    font-size: 20px !important;
+  }
+}
 </style>

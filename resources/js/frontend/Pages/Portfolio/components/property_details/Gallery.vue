@@ -330,7 +330,7 @@ export default {
   }
 
   .page-title {
-    font-size: 1.8rem;
+    font-size: 20px !important;
   }
 
   .icon-btn {

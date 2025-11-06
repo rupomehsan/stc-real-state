@@ -108,7 +108,7 @@
               <div class="nav-background">
                 <div
                   class="active-tab-indicator"
-                  :style="{ transform: `translateX(${activeTabIndex * 100}%)` }"
+                  :style="tabIndicatorStyle"
                 ></div>
               </div>
 
@@ -290,6 +290,7 @@ export default {
       currentSlideIndex: 0,
       activeTabIndex: 0,
       autoAdvanceInterval: null,
+      isMobile: false,
       icons: [
         `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
                   <rect x="10" y="20" width="80" height="60" rx="5"/>
@@ -397,10 +398,11 @@ export default {
   },
 
   mounted() {
-    // Auto-advance tabs every 5 seconds
-    this.autoAdvanceInterval = setInterval(() => {
-      this.autoAdvanceTabs();
-    }, 5000);
+    // Check if mobile on mount
+    this.checkIfMobile();
+
+    // Add resize listener
+    window.addEventListener("resize", this.checkIfMobile);
 
     // Initialize stats animation
     this.$nextTick(() => {
@@ -419,6 +421,14 @@ export default {
     // Loading state for skeleton display
     isLoading() {
       return this.loading || !this.hasServices;
+    },
+
+    // Active tab indicator transform style
+    tabIndicatorStyle() {
+      if (this.isMobile) {
+        return { display: "none" };
+      }
+      return { transform: `translateX(${this.activeTabIndex * 100}%)` };
     },
   },
 
@@ -443,6 +453,11 @@ export default {
     closeServiceDetail() {
       this.selectedService = null;
       document.body.style.overflow = "auto";
+    },
+
+    // Check if device is mobile
+    checkIfMobile() {
+      this.isMobile = window.innerWidth <= 768;
     },
 
     // Handle image error for orbit icons
@@ -478,23 +493,6 @@ export default {
     // Tab navigation methods
     setActiveTab(index) {
       this.activeTabIndex = index;
-      // Reset auto-advance timer when user manually changes tab
-      this.resetAutoAdvance();
-    },
-
-    autoAdvanceTabs() {
-      const nextIndex =
-        (this.activeTabIndex + 1) % this.excellenceSlides.length;
-      this.activeTabIndex = nextIndex;
-    },
-
-    resetAutoAdvance() {
-      if (this.autoAdvanceInterval) {
-        clearInterval(this.autoAdvanceInterval);
-        this.autoAdvanceInterval = setInterval(() => {
-          this.autoAdvanceTabs();
-        }, 5000);
-      }
     },
 
     // Initialize stats counter animation
@@ -559,9 +557,9 @@ export default {
   // Cleanup when component is destroyed
   beforeUnmount() {
     document.body.style.overflow = "auto";
-    if (this.autoAdvanceInterval) {
-      clearInterval(this.autoAdvanceInterval);
-    }
+
+    // Remove resize listener
+    window.removeEventListener("resize", this.checkIfMobile);
   },
 };
 </script>
@@ -571,7 +569,7 @@ export default {
 :root {
   --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  --accent-color: #6366f1;
+  --accent-color: #940404;
   --text-primary: #1f2937;
   --text-secondary: #6b7280;
   --text-light: #ffffff;
@@ -1579,6 +1577,26 @@ export default {
     padding: 0 1rem;
   }
 
+  // Mobile layout fix for small devices
+  .modern-content-area .modern-panel .panel-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: none !important;
+    gap: 1.5rem !important;
+    text-align: center;
+  }
+
+  .visual-showcase {
+    order: 1 !important;
+    width: 100% !important;
+    padding: 1rem !important;
+  }
+
+  .content-showcase {
+    order: 2 !important;
+    width: 100% !important;
+  }
+
   .hero-subtitle-section {
     padding: 25px 0;
     margin-bottom: 30px;
@@ -1826,7 +1844,7 @@ export default {
       display: inline-flex;
       align-items: center;
       gap: 0.75rem;
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      background: linear-gradient(135deg, #af212f, #ff4136);
       color: white;
       padding: 0.75rem 1.5rem;
       border-radius: 50px;
@@ -1885,7 +1903,7 @@ export default {
 
           .title-main {
             display: block;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            background: linear-gradient(135deg, #af212f, #ff4136);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -1895,7 +1913,7 @@ export default {
         .title-accent {
           width: 80px;
           height: 4px;
-          background: linear-gradient(90deg, #6366f1, #8b5cf6);
+          background: linear-gradient(90deg, #940404, #8b5cf6);
           border-radius: 2px;
           margin: 1rem auto;
           position: relative;
@@ -1907,7 +1925,7 @@ export default {
             left: 50%;
             width: 12px;
             height: 12px;
-            background: #6366f1;
+            background: #940404;
             border-radius: 50%;
             transform: translate(-50%, -50%);
             box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
@@ -1923,7 +1941,7 @@ export default {
         margin: 0 auto;
 
         .subtitle-emphasis {
-          background: linear-gradient(135deg, #6366f1, #8b5cf6);
+          background: linear-gradient(135deg, #af212f, #ff4136);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -2181,7 +2199,7 @@ export default {
     line-height: 1.6;
 
     .subtitle-emphasis {
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      background: linear-gradient(135deg, #af212f, #ff4136);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -2214,7 +2232,7 @@ export default {
       left: 8px;
       width: calc(25% - 8px);
       height: calc(100% - 16px);
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      background: linear-gradient(135deg, #af212f, #ff4136);
       border-radius: 12px;
       transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
@@ -2224,9 +2242,13 @@ export default {
   .nav-tabs-wrapper {
     position: relative;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 0;
     z-index: 2;
+
+    @media (min-width: 769px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
 
   .modern-tab-btn {
@@ -2248,6 +2270,7 @@ export default {
     &.active {
       color: white !important;
       font-weight: bold;
+
       .tab-content-wrapper {
         color: white !important;
 
@@ -2301,7 +2324,7 @@ export default {
         svg {
           width: 20px;
           height: 20px;
-          color: #6366f1;
+          color: #940404;
           transition: color 0.3s ease;
         }
       }
@@ -2326,7 +2349,7 @@ export default {
             transition: all 0.3s ease;
 
             &.active {
-              background: #6366f1;
+              background: #940404;
             }
           }
         }
@@ -2376,10 +2399,20 @@ export default {
 
   .modern-panel {
     .panel-layout {
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 4rem;
-      align-items: start;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: center;
+      text-align: center;
+
+      // Desktop layout - horizontal
+      @media (min-width: 769px) {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 4rem;
+        align-items: start;
+        text-align: left;
+      }
     }
 
     // Visual Showcase Styles
@@ -2468,7 +2501,7 @@ export default {
             position: relative;
             width: 120px;
             height: 120px;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            background: linear-gradient(135deg, #af212f, #ff4136);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -2544,7 +2577,7 @@ export default {
                 display: block;
                 font-size: 1.5rem;
                 font-weight: 800;
-                color: #6366f1;
+                color: #940404;
                 margin-bottom: 0.25rem;
               }
 
@@ -2571,7 +2604,7 @@ export default {
           align-items: center;
           gap: 0.5rem;
           background: rgba(99, 102, 241, 0.1);
-          color: #6366f1;
+          color: #940404;
           padding: 0.5rem 1rem;
           border-radius: 50px;
           font-size: 0.85rem;
@@ -2581,7 +2614,7 @@ export default {
           .badge-indicator {
             width: 8px;
             height: 8px;
-            background: #6366f1;
+            background: #940404;
             border-radius: 50%;
             animation: pulse-dot 2s ease-in-out infinite;
           }
@@ -2601,7 +2634,7 @@ export default {
             top: 50%;
             width: 4px;
             height: 60%;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            background: linear-gradient(135deg, #af212f, #ff4136);
             border-radius: 2px;
             transform: translateY(-50%);
           }
@@ -2618,7 +2651,7 @@ export default {
           .underline-fill {
             height: 100%;
             width: 60%;
-            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            background: linear-gradient(90deg, #940404, #8b5cf6);
             border-radius: 2px;
             animation: slide-in 1s ease-out;
           }
@@ -2651,7 +2684,7 @@ export default {
               top: 50%;
               width: 4px;
               height: 20px;
-              background: #6366f1;
+              background: #940404;
               border-radius: 2px;
               transform: translateY(-50%);
             }
@@ -2675,7 +2708,7 @@ export default {
 
               &:hover {
                 background: #f1f5f9;
-                border-left-color: #6366f1;
+                border-left-color: #940404;
                 transform: translateX(5px);
 
                 .feature-accent {
@@ -2686,7 +2719,7 @@ export default {
               .feature-icon {
                 width: 24px;
                 height: 24px;
-                color: #6366f1;
+                color: #940404;
                 flex-shrink: 0;
               }
 
@@ -2730,7 +2763,7 @@ export default {
             .progress-percentage {
               font-size: 1.25rem;
               font-weight: 700;
-              color: #6366f1;
+              color: #940404;
             }
           }
 
@@ -2770,7 +2803,7 @@ export default {
               top: 0;
               left: 0;
               bottom: 0;
-              background: linear-gradient(90deg, #6366f1, #8b5cf6);
+              background: linear-gradient(90deg, #940404, #8b5cf6);
               border-radius: 4px;
               transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
             }
@@ -4575,6 +4608,25 @@ export default {
       .container {
         padding: 0 1rem;
       }
+
+      // Mobile layout fix for panel
+      .modern-content-area .modern-panel .panel-layout {
+        display: flex !important;
+        flex-direction: column !important;
+        grid-template-columns: none !important;
+        gap: 2rem !important;
+        text-align: center;
+      }
+
+      .visual-showcase {
+        order: 1 !important;
+        width: 100% !important;
+      }
+
+      .content-showcase {
+        order: 2 !important;
+        width: 100% !important;
+      }
     }
 
     .excellence-showcase-card {
@@ -4600,42 +4652,122 @@ export default {
       }
 
       .modern-tab-navigation {
-        padding: 2rem;
+        padding: 2rem 1.5rem;
 
         .nav-background {
-          left: 2rem;
-          right: 2rem;
-          height: auto;
-          background: transparent;
-          box-shadow: none;
-
-          .active-tab-indicator {
-            display: none;
-          }
+          display: none !important;
         }
 
         .nav-tabs-wrapper {
-          grid-template-columns: 1fr;
-          gap: 0.5rem;
+          display: flex !important;
+          flex-direction: column !important;
+          grid-template-columns: none !important;
+          gap: 1rem !important;
         }
 
         .modern-tab-btn {
-          background: rgba(255, 255, 255, 0.9);
-          border-radius: 12px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          position: relative !important;
+          background: transparent !important;
+          border: 1px solid rgba(99, 102, 241, 0.2) !important;
+          border-radius: 12px !important;
+          box-shadow: none !important;
+          padding: 1rem 1.25rem !important;
+          transition: all 0.3s ease !important;
+          display: block !important;
+          width: 100% !important;
+          text-align: left !important;
+
+          &::before {
+            display: none !important;
+            background: none !important;
+          }
+
+          .tab-hover-effect {
+            display: none !important;
+            opacity: 0 !important;
+            background: none !important;
+            visibility: hidden !important;
+          }
 
           &.active {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
-            color: white;
+            background: linear-gradient(135deg, #af212f, #ff4136) !important;
+            border-color: transparent !important;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3) !important;
+            transform: translateX(0px) !important;
+
+            .tab-content-wrapper {
+              color: white !important;
+
+              .tab-number {
+                color: rgba(255, 255, 255, 0.95) !important;
+              }
+
+              .tab-icon-modern svg {
+                color: white !important;
+                stroke: white !important;
+              }
+
+              .tab-title-modern {
+                color: white !important;
+              }
+
+              .progress-line {
+                background: rgba(255, 255, 255, 0.3) !important;
+
+                &.active {
+                  background: white !important;
+                }
+              }
+            }
+          }
+
+          &:hover:not(.active) {
+            transform: translateX(0px) !important;
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15) !important;
+
+            .tab-hover-effect {
+              opacity: 0.5 !important;
+            }
           }
 
           .tab-content-wrapper {
-            padding: 0.5rem;
+            padding: 0 !important;
+            gap: 1rem !important;
+            display: flex !important;
+            align-items: center !important;
+
+            .tab-number {
+              min-width: 28px !important;
+              font-size: 0.9rem !important;
+            }
+
+            .tab-icon-modern {
+              width: 28px !important;
+              height: 28px !important;
+              display: flex !important;
+              align-items: center !important;
+              justify-content: center !important;
+
+              svg {
+                width: 18px !important;
+                height: 18px !important;
+              }
+            }
 
             .tab-info {
+              flex: 1 !important;
+
               .tab-title-modern {
-                font-size: 0.85rem;
+                font-size: 0.9rem !important;
+                line-height: 1.4 !important;
+              }
+
+              .tab-progress {
+                margin-top: 0.5rem !important;
+
+                .progress-line {
+                  height: 3px !important;
+                }
               }
             }
           }
@@ -4646,12 +4778,14 @@ export default {
         padding: 2rem;
 
         .modern-panel .panel-layout {
-          grid-template-columns: 1fr;
+          display: flex;
+          flex-direction: column;
           gap: 2rem;
           text-align: center;
         }
 
         .visual-showcase {
+          order: 1;
           padding: 1.5rem;
 
           .main-visual .icon-container .main-icon {
@@ -4671,6 +4805,8 @@ export default {
         }
 
         .content-showcase {
+          order: 2;
+
           .content-header .content-title {
             font-size: 2rem;
 
@@ -4704,23 +4840,109 @@ export default {
         }
 
         .modern-tab-navigation {
-          padding: 1rem;
+          padding: 1.5rem 1rem;
 
           .nav-background {
-            left: 1rem;
-            right: 1rem;
+            display: none !important;
           }
 
-          .modern-tab-btn .tab-content-wrapper {
-            gap: 0.75rem;
+          .nav-tabs-wrapper {
+            display: flex !important;
+            flex-direction: column !important;
+            grid-template-columns: none !important;
+            gap: 0.75rem !important;
+          }
 
-            .tab-icon-modern {
-              width: 24px;
-              height: 24px;
+          .modern-tab-btn {
+            position: relative !important;
+            padding: 0.875rem 1rem !important;
+            background: transparent !important;
+            border: 1px solid rgba(99, 102, 241, 0.2) !important;
+            border-radius: 12px !important;
+            box-shadow: none !important;
+            display: block !important;
+            width: 100% !important;
+            text-align: left !important;
 
-              svg {
-                width: 16px;
-                height: 16px;
+            &::before {
+              display: none !important;
+              background: none !important;
+            }
+
+            .tab-hover-effect {
+              display: none !important;
+              opacity: 0 !important;
+              background: none !important;
+              visibility: hidden !important;
+            }
+
+            &.active {
+              background: linear-gradient(135deg, #af212f, #ff4136) !important;
+              border-color: transparent !important;
+              box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3) !important;
+              transform: translateX(0px) !important;
+
+              .tab-content-wrapper {
+                color: white !important;
+
+                .tab-number {
+                  color: rgba(255, 255, 255, 0.95) !important;
+                }
+
+                .tab-icon-modern svg {
+                  color: white !important;
+                  stroke: white !important;
+                }
+
+                .tab-title-modern {
+                  color: white !important;
+                }
+
+                .progress-line {
+                  background: rgba(255, 255, 255, 0.3) !important;
+
+                  &.active {
+                    background: white !important;
+                  }
+                }
+              }
+            }
+
+            &:hover:not(.active) {
+              transform: translateX(0px) !important;
+              box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15) !important;
+            }
+
+            .tab-content-wrapper {
+              padding: 0 !important;
+              gap: 0.75rem !important;
+              display: flex !important;
+              align-items: center !important;
+
+              .tab-number {
+                min-width: 24px !important;
+                font-size: 0.85rem !important;
+              }
+
+              .tab-icon-modern {
+                width: 24px !important;
+                height: 24px !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+
+                svg {
+                  width: 16px !important;
+                  height: 16px !important;
+                }
+              }
+
+              .tab-info {
+                flex: 1 !important;
+
+                .tab-title-modern {
+                  font-size: 0.85rem !important;
+                }
               }
             }
           }
@@ -4729,12 +4951,35 @@ export default {
         .modern-content-area {
           padding: 1.5rem;
 
-          .content-showcase .content-header .content-title {
-            font-size: 1.75rem;
+          .modern-panel .panel-layout {
+            flex-direction: column;
+            gap: 1.5rem;
+          }
+
+          .visual-showcase {
+            order: 1;
+            padding: 1rem;
+          }
+
+          .content-showcase {
+            order: 2;
+
+            .content-header .content-title {
+              font-size: 1.75rem;
+            }
           }
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .modern-tab-navigation .modern-tab-btn.active {
+    background: linear-gradient(135deg, #af212f, #ff4136) !important;
+  }
+  .modern-tab-navigation .nav-background {
+    display: none !important;
   }
 }
 </style>

@@ -31,21 +31,16 @@
             </h2>
             <div class="project-info">
               <h3 class="project-name">
-                {{
-                  currentSlide?.property_name ||
-                  currentSlide?.title ||
-                  "Sheltech Cityscape Heights"
-                }}
+                {{ currentSlide?.title || "Sheltech Cityscape Heights" }}
               </h3>
               <div class="project-meta">
                 <span class="project-type">{{
-                  currentSlide?.category?.name || "Featured Property"
+                  currentSlide?.category?.name || "Commercial"
                 }}</span>
-
                 <span class="separator">•</span>
-                <span class="project-location">{{
-                  currentSlide?.property_address || "Dhaka"
-                }}</span>
+                <span class="project-series">Sapphire Series</span>
+                <span class="separator">•</span>
+                <span class="project-location">Kakrail</span>
               </div>
             </div>
           </div>
@@ -72,39 +67,24 @@
         <!-- Right Image Panel -->
         <div class="image-panel">
           <!-- Main Slider -->
-          <div
-            ref="mainSliderRef"
-            class="main-image-slider swiper"
-            v-if="!loading && slides.length > 0"
-          >
+          <div ref="mainSliderRef" class="main-image-slider swiper">
             <div class="swiper-wrapper">
               <div
                 v-for="slide in slides"
                 :key="`main-${slide.id}`"
                 class="swiper-slide"
               >
-                <Link
-                  :href="`/portfolio/property-details?slug=${slide.slug}`"
-                  class="image-container"
-                  :title="`View details of ${
-                    slide.property_name || slide.title
-                  }`"
-                >
+                <div class="image-container">
                   <img
                     class="property-image"
-                    :src="getPropertyImage(slide)"
-                    :alt="slide.property_name || slide.title"
+                    :src="slide.image"
+                    :alt="slide.title"
                     loading="eager"
                     @error="handleImageError"
                     @load="handleImageLoad"
                   />
-                  <div class="image-overlay">
-                    <div class="view-details-overlay">
-                      <i class="fas fa-eye"></i>
-                      <span>View Details</span>
-                    </div>
-                  </div>
-                </Link>
+                  <div class="image-overlay"></div>
+                </div>
               </div>
             </div>
 
@@ -146,21 +126,9 @@
               </button>
             </div>
           </div>
-          <!-- Loading State -->
-          <div v-else-if="loading" class="loading-state">
-            <div class="loading-spinner"></div>
-            <p>Loading properties...</p>
-          </div>
-          <!-- Empty State -->
-          <div v-else class="empty-state">
-            <p>No properties found.</p>
-          </div>
 
           <!-- Thumbnail Navigation -->
-          <div
-            class="thumbnail-navigation"
-            v-if="!loading && slides.length > 0"
-          >
+          <div class="thumbnail-navigation">
             <div ref="thumbSliderRef" class="thumbnail-slider swiper">
               <div class="swiper-wrapper">
                 <div
@@ -175,8 +143,8 @@
                 >
                   <img
                     class="thumb-image"
-                    :src="getPropertyImage(slide)"
-                    :alt="slide.property_name || slide.title"
+                    :src="slide.image"
+                    :alt="slide.title"
                     loading="lazy"
                   />
                   <!-- Debug indicator -->
@@ -191,29 +159,114 @@
 </template>
 
 <script>
-import {
-  ref,
-  onMounted,
-  onUnmounted,
-  computed,
-  getCurrentInstance,
-  watch,
-  nextTick,
-} from "vue";
+import { ref, onMounted, onUnmounted, computed } from "vue";
 import { Swiper } from "swiper";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
-import { store as propertiesStore } from "./Store/propertiesStore.js";
-import { mapState, mapActions } from "pinia";
-import { Link } from "@inertiajs/vue3";
 
 export default {
   name: "PropertySlider",
-  components: {
-    Link,
-  },
   props: {
+    slides: {
+      type: Array,
+      default: () => [
+        {
+          id: 1,
+          title: "Rose Garden Towers – Redefining elegance in city living",
+          link: "/property/1",
+          image:
+            "https://www.sheltech-bd.com/cms/admin/uploads/product/sheltech-khan-legacy/1744282377cFRqd.jpg",
+          author: {
+            name: "Mohammad Asik",
+            avatar: "https://picsum.photos/id/1026/48/48",
+            profile: "/author/1",
+          },
+          commentsCount: 1,
+          category: {
+            name: "Commercial",
+            link: "/category/commercial",
+          },
+          date: "2021-07-30",
+        },
+        {
+          id: 2,
+          title: "21 Towers – A symbol of modern luxury and urban lifestyle",
+          link: "/property/2",
+          image:
+            "https://www.sheltech-bd.com/cms/admin/uploads/product/sheltech-prottasha/1739266642u4UVP.jpg",
+          author: {
+            name: "Una Maria",
+            avatar: "https://picsum.photos/id/158/48/48",
+            profile: "/author/2",
+          },
+          commentsCount: 1,
+          category: {
+            name: "Commercial",
+            link: "/category/commercial",
+          },
+          date: "2021-07-30",
+        },
+        {
+          id: 3,
+          title:
+            "Sun View Towers – Contemporary design with sustainable features",
+          link: "/property/3",
+          image:
+            "https://www.sheltech-bd.com/cms/admin/uploads/product/sheltech-winter-berry/1734603888ILgAE.jpg",
+          author: {
+            name: "Isabella",
+            avatar: "https://picsum.photos/id/292/48/48",
+            profile: "/author/3",
+          },
+          commentsCount: 1,
+          category: {
+            name: "Commercial",
+            link: "/category/commercial",
+          },
+          date: "2021-07-30",
+        },
+        {
+          id: 4,
+          title:
+            "Three Business Women Working Together With Requirements For Business",
+          link: "/property/4",
+          image:
+            "https://www.sheltech-bd.com/cms/admin/uploads/product/sheltech-rebecca-mohiuddin/1706509114Z3TkK.jpg",
+          author: {
+            name: "Mohammad Asik",
+            avatar:
+              "https://www.sheltech-bd.com/cms/admin/uploads/product/sheltech-rebecca-mohiuddin/1706509114Z3TkK.jpg",
+            profile: "/author/1",
+          },
+          commentsCount: 1,
+          category: {
+            name: "Business",
+            link: "/category/business",
+          },
+          date: "2021-07-30",
+        },
+        {
+          id: 5,
+          title:
+            "Three Business Women Working Together With Requirements For Business",
+          link: "/property/5",
+          image:
+            "https://www.sheltech-bd.com/cms/admin/uploads/product/sheltech-mh-heights/1733910637hRBVn.jpg",
+          author: {
+            name: "Mohammad Asik",
+            avatar: "https://picsum.photos/id/477/48/48",
+            profile: "/author/1",
+          },
+          commentsCount: 1,
+          category: {
+            name: "Business",
+            link: "/category/business",
+          },
+          date: "2021-07-30",
+        },
+      ],
+    },
     showNavigation: {
       type: Boolean,
       default: true,
@@ -227,102 +280,7 @@ export default {
       default: 3000,
     },
   },
-  created() {
-    console.log("PropertySlider created, fetching properties...");
-    this.fetch_properties({ page: 1 });
-  },
-  mounted() {
-    console.log(
-      "PropertySlider mounted - Loading:",
-      this.loading,
-      "Slides:",
-      this.slides.length
-    );
-  },
-  computed: {
-    ...mapState(propertiesStore, ["properties", "loading", "error"]),
-    // Get slides from store data
-    slides() {
-      return this.properties?.data || [];
-    },
-    // Current slide based on index
-    currentSlide() {
-      const index = this.currentSlideIndex || 0;
-      return this.slides[index] || this.slides[0] || {};
-    },
-  },
-  watch: {
-    slides: {
-      handler(newSlides, oldSlides) {
-        // Initialize sliders when data becomes available
-        if (
-          newSlides &&
-          newSlides.length > 0 &&
-          (!oldSlides || oldSlides.length === 0)
-        ) {
-          console.log("Slides data loaded, reinitializing...");
-          this.$nextTick(() => {
-            this.reinitializeSliders();
-          });
-        }
-      },
-      immediate: true,
-    },
-    loading(newLoading, oldLoading) {
-      // When loading finishes and we have data, initialize sliders
-      if (oldLoading && !newLoading && this.slides.length > 0) {
-        console.log("Loading finished, attempting to initialize sliders...");
-        setTimeout(() => {
-          this.reinitializeSliders();
-        }, 100);
-      }
-    },
-  },
-  methods: {
-    ...mapActions(propertiesStore, ["fetch_properties"]),
-    reinitializeSliders() {
-      // Force re-initialization of sliders
-      this.$nextTick(() => {
-        if (this.slides.length > 0) {
-          console.log("Manually reinitializing sliders...");
-          // Destroy existing sliders if they exist
-          if (this.mainSlider) {
-            this.mainSlider.destroy(true, true);
-            this.mainSlider = null;
-          }
-          if (this.thumbSlider) {
-            this.thumbSlider.destroy(true, true);
-            this.thumbSlider = null;
-          }
-          // Reinitialize
-          this.initializeSliders();
-        }
-      });
-    },
-    getPropertyImage(property) {
-      // Handle both old format (image) and new format (banner_image)
-      if (property.image) {
-        return property.image;
-      }
-      if (property.banner_image) {
-        // If banner_image is an array, get the first image
-        if (
-          Array.isArray(property.banner_image) &&
-          property.banner_image.length > 0
-        ) {
-          return property.banner_image[0];
-        }
-        // If it's a string, return it directly
-        if (typeof property.banner_image === "string") {
-          return property.banner_image;
-        }
-      }
-      // Fallback image
-      return "https://www.sheltech-bd.com/cms/admin/uploads/product/sheltech-khan-legacy/1744282377cFRqd.jpg";
-    },
-  },
   setup(props) {
-    const instance = getCurrentInstance();
     const mainSliderRef = ref(null);
     const thumbSliderRef = ref(null);
     const nextButtonRef = ref(null);
@@ -331,10 +289,10 @@ export default {
     let mainSlider = null;
     let thumbSlider = null;
 
-    // Get slides from component instance
-    const getSlides = () => {
-      return instance?.proxy?.slides || [];
-    };
+    // Computed property for current slide
+    const currentSlide = computed(() => {
+      return props.slides[currentSlideIndex.value] || props.slides[0];
+    });
 
     const imageConfig = {
       main: { width: 1200, height: 800 },
@@ -374,13 +332,7 @@ export default {
         return;
       }
 
-      const slides = getSlides();
-      console.log("Initializing sliders with", slides.length, "slides");
-
-      if (slides.length === 0) {
-        console.warn("No slides data available for initialization");
-        return;
-      }
+      console.log("Initializing sliders with", props.slides.length, "slides");
 
       // Initialize thumbnail slider first
       thumbSlider = new Swiper(thumbSliderRef.value, {
@@ -400,7 +352,7 @@ export default {
           init: function () {
             console.log(
               "Thumbnail slider initialized with",
-              slides.length,
+              props.slides.length,
               "slides"
             );
             this.update();
@@ -528,8 +480,7 @@ export default {
       console.log("thumbSlider exists:", !!thumbSlider);
       console.log("current currentSlideIndex:", currentSlideIndex.value);
 
-      const slides = getSlides();
-      if (index >= 0 && index < slides.length) {
+      if (index >= 0 && index < props.slides.length) {
         // Update the current slide index immediately
         currentSlideIndex.value = index;
 
@@ -560,40 +511,18 @@ export default {
       }
     };
 
-    // Watch for slides data changes and initialize sliders when data is available
-    watch(
-      () => instance?.proxy?.slides,
-      (newSlides) => {
-        console.log("Setup watcher triggered, slides:", newSlides?.length || 0);
-        if (newSlides && newSlides.length > 0 && !mainSlider && !thumbSlider) {
-          console.log("Setup: Data loaded, initializing sliders...");
-          nextTick(() => {
-            initializeSliders();
-            // Initialize first thumbnail as active
-            setTimeout(() => {
-              updateThumbnailActiveStates(0);
-            }, 200);
-          });
-        }
-      },
-      { immediate: true }
-    );
-
     onMounted(() => {
+      // Use nextTick to ensure DOM is fully rendered
+      setTimeout(() => {
+        initializeSliders();
+        // Initialize first thumbnail as active
+        setTimeout(() => {
+          updateThumbnailActiveStates(0);
+        }, 200);
+      }, 100);
+
       // Add keyboard navigation support
       document.addEventListener("keydown", handleKeyboardNavigation);
-
-      // Fallback initialization in case watch doesn't trigger
-      setTimeout(() => {
-        const slides = getSlides();
-        if (slides.length > 0 && !mainSlider && !thumbSlider) {
-          console.log("Fallback initialization...");
-          initializeSliders();
-          setTimeout(() => {
-            updateThumbnailActiveStates(0);
-          }, 200);
-        }
-      }, 2000); // Wait 2 seconds for data to load
     });
 
     onUnmounted(() => {
@@ -619,6 +548,7 @@ export default {
       thumbSliderRef,
       nextButtonRef,
       prevButtonRef,
+      currentSlide,
       currentSlideIndex,
       imageConfig,
       navigationLabels,
@@ -629,21 +559,6 @@ export default {
       handleKeyboardNavigation,
       handleImageError,
       handleImageLoad,
-      initializeSliders,
-      destroySliders,
-      // Expose slider instances for access from methods
-      get mainSlider() {
-        return mainSlider;
-      },
-      get thumbSlider() {
-        return thumbSlider;
-      },
-      set mainSlider(value) {
-        mainSlider = value;
-      },
-      set thumbSlider(value) {
-        thumbSlider = value;
-      },
     };
   },
 };
@@ -860,21 +775,6 @@ export default {
   align-items: center;
   justify-content: center;
   background: #e0e0e0; /* Fallback background */
-  cursor: pointer;
-  text-decoration: none;
-
-  &:hover .property-image {
-    transform: scale(1.05);
-  }
-
-  &:hover .image-overlay {
-    background: rgba(0, 0, 0, 0.3);
-  }
-
-  &:hover .view-details-overlay {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .property-image {
@@ -905,36 +805,6 @@ export default {
     rgba(52, 73, 94, 0.2) 100%
   );
   pointer-events: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .view-details-overlay {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 20px;
-    border-radius: 10px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.3s ease;
-    pointer-events: auto;
-
-    i {
-      font-size: 24px;
-      margin-bottom: 8px;
-    }
-
-    span {
-      font-size: 14px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-  }
 }
 
 /* Main Image Navigation Arrows - Mobile Only */
@@ -2631,44 +2501,5 @@ export default {
     transition: none !important;
     animation: none !important;
   }
-}
-
-/* Loading and Empty States */
-.loading-state,
-.empty-state {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  min-height: 400px;
-  color: #ffffff;
-  text-align: center;
-}
-
-.loading-spinner {
-  width: 50px;
-  height: 50px;
-  border: 4px solid rgba(255, 255, 255, 0.3);
-  border-top: 4px solid #ffffff;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin-bottom: 20px;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.loading-state p,
-.empty-state p {
-  font-size: 18px;
-  margin: 0;
-  opacity: 0.8;
 }
 </style>

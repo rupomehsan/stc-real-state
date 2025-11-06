@@ -24,7 +24,7 @@ const setup: setup_type = {
     "property_status",
     "date",
     "property_name",
-    "price",
+
     "property_address",
     "property_description",
     "property_detail",
@@ -43,27 +43,26 @@ const setup: setup_type = {
   sort_by_cols: [
     "id",
     "property_name",
-    "price",
-    "property_address",
 
+    "property_address",
     "status",
     "created_at",
   ],
   table_header_data: [
     "id",
     "property_name",
-    "price",
+    "category",
     "property_address",
-
+    "property_status",
     "status",
     "created_at",
   ],
   table_row_data: [
     "id",
     "property_name",
-    "price",
+    "category",
     "property_address",
-
+    "property_status",
     "status",
     "created_at",
   ],

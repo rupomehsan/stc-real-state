@@ -1747,5 +1747,11 @@ export default {
   .no-image-placeholder {
     min-height: 180px;
   }
+
+  @media screen and (max-width: 768px) {
+    .hero-text-content {
+      margin-top: 100px !important;
+    }
+  }
 }
 </style>

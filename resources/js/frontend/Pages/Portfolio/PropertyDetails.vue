@@ -15,18 +15,21 @@
     </div>
   </div>
   <!-- {{ single_property }} -->
-  <section class="property-details space overflow-hidden">
+  <section class="property-details my-5 overflow-hidden">
     <div class="container">
       <!-- Hero Section with Image and At A Glance -->
-
+      <div class="row gx-50 justify-content-center">
+        <div class="col-10">
+          <h2 class="page-title my-4">
+            <span class="text-primary">{{
+              single_property?.property_name
+            }}</span>
+            : Property Overview & Specifications
+          </h2>
+        </div>
+      </div>
       <div class="row gy-40 gx-50 mb-5 justify-content-center">
         <div class="col-lg-5">
-          <div
-            class="page-title-wrap fadeinup wow"
-            style="visibility: visible; animation-name: fadeinup"
-          >
-            <h2 class="page-title mb-2">Property Overview & Specifications</h2>
-          </div>
           <BannerImageSlider
             :banner_images="single_property?.banner_image || []"
           />
@@ -139,4 +142,25 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.page-title {
+  position: relative;
+  padding-bottom: 15px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50%;
+    height: 3px;
+    background-color: #1a3a52;
+  }
+}
+
+@media (max-width: 767px) {
+  .page-title {
+    font-size: 20px !important;
+  }
+}
+</style>

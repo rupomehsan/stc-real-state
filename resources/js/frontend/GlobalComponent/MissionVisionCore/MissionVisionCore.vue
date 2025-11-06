@@ -2,7 +2,7 @@
   <!-- Mission Vision Core Slider Section -->
   <section class="mission-vision-slider-section">
     <div class="container">
-      <div class="row justify-content-center mb-5">
+      <div class="row justify-content-center mb-2 mb-md-3 mb-lg-5">
         <div class="col-xl-10">
           <div class="section-title-area text-center">
             <div class="subtitle-badge">
@@ -46,8 +46,8 @@
         <div class="slider-container" ref="sliderContainer">
           <div class="slider-track" :style="{ transform: slideTransform }">
             <!-- Mission Slide -->
-            <div class="slider-slide mission-slide d-flex">
-              <div class="row align-items-center g-5">
+            <div class="slider-slide mission-slide d-flex first-item">
+              <div class="row g-1 g-md-3 g-lg-5">
                 <div class="col-lg-6">
                   <div v-if="isMissionLoading" class="skeleton-image-card">
                     <div class="skeleton-image"></div>
@@ -70,7 +70,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-6 px-lg-5">
+                <div class="col-lg-6 px-1 px-md-3 px-lg-5">
                   <div v-if="isMissionLoading" class="skeleton-content-area">
                     <div class="skeleton-icon"></div>
                     <div class="skeleton-subtitle"></div>
@@ -131,8 +131,8 @@
             </div>
 
             <!-- Vision Slide -->
-            <div class="slider-slide vision-slide d-flex">
-              <div class="row align-items-center g-5">
+            <div class="slider-slide vision-slide d-flex second-item">
+              <div class="row g-1 g-md-3 g-lg-5">
                 <div class="col-lg-6 order-lg-2">
                   <div v-if="isVisionLoading" class="skeleton-image-card">
                     <div class="skeleton-image"></div>
@@ -155,7 +155,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-6 order-lg-1 px-lg-5">
+                <div class="col-lg-6 order-lg-1 px-1 px-md-3 px-lg-5">
                   <div v-if="isVisionLoading" class="skeleton-content-area">
                     <div class="skeleton-icon vision"></div>
                     <div class="skeleton-subtitle"></div>
@@ -217,7 +217,7 @@
 
             <!-- Core Values Slide -->
             <div class="slider-slide core-values-slide d-flex">
-              <div class="row align-items-center g-5">
+              <div class="row g-1 g-md-3 g-lg-5">
                 <div class="col-lg-6">
                   <div v-if="isCoreValuesLoading" class="skeleton-image-card">
                     <div class="skeleton-image"></div>
@@ -240,7 +240,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-6 px-lg-5">
+                <div class="col-lg-6 px-1 px-md-3 px-lg-5">
                   <div v-if="isCoreValuesLoading" class="skeleton-content-area">
                     <div class="skeleton-icon core-values"></div>
                     <div class="skeleton-subtitle"></div>
@@ -475,6 +475,14 @@ export default {
   align-items: center;
 }
 
+/* Mobile optimizations for main section */
+@media (max-width: 576px) {
+  .mission-vision-slider-section {
+    padding: 20px 0 !important;
+    min-height: auto !important;
+  }
+}
+
 .mission-vision-slider-section::before {
   content: "";
   position: absolute;
@@ -498,6 +506,12 @@ export default {
   margin-bottom: 20px;
 }
 
+@media (max-width: 576px) {
+  .section-title-area {
+    margin-bottom: 8px !important;
+  }
+}
+
 .subtitle-badge {
   display: inline-flex;
   align-items: center;
@@ -512,6 +526,15 @@ export default {
   letter-spacing: 0.5px;
   margin-bottom: 20px;
   box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+@media (max-width: 576px) {
+  .subtitle-badge {
+    font-size: 11px !important;
+    padding: 5px 12px !important;
+    margin-bottom: 12px !important;
+    gap: 6px !important;
+  }
 }
 
 .badge-icon::before {
@@ -535,6 +558,13 @@ export default {
   background-clip: text;
 }
 
+@media (max-width: 576px) {
+  .section-title {
+    font-size: clamp(24px, 6vw, 32px) !important;
+    margin-bottom: 10px !important;
+  }
+}
+
 .title-underline {
   width: 80px;
   height: 4px;
@@ -547,6 +577,13 @@ export default {
 .slider-navigation {
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+@media (max-width: 576px) {
+  .slider-navigation {
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+  }
 }
 
 .nav-tabs-wrapper {
@@ -584,6 +621,7 @@ export default {
   color: white;
   transform: translateY(-5px);
   box-shadow: 0 20px 40px rgba(175, 33, 47, 0.4);
+  margin-top: 10px;
 }
 
 .tab-icon {
@@ -668,6 +706,16 @@ export default {
   margin-bottom: 0;
 }
 
+/* Mobile optimizations for slider content */
+@media (max-width: 576px) {
+  .slider-content-wrapper {
+    border-radius: 15px !important;
+    padding: 15px 10px !important;
+    margin: 0 5px !important;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08) !important;
+  }
+}
+
 .slider-container {
   width: 100%;
   overflow: hidden;
@@ -692,12 +740,37 @@ export default {
   box-sizing: border-box;
 }
 
+@media (max-width: 576px) {
+  .slider-slide {
+    padding: 0 !important;
+  }
+
+  /* Further reduce column gaps on mobile */
+  .slider-slide .row {
+    --bs-gutter-x: 0.25rem !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .slider-slide .col-lg-6 {
+    padding-left: 0.125rem !important;
+    padding-right: 0.125rem !important;
+  }
+}
+
 /* Content Header */
 .content-header {
   display: flex;
   align-items: center;
   gap: 15px;
   margin-bottom: 15px;
+}
+
+@media (max-width: 576px) {
+  .content-header {
+    gap: 8px !important;
+    margin-bottom: 8px !important;
+  }
 }
 
 .content-badge {
@@ -732,6 +805,14 @@ export default {
   background-clip: text;
 }
 
+@media (max-width: 576px) {
+  .content-title {
+    font-size: 20px !important;
+    margin-bottom: 8px !important;
+    line-height: 1.3 !important;
+  }
+}
+
 /* Content Features */
 .content-features {
   display: flex;
@@ -748,6 +829,14 @@ export default {
 
 .slider-slide > *:last-child {
   margin-bottom: 0 !important;
+}
+
+@media (max-width: 576px) {
+  .content-features {
+    gap: 6px !important;
+    margin-top: 8px !important;
+    margin-bottom: 0 !important;
+  }
 }
 
 .feature-item {
@@ -829,6 +918,13 @@ export default {
   transition: transform 0.6s ease;
 }
 
+/* Mobile optimization for images */
+@media (max-width: 576px) {
+  .content-image {
+    min-height: 250px !important;
+  }
+}
+
 .content-image-card:hover .content-image {
   transform: scale(1.05);
 }
@@ -892,6 +988,12 @@ export default {
   padding: 20px 0;
   opacity: 0;
   animation: fadeInUp 0.6s ease forwards;
+}
+
+@media (max-width: 576px) {
+  .content-text-area {
+    padding: 8px 0 !important;
+  }
 }
 
 @keyframes fadeInUp {
@@ -981,6 +1083,22 @@ export default {
   white-space: pre-line;
 }
 
+@media (max-width: 576px) {
+  .content-description {
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 8px !important;
+  }
+
+  .content-description p {
+    margin-bottom: 6px !important;
+  }
+
+  .content-description p:last-child {
+    margin-bottom: 0 !important;
+  }
+}
+
 /* Modern Button Styling */
 .modern-btn {
   display: inline-flex;
@@ -1050,26 +1168,38 @@ export default {
 /* Responsive Design */
 @media (max-width: 991px) {
   .mission-vision-slider-section {
-    padding: 30px 0;
+    padding: 20px 0;
     min-height: 80vh;
   }
 
+  .section-title-area {
+    margin-bottom: 15px;
+  }
+
+  .slider-navigation {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
   .slider-content-wrapper {
-    padding: 15px 15px 10px 15px;
+    padding: 12px;
+    border-radius: 20px;
   }
 
   .nav-tabs-wrapper {
     flex-direction: column;
     align-items: center;
+    gap: 10px;
   }
 
   .nav-tab {
     min-width: 280px;
+    padding: 12px 18px;
   }
 
   .content-image-card {
     transform: none;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
 
   .content-image {
@@ -1079,93 +1209,273 @@ export default {
 
   .content-title {
     font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .content-text-area {
+    padding: 15px 0;
   }
 
   .content-features {
-    gap: 15px;
+    gap: 10px;
+    margin-top: 12px;
   }
 
   .feature-item {
-    padding: 10px 16px;
+    padding: 8px 14px;
+  }
+
+  .slider-slide {
+    padding: 3px;
   }
 }
 
 @media (max-width: 768px) {
+  .first-item .content-text-area {
+    margin-top: -130px;
+  }
+  .second-item .content-text-area {
+    margin-top: -50px;
+  }
+  .mission-vision-slider-section {
+    padding: 15px 0;
+  }
+
+  .row.justify-content-center.mb-5 {
+    margin-bottom: 1.5rem !important;
+  }
+
+  .section-title-area {
+    margin-bottom: 12px;
+  }
+
+  .slider-navigation {
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+
+  .slider-content-wrapper {
+    padding: 10px;
+  }
+
   .content-header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
+    gap: 8px;
+    margin-bottom: 12px;
   }
 
   .slider-track {
     width: 300%;
   }
 
+  .content-description {
+    margin-bottom: 12px;
+  }
+
   .content-features {
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
+  }
+
+  .slider-slide {
+    padding: 2px;
+  }
+
+  .row.g-5 {
+    --bs-gutter-x: 0.75rem !important;
+    --bs-gutter-y: 0.75rem !important;
+  }
+
+  .row.align-items-center.g-5 {
+    --bs-gutter-x: 0.75rem !important;
+    --bs-gutter-y: 0.75rem !important;
+    row-gap: 0.75rem !important;
   }
 }
 
 @media (max-width: 576px) {
   .mission-vision-slider-section {
-    padding: 20px 0;
-    min-height: 70vh;
+    padding: 10px 0 15px 0;
+    min-height: auto;
+  }
+
+  /* Container padding override */
+  .mission-vision-slider-section .container {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  /* Row margin override */
+  .row.justify-content-center.mb-5 {
+    margin-bottom: 1rem !important;
+  }
+
+  .row.g-5 {
+    --bs-gutter-x: 0.25rem !important;
+    --bs-gutter-y: 0.5rem !important;
+  }
+
+  .section-title-area {
+    margin-bottom: 8px;
+  }
+
+  .subtitle-badge {
+    font-size: 11px;
+    padding: 5px 12px;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-size: clamp(24px, 6vw, 32px);
+    margin-bottom: 10px;
+  }
+
+  .title-underline {
+    width: 60px;
+    height: 3px;
+  }
+
+  .slider-navigation {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+
+  .nav-tabs-wrapper {
+    gap: 6px;
   }
 
   .slider-content-wrapper {
-    padding: 10px 10px 8px 10px;
+    padding: 8px 6px 6px 6px;
+    border-radius: 15px;
+    margin-bottom: 0;
+  }
+
+  .slider-slide {
+    padding: 0;
+  }
+
+  /* Column padding override */
+  .col-lg-6 {
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+  }
+
+  .col-lg-6.px-lg-5 {
+    padding-left: 6px !important;
+    padding-right: 6px !important;
   }
 
   .nav-tab {
     min-width: 100%;
-    padding: 16px 20px;
-    gap: 12px;
+    padding: 10px 15px;
+    gap: 10px;
+    border-radius: 12px;
   }
 
   .tab-icon {
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
   }
 
   .tab-icon i {
-    font-size: 18px;
-  }
-
-  .tab-content h4 {
     font-size: 16px;
   }
 
-  .tab-content p {
-    font-size: 13px;
+  .tab-content h4 {
+    font-size: 15px;
+    margin-bottom: 2px;
   }
 
-  .subtitle-badge {
+  .tab-content p {
     font-size: 12px;
-    padding: 6px 15px;
+  }
+
+  .content-image-card {
+    margin-bottom: 8px;
+    border-radius: 12px;
   }
 
   .content-image {
     height: auto;
-    min-height: 250px;
+    min-height: 200px;
   }
 
-  .content-title {
-    font-size: 24px;
+  /* Additional row gap reduction */
+  .row.align-items-center.g-5 {
+    --bs-gutter-x: 0.25rem !important;
+    --bs-gutter-y: 0.5rem !important;
+    row-gap: 0.5rem !important;
   }
 
-  .content-icon {
+  .image-badge {
+    width: 40px;
+    height: 40px;
+    top: 8px;
+    right: 8px;
+  }
+
+  .image-badge i {
+    font-size: 16px;
+  }
+
+  .image-decoration {
     width: 60px;
     height: 60px;
   }
 
+  .content-text-area {
+    padding: 8px 0;
+  }
+
+  .content-header {
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .content-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+  }
+
   .content-icon i {
-    font-size: 24px;
+    font-size: 20px;
+  }
+
+  .content-badge {
+    padding: 4px 12px;
+    font-size: 11px;
+    border-radius: 15px;
+  }
+
+  .content-title {
+    font-size: 20px;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .content-description {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+
+  .content-features {
+    gap: 6px;
+    margin-top: 8px;
+    margin-bottom: 0;
   }
 
   .feature-item {
-    padding: 8px 14px;
-    font-size: 13px;
+    padding: 6px 10px;
+    font-size: 12px;
+    border-radius: 20px;
+  }
+
+  .feature-item i {
+    font-size: 12px;
   }
 }
 

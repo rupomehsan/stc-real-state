@@ -20,15 +20,20 @@ export const store = defineStore("properties_store", {
   actions: {
     set_property_category_id(id) {
       this.property_category_id = id;
-      console.log('id', this.property_category_id);
-      if (this.property_category_id === 'all' || this.property_category_id === null || this.property_category_id === undefined || this.property_category_id === '') {
+      console.log("id", this.property_category_id);
+      if (
+        this.property_category_id === "all" ||
+        this.property_category_id === null ||
+        this.property_category_id === undefined ||
+        this.property_category_id === ""
+      ) {
         this.property_category_id = null;
         this.fetch_properties({ page: 1 });
-      }else{
+      } else {
         this.fetch_properties({ page: 1 });
       }
     },
-    async fetch_properties({  page = 1 } = {}) {
+    async fetch_properties({ page = 1 } = {}) {
       this.loading = true;
       this.error = null;
 
@@ -37,10 +42,11 @@ export const store = defineStore("properties_store", {
           page,
           limit: 8,
           property_category_id: this.property_category_id,
+          property_status: "featured",
         };
 
         const response = await axios.get("properties", { params });
-        console.log('clicked',response.data);
+        console.log("clicked", response.data);
 
         let result = response?.data?.data;
         if (!result.data) {

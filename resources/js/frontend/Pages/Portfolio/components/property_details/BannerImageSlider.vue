@@ -68,19 +68,26 @@ export default {
 /* Main Image Container */
 .main-image-container {
   margin-bottom: 20px;
+  margin-top: -50px;
+  padding: 50px;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .property-main-image {
-  background: #f8f9fa;
+  background: none;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  // box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 100%;
 
   img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
-    // max-height: 600px;
     object-fit: contain;
     object-position: center;
   }
@@ -165,6 +172,12 @@ export default {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .main-image-container {
+    height: 100% !important;
+    padding: 0px !important;
+    margin-top: 0px !important;
+  }
+
   .property-main-image {
     img {
       max-height: 400px;
@@ -182,7 +195,7 @@ export default {
 @media (max-width: 480px) {
   .property-main-image {
     img {
-      max-height: 300px;
+      max-height: 400px;
     }
   }
 

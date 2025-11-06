@@ -57,6 +57,22 @@
             @mouseleave="startAutoSlide('completed', 3000)"
           >
             <div class="properties-slider-container">
+              <!-- Navigation arrows directly on slider images -->
+              <div class="slider-image-navigation">
+                <button
+                  class="slider-image-nav-btn slider-image-prev"
+                  @click="prevCompleted"
+                >
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <button
+                  class="slider-image-nav-btn slider-image-next"
+                  @click="nextCompleted"
+                >
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+
               <div
                 class="properties-slider"
                 ref="completedSlider"
@@ -134,6 +150,22 @@
             @mouseleave="startAutoSlide('upcoming', 3000)"
           >
             <div class="properties-slider-container">
+              <!-- Navigation arrows directly on slider images -->
+              <div class="slider-image-navigation">
+                <button
+                  class="slider-image-nav-btn slider-image-prev"
+                  @click="prevUpcoming"
+                >
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <button
+                  class="slider-image-nav-btn slider-image-next"
+                  @click="nextUpcoming"
+                >
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+
               <div
                 class="properties-slider"
                 ref="upcomingSlider"
@@ -703,20 +735,22 @@ export default {
   height: 50px;
   border: none;
   border-radius: 50%;
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  color: white;
+  background: rgba(255, 255, 255, 0.95);
+  color: #333;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  opacity: 0.9;
 }
 
 .slider-nav-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
-  background: linear-gradient(135deg, #1d4ed8, #1e40af);
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 1);
+  opacity: 1;
 }
 
 .slider-nav-btn:active {
@@ -725,12 +759,77 @@ export default {
 
 .slider-nav-btn i {
   font-size: 1.2rem;
+  color: #333;
+  font-weight: 600;
 }
 
 .slider-nav-btn:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
   transform: none;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* Slider Image Navigation - Hidden on desktop, visible on mobile */
+.slider-image-navigation {
+  display: none; /* Hidden on desktop by default */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.slider-image-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  pointer-events: auto;
+  opacity: 0.9;
+
+  &:hover {
+    background: rgba(255, 255, 255, 1);
+    opacity: 1;
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  &:active {
+    transform: translateY(-50%) scale(0.95);
+  }
+
+  i {
+    font-size: 18px;
+    color: #333;
+    font-weight: 600;
+  }
+}
+
+.slider-image-prev {
+  left: 20px;
+}
+
+.slider-image-next {
+  right: 20px;
+}
+
+/* Properties slider container positioning */
+.properties-slider-container {
+  position: relative;
 }
 
 /* Slider Indicator */
@@ -923,6 +1022,10 @@ export default {
     margin-bottom: 60px;
   }
 
+  section.th-blog-wrapper {
+    margin: 0 !important;
+  }
+
   .property-category-section {
     margin-bottom: 60px;
   }
@@ -949,6 +1052,34 @@ export default {
   .slider-nav-btn {
     width: 45px;
     height: 45px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Hide top navigation arrows on mobile */
+  .slider-navigation {
+    display: none !important;
+  }
+
+  /* Show slider image navigation arrows on mobile */
+  .slider-image-navigation {
+    display: block !important;
+  }
+
+  .slider-image-nav-btn {
+    width: 45px;
+    height: 45px;
+
+    i {
+      font-size: 16px;
+    }
+  }
+
+  .slider-image-prev {
+    left: 15px;
+  }
+
+  .slider-image-next {
+    right: 15px;
   }
 
   .category-description {
@@ -1010,14 +1141,34 @@ export default {
   .slider-nav-btn {
     width: 40px;
     height: 40px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
   }
 
   .slider-nav-btn i {
     font-size: 1rem;
+    color: #333;
+  }
+
+  /* Smaller slider image navigation arrows for small mobile */
+  .slider-image-nav-btn {
+    width: 40px;
+    height: 40px;
+
+    i {
+      font-size: 14px;
+    }
+  }
+
+  .slider-image-prev {
+    left: 10px;
+  }
+
+  .slider-image-next {
+    right: 10px;
   }
 
   .slider-navigation {
-    gap: 10px;
+    display: none !important;
   }
 
   .view-toggle-btn {

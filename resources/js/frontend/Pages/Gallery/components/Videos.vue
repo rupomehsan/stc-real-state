@@ -20,6 +20,7 @@
           :title="item.title || 'Video'"
           @error="handleVideoError(item)"
           @load="handleVideoLoad(item)"
+          style="min-height: 250px"
         ></iframe>
         <div v-else class="no-video">
           <i class="fa-solid fa-video-slash"></i>
@@ -140,7 +141,7 @@ export default {
   }
 
   .no-video {
-    height: 250px;
+    height: 450px; // Match iframe height for consistency
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -206,35 +207,48 @@ export default {
 // Responsive design
 @media (max-width: 768px) {
   .video-card {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
   }
 
   .video-wrapper {
     .video-iframe,
     .no-video {
-      height: 200px;
+      height: 280px; // Increased from 200px for bigger video on tablet
     }
   }
 
   .video-info {
-    padding: 16px;
+    padding: 18px; // Slightly more padding
   }
 
   .video-title {
-    font-size: 16px;
+    font-size: 17px; // Slightly larger title
   }
 }
 
 @media (max-width: 576px) {
+  .video-card {
+    margin-bottom: 30px; // More space between cards
+  }
+
   .video-wrapper {
     .video-iframe,
     .no-video {
-      height: 180px;
+      height: 350px; // Significantly increased from 180px for bigger mobile video
     }
   }
 
+  .video-info {
+    padding: 20px; // More generous padding on mobile
+  }
+
   .video-title {
-    font-size: 15px;
+    font-size: 16px; // Larger, more readable title on mobile
+    margin-bottom: 15px; // More space after title
+  }
+
+  .video-date {
+    font-size: 15px; // Slightly larger date text
   }
 }
 </style>

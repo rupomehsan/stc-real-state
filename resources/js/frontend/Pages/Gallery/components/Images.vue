@@ -4,7 +4,7 @@
       <div
         v-for="(item, index) in images"
         :key="index"
-        :class="`gallery-item  filter-item`"
+        class="gallery-item filter-item"
         :style="{
           animationDelay: `${index * 0.08}s`,
           '--item-index': index,
@@ -146,23 +146,7 @@ export default {
     };
   },
   methods: {
-    getItemSize(index) {
-      const patterns = [
-        "large",
-        "medium",
-        "small",
-        "medium",
-        "large",
-        "small",
-        "small",
-        "large",
-        "medium",
-        "large",
-        "small",
-        "medium",
-      ];
-      return patterns[index % patterns.length];
-    },
+    // Removed getItemSize method as we now use consistent sizing
 
     truncateText(text, length = 100) {
       if (!text) return "";
@@ -289,19 +273,10 @@ export default {
   transform: translateY(30px);
   animation: fadeInUp 0.8s ease-out forwards;
   transition: all 0.3s ease;
-  height: 450px;
+  height: 300px; // Fixed height for consistency
 
-  &.large {
-    grid-row: span 2;
-  }
-
-  &.medium {
-    grid-row: span 1;
-  }
-
-  &.small {
-    grid-row: span 1;
-  }
+  // Remove variable row spans for consistent sizing
+  // All items will have the same height now
 }
 
 // Professional Gallery Card
@@ -348,7 +323,7 @@ export default {
 .gallery-img-wrapper {
   position: relative;
   width: 100%;
-  height: 450px;
+  height: 300px; // Fixed height matching gallery-item
   overflow: hidden;
   background: #f1f5f9;
 
@@ -761,8 +736,13 @@ export default {
     gap: 1.5rem;
   }
 
+  // Keep consistent height across all devices
+  .gallery-item {
+    height: 300px;
+  }
+
   .gallery-img-wrapper {
-    height: 250px;
+    height: 300px; // Same height as desktop for consistency
   }
 
   .action-btn {
@@ -792,8 +772,13 @@ export default {
     gap: 1rem;
   }
 
+  // Maintain consistent dimensions even on small screens
+  .gallery-item {
+    height: 300px;
+  }
+
   .gallery-img-wrapper {
-    height: 200px;
+    height: 300px; // Keep same height for consistency
   }
 
   .modal-nav {

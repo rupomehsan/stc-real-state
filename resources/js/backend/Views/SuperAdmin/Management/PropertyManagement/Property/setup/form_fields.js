@@ -25,12 +25,12 @@ export default [
     label: "Select property status",
     data_list: [
       {
-        label: "Rent",
-        value: "rent",
+        label: "Featured",
+        value: "featured",
       },
       {
-        label: "Sale",
-        value: "sale",
+        label: "Ongoing",
+        value: "ongoing",
       },
     ],
     value: "",
@@ -99,20 +99,20 @@ export default [
     row_col_class: "col-md-12",
   },
 
-	{
-		name: "status",
-		label: "select status",
-		type: "select",
-		value: "",
-		data_list: [
-			{
-				label: "Active",
-				value: "active",
-			},
-			{
-				label: "Inactive",
-				value: "inactive",
-			},
-		],
-	},
+  {
+    name: "status",
+    label: "select status",
+    type: "select",
+    value: "",
+    data_list: [
+      {
+        label: "Active",
+        value: "active",
+      },
+      {
+        label: "Inactive",
+        value: "inactive",
+      },
+    ],
+  },
 ];
