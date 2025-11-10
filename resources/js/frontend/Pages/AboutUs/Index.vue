@@ -12,7 +12,7 @@
         <!-- Enhanced Breadcrumb Navigation -->
 
         <!-- Professional Hero Content -->
-        <div class="hero-text-content mt-5">
+        <div class="hero-text-content">
           <h1 class="hero-title">
             About <span class="title-highlight">Our Company</span>
           </h1>
@@ -818,6 +818,11 @@ export default {
   margin: 0 auto 50px;
 }
 
+/* Hero Text Content Responsive Margins */
+.hero-text-content {
+  margin-top: 3rem; /* Default mobile spacing */
+}
+
 /* Trust Indicators */
 .trust-indicators {
   display: flex;
@@ -1341,6 +1346,23 @@ export default {
    RESPONSIVE DESIGN
    ======================================== */
 
+/* Extra Large Devices */
+@media (min-width: 1400px) {
+  .hero-text-content {
+    margin-top: 6rem; /* Extra large device spacing */
+  }
+}
+
+/* Large Devices */
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .hero-text-content {
+    margin-top: 10rem; /* Large device spacing */
+  }
+  .hero-content {
+    padding-bottom: 20px;
+  }
+}
+
 @media (max-width: 1200px) {
   .hero-title {
     font-size: 3rem;
@@ -1353,6 +1375,10 @@ export default {
   .trust-indicators {
     gap: 25px;
   }
+
+  .hero-text-content {
+    margin-top: 4rem; /* Large device spacing */
+  }
 }
 
 @media (max-width: 992px) {
@@ -1363,6 +1389,10 @@ export default {
 
   .hero-title {
     font-size: 2.5rem;
+  }
+
+  .hero-text-content {
+    margin-top: 5rem; /* Medium device spacing */
   }
 
   .trust-indicators {
@@ -1407,6 +1437,10 @@ export default {
 
   .hero-subtitle {
     font-size: 1rem;
+  }
+
+  .hero-text-content {
+    margin-top: 3rem; /* Tablet spacing */
   }
 
   .breadcrumb-list {
@@ -1454,6 +1488,10 @@ export default {
   .hero-badge {
     padding: 8px 16px;
     font-size: 0.8rem;
+  }
+
+  .hero-text-content {
+    margin-top: 2rem; /* Mobile spacing */
   }
 
   .professional-title {

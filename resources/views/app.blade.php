@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     {{-- <meta charset="utf-8" /> --}}
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>STC Building and Properties</title>
+    <title>STC-Real Estate And Construction</title>
     <meta name="author" content="STC" />
-    <meta name="description" content="STC - Real Estate Home HTML Template" />
-    <meta name="keywords" content="STC - Real Estate Home HTML Template" />
+    <meta name="description" content="STC - Real Estate And Construction excellence" />
+    <meta name="keywords" content="STC - Real Estate And Construction excellence" />
     <meta name="robots" content="INDEX,FOLLOW" />
     {{-- <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" /> --}}
     <link rel="apple-touch-icon" sizes="57x57" href="/assets/frontend/img/logo.jpeg" />
@@ -22,8 +22,7 @@
     <link rel="apple-touch-icon" sizes="144x144" href="/assets/frontend/img/logo.jpeg" />
     <link rel="apple-touch-icon" sizes="152x152" href="/assets/frontend/img/logo.jpeg" />
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/frontend/img/logo.jpeg" />
-    <link rel="icon" type="image/png" sizes="192x192"
-        href="/assets/frontend/img/logo.jpeg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/frontend/img/logo.jpeg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/frontend/img/logo.jpeg" />
     <link rel="icon" type="image/png" sizes="96x96" href="/assets/frontend/img/logo.jpeg" />
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/frontend/img/logo.jpeg" />

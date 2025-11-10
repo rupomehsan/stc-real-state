@@ -1,7 +1,7 @@
 <template>
   <div class="property-slider-container">
     <!-- Hero Subtitle Section -->
-    <div class="hero-subtitle-section text-center mb-60">
+    <!-- <div class="hero-subtitle-section text-center mb-60">
       <div
         class="hero-subtitle-wrapper fadeInUp wow"
         data-wow-duration="1.4s"
@@ -18,7 +18,7 @@
           <div class="hero-subtitle-underline"></div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- Modern Property Slider -->
     <div class="modern-property-slider">
@@ -26,9 +26,7 @@
         <!-- Left Content Panel -->
         <div class="content-panel">
           <div class="project-header">
-            <h2 class="main-title">
-              Experience the Magnificence of the STC Family
-            </h2>
+            <h2 class="main-title">STC Featured Projects</h2>
             <div class="project-info">
               <h3 class="project-name">
                 {{
@@ -685,7 +683,7 @@ export default {
 
 /* Left Content Panel */
 .content-panel {
-  flex: 0 0 40%; /* 25% width */
+  flex: 0 0 45%; /* 25% width */
   padding: 80px 50px; /* Much bigger padding for professional look */
   display: flex;
   flex-direction: column;
@@ -816,7 +814,7 @@ export default {
 
 /* Right Image Panel - Takes remaining 75% */
 .image-panel {
-  flex: 0 0 75%; /* Exactly 75% of total width */
+  flex: 0 0 55%; /* Exactly 75% of total width */
   position: relative;
   overflow: hidden;
   display: flex;

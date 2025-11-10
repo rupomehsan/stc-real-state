@@ -1,10 +1,10 @@
 <template>
   <!-- Mission Vision Core Slider Section -->
-  <section class="mission-vision-slider-section">
+  <section class="mission-vision-slider-section my-5">
     <div class="container">
       <div class="row justify-content-center mb-2 mb-md-3 mb-lg-5">
         <div class="col-xl-10">
-          <div class="section-title-area text-center">
+          <div class="section-title-area text-center d-none">
             <div class="subtitle-badge">
               <span class="badge-icon"></span>
               An Inherent Legacy
@@ -470,7 +470,7 @@ export default {
   position: relative;
   background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
   overflow: hidden;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   display: flex;
   align-items: center;
 }
@@ -912,7 +912,7 @@ export default {
 .content-image {
   width: 100%;
   height: auto;
-  min-height: 400px;
+  max-height: 400px;
   object-fit: cover;
   object-position: center;
   transition: transform 0.6s ease;
@@ -1232,10 +1232,10 @@ export default {
 
 @media (max-width: 768px) {
   .first-item .content-text-area {
-    margin-top: -130px;
+    margin-top: 0px;
   }
   .second-item .content-text-area {
-    margin-top: -50px;
+    margin-top: 0px;
   }
   .mission-vision-slider-section {
     padding: 15px 0;

@@ -3,7 +3,7 @@
     <!-- <div class="section-overlay"></div> -->
     <div class="container">
       <!-- Hero Subtitle Section (matching AboutUs) -->
-      <div class="hero-subtitle-section text-center mt-3">
+      <!-- <div class="hero-subtitle-section text-center mb-60 mt-3">
         <div
           class="hero-subtitle-wrapper fadeInUp wow"
           data-wow-duration="1.4s"
@@ -20,7 +20,7 @@
             <div class="hero-subtitle-underline"></div>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Enhanced Section Info with Creative Design -->
 
@@ -52,12 +52,12 @@
               </div> -->
 
               <div class="header-content mt-3">
-                <!-- <div class="title-wrapper">
+                <div class="title-wrapper">
                   <h2 class="modern-title">
                     <span class="title-main"> Why Choose Us</span>
                   </h2>
                   <div class="title-accent"></div>
-                </div> -->
+                </div>
                 <p class="modern-subtitle">
                   Building trust through consistent quality and unwavering
                   commitment to our clients.
@@ -75,6 +75,9 @@
                   class="professional-stat-card"
                   v-for="(slide, index) in services"
                   :key="index"
+                  :class="{ active: index === activeTabIndex }"
+                  @click="setActiveTab(index)"
+                  style="cursor: pointer"
                 >
                   <div class="stat-card-background">
                     <div class="stat-card-glow"></div>
@@ -100,43 +103,6 @@
                   </div>
                   <div class="stat-hover-overlay"></div>
                 </div>
-              </div>
-            </div>
-
-            <!-- Modern Tab Navigation -->
-            <div class="modern-tab-navigation">
-              <div class="nav-background">
-                <div
-                  class="active-tab-indicator"
-                  :style="tabIndicatorStyle"
-                ></div>
-              </div>
-
-              <div class="nav-tabs-wrapper">
-                <button
-                  v-for="(slide, index) in services"
-                  :key="index"
-                  class="modern-tab-btn"
-                  :class="{ active: index === activeTabIndex }"
-                  @click="setActiveTab(index)"
-                >
-                  <div class="tab-content-wrapper">
-                    <div class="tab-number">
-                      {{ String(index + 1).padStart(2, "0") }}
-                    </div>
-                    <div class="tab-icon-modern" v-html="icons[index]"></div>
-                    <div class="tab-info">
-                      <span class="tab-title-modern">{{ slide.title }}</span>
-                      <div class="tab-progress">
-                        <div
-                          class="progress-line"
-                          :class="{ active: index === activeTabIndex }"
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="tab-hover-effect"></div>
-                </button>
               </div>
             </div>
 

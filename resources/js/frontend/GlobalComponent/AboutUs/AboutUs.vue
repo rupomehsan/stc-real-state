@@ -150,7 +150,7 @@
 
   <!-- Actual Content -->
   <div
-    class="about-1-wrapper space overflow-hidden position-relative"
+    class="about-1-wrapper my-5 overflow-hidden position-relative"
     id="about-sec"
     ref="componentRef"
     v-if="showContent"
@@ -167,7 +167,7 @@
     </div>
     <div class="container">
       <!-- Enhanced Hero Subtitle Section -->
-      <div class="hero-subtitle-section text-center mb-60">
+      <!-- <div class="hero-subtitle-section text-center mb-60">
         <div
           class="hero-subtitle-wrapper fadeInUp wow"
           data-wow-duration="1.4s"
@@ -184,10 +184,10 @@
             <div class="hero-subtitle-underline"></div>
           </div>
         </div>
-      </div>
+      </div> -->
 
-      <div class="row gy-40 gx-70 justify-content-between">
-        <div class="col-xl-6 px-lg-5 px-3">
+      <div class="row gx-70 justify-content-between my-5 align-items-center">
+        <div class="col-xl-6 px-lg-5">
           <!-- Modern Content Card -->
           <div class="modern-content-card">
             <div class="content-card-background">
@@ -197,10 +197,10 @@
                 <div class="floating-circle circle-3"></div>
               </div>
 
-              <div class="title-area text-left mb-50 pe-lg-5">
+              <div class="title-area text-left mb-50">
                 <!-- Modern Title Section -->
                 <div class="modern-title-wrapper">
-                  <h2
+                  <h3
                     class="sec-title modern-professional-title fadeInUp wow"
                     data-wow-duration="1.4s"
                     data-wow-delay="0.25s"
@@ -209,7 +209,7 @@
                       about_us?.title
                     }}</span>
                     <div class="title-decoration"></div>
-                  </h2>
+                  </h3>
                 </div>
 
                 <!-- Modern Description Section -->
@@ -224,7 +224,7 @@
                     </div>
                     <div
                       class="sec-text modern-text"
-                      v-html="about_us?.description?.slice(0, 150 * 6) + '...'"
+                      v-html="about_us?.description?.slice(0, 50 * 5) + '...'"
                     ></div>
                     <div class="description-accent-line"></div>
                   </div>
@@ -258,7 +258,7 @@
             </div>
           </div>
         </div>
-        <div class="col-xl-5 mx-0 px-0">
+        <div class="col-xl-6 mx-0 px-0">
           <div
             class="professional-video-showcase fadeInRight wow"
             data-wow-duration="1.3s"
@@ -271,7 +271,7 @@
                   <div class="badge-indicator">
                     <div class="indicator-pulse"></div>
                   </div>
-                  <span class="badge-text">COMPANY METRICS</span>
+                  <span class="badge-text">ABOUT OUR COMPANY</span>
                 </div>
               </div>
             </div>
@@ -445,7 +445,7 @@
               </div>
 
               <!-- Professional Stats Section -->
-              <div class="professional-stats-container mt-4">
+              <div class="professional-stats-container mt-4 d-none">
                 <div
                   class="stats-grid-wrapper d-flex justify-content-center gap-3"
                 >

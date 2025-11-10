@@ -1,7 +1,7 @@
 <template>
-  <section class="modern-testimonial-section" id="testimonials-section">
+  <section class="modern-testimonial-section p-0" id="testimonials-section">
     <div class="container">
-      <div class="hero-subtitle-section text-center mt-3">
+      <!-- <div class="hero-subtitle-section text-center mt-3">
         <div
           class="hero-subtitle-wrapper fadeInUp wow"
           data-wow-duration="1.4s"
@@ -18,7 +18,7 @@
             <div class="hero-subtitle-underline"></div>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Enhanced Modern Testimonials Showcase -->
       <div class="modern-testimonials-section">

@@ -18,7 +18,7 @@
   <section class="property-details my-5 overflow-hidden">
     <div class="container">
       <!-- Hero Section with Image and At A Glance -->
-      <div class="row gx-50 justify-content-center">
+      <div class="row gx-50 justify-content-center" v-show="single_property">
         <div class="col-10">
           <h2 class="page-title my-4">
             <span class="text-primary">{{

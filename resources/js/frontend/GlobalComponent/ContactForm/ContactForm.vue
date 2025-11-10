@@ -1,5 +1,5 @@
 <template>
-  <div class="download-sec-3 space-top">
+  <div class="download-sec-3">
     <div
       class="download-3-bg-inner"
       :style="{

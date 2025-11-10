@@ -24,7 +24,18 @@
       </div>
     </div>
 
+    <!-- Loading State -->
+    <div v-if="loading || banners.length === 0" class="loading-container">
+      <div class="loading-content">
+        <div class="loading-spinner"></div>
+        <h3>Loading Amazing Properties...</h3>
+      </div>
+    </div>
+
+    <!-- Swiper - Only render when banners are loaded -->
     <swiper
+      v-else
+      :key="bannersKey"
       :modules="modules"
       :slides-per-view="1"
       :space-between="0"
@@ -44,7 +55,7 @@
         disableOnInteraction: false,
         pauseOnMouseEnter: true,
       }"
-      :loop="true"
+      :loop="banners.length > 1"
       @swiper="onSwiper"
       @slideChange="onSlideChange"
       class="thumbnail-swiper"
@@ -145,6 +156,20 @@ export default {
   setup() {
     const onSwiper = (swiper) => {
       console.log("Swiper initialized:", swiper);
+      // Ensure swiper updates when initialized
+      setTimeout(() => {
+        if (swiper && swiper.update) {
+          swiper.update();
+          swiper.updateProgress();
+          swiper.updateSlidesProgress();
+          swiper.updateSlidesClasses();
+
+          // Restart autoplay if it was disabled
+          if (swiper.autoplay && swiper.autoplay.start) {
+            swiper.autoplay.start();
+          }
+        }
+      }, 100);
     };
     const onSlideChange = () => {
       console.log("Slide changed");
@@ -155,15 +180,50 @@ export default {
       modules: [Navigation, Pagination, A11y, Parallax, Autoplay, EffectFade],
     };
   },
+  data() {
+    return {
+      bannersKey: 0, // Force swiper re-render when banners change
+    };
+  },
   created() {
     this.fetch_banners();
   },
-
+  mounted() {
+    // Ensure we have data loaded when component mounts
+    if (this.banners.length === 0 && !this.loading) {
+      this.fetch_banners();
+    }
+  },
+  watch: {
+    // Watch for banners changes and force swiper re-render
+    banners: {
+      handler(newBanners, oldBanners) {
+        if (newBanners && newBanners.length > 0) {
+          // Small delay to ensure DOM is updated before re-rendering swiper
+          this.$nextTick(() => {
+            this.bannersKey += 1;
+          });
+        }
+      },
+      deep: true,
+    },
+    // Also watch loading state
+    loading: {
+      handler(newLoading, oldLoading) {
+        if (oldLoading && !newLoading && this.banners.length > 0) {
+          // Loading finished and we have banners, force swiper re-render
+          this.$nextTick(() => {
+            this.bannersKey += 1;
+          });
+        }
+      },
+    },
+  },
   methods: {
     ...mapActions(home_store, ["fetch_banners"]),
   },
   computed: {
-    ...mapState(home_store, ["banners"]),
+    ...mapState(home_store, ["banners", "loading"]),
   },
 };
 </script>
@@ -184,6 +244,67 @@ export default {
   z-index: 10;
   pointer-events: none;
   padding: 0 30px;
+}
+
+/* Loading Container */
+.loading-container {
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+  position: relative;
+  overflow: hidden;
+}
+
+.loading-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+.loading-content {
+  text-align: center;
+  z-index: 2;
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-left: 4px solid var(--theme-color);
+  border-radius: 50%;
+  margin: 0 auto 25px;
+  animation: spin 1s linear infinite;
+}
+
+.loading-content h3 {
+  color: var(--white-color);
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+  opacity: 0.9;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .category-blocks {
