@@ -157,7 +157,9 @@
             <Link href="/service" @click="toggleSidebarMenu">Our Services</Link>
           </li>
           <li>
-            <Link href="/portfolio" @click="toggleSidebarMenu">Property</Link>
+            <Link href="/portfolio" @click="toggleSidebarMenu"
+              >Our Projects</Link
+            >
           </li>
           <li class="menu-item-has-children">
             <a href="javascript:void(0)" @click="toggleGallery"> Gallery </a>
@@ -297,7 +299,7 @@
                   <li><Link href="/team">Our Team</Link></li>
                   <li><Link href="/service">Our Services</Link></li>
                   <li>
-                    <Link href="/portfolio">Property</Link>
+                    <Link href="/portfolio">Our Projects</Link>
                   </li>
                   <li class="menu-item-has-children">
                     <a href="javascript:void(0)">Gallery </a>

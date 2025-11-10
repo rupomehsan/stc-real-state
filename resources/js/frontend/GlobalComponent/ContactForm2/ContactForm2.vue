@@ -55,9 +55,9 @@
                       <option value="" disabled="" selected="" hidden="">
                         Select Service Type
                       </option>
-                      <option value="buying">Buying</option>
-                      <option value="selling">Selling</option>
-                      <option value="renting">Renting</option>
+                      <option value="construction">Construction</option>
+                      <option value="real-estate">Real Estate</option>
+                      <option value="bricks">Bricks</option>
                       <option value="consultation">Consultation</option>
                     </select>
                   </div>
@@ -138,7 +138,6 @@ export default {
       this.errorMessage = "";
 
       try {
-        
         const response = await axios.post("/contacts/store", this.form);
         console.log("Form Data:", response);
 
@@ -159,10 +158,7 @@ export default {
           message: "",
         };
 
-
-
         window.s_alert("Your message has been sent successfully!");
-
       } catch (error) {
         console.error("Form submission error:", error);
 

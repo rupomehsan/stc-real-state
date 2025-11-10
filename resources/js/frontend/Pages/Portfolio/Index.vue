@@ -5,10 +5,10 @@
   >
     <div class="container">
       <div class="breadcumb-content">
-        <h1 class="breadcumb-title mt-5">Properties</h1>
+        <h1 class="breadcumb-title mt-5">Projects</h1>
         <ul class="breadcumb-menu">
           <li><Link href="/">Home</Link></li>
-          <li>Properties</li>
+          <li>Projects</li>
         </ul>
       </div>
     </div>
@@ -25,7 +25,7 @@
                 <i class="fas fa-check-circle"></i>
                 <span>Completed</span>
               </div>
-              <h2 class="category-title">Our Completed Properties</h2>
+              <h2 class="category-title">Our Completed Projects</h2>
               <p class="category-description">
                 Explore our successfully delivered projects showcasing quality
                 and excellence
@@ -119,11 +119,12 @@
                 <i class="fas fa-clock"></i>
                 <span>Upcoming</span>
               </div>
-              <h2 class="category-title">Upcoming Properties</h2>
+              <h2 class="category-title">Upcoming Projects</h2>
               <p class="category-description">
                 Discover our exciting upcoming projects currently in development
               </p>
             </div>
+
             <!-- Navigation Arrows -->
             <div class="slider-navigation">
               <!-- <div class="slider-indicator">

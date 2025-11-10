@@ -6,14 +6,16 @@
   >
     <div class="container">
       <div class="breadcumb-content">
-        <h1 class="breadcumb-title mt-5">Property Details</h1>
+        <h1 class="breadcumb-title mt-5">Project Details</h1>
+
         <ul class="breadcumb-menu">
           <li><Link href="/">Home</Link></li>
-          <li>Property Details</li>
+          <li>Project Details</li>
         </ul>
       </div>
     </div>
   </div>
+
   <!-- {{ single_property }} -->
   <section class="property-details my-5 overflow-hidden">
     <div class="container">
@@ -24,7 +26,7 @@
             <span class="text-primary">{{
               single_property?.property_name
             }}</span>
-            : Property Overview & Specifications
+            : Projects Overview & Specifications
           </h2>
         </div>
       </div>
