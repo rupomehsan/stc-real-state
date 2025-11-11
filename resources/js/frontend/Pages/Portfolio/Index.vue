@@ -25,7 +25,7 @@
                 <i class="fas fa-check-circle"></i>
                 <span>Completed</span>
               </div>
-              <h2 class="category-title">Our Completed Projects</h2>
+              <h2 class="category-title">Completed Projects</h2>
               <p class="category-description">
                 Explore our successfully delivered projects showcasing quality
                 and excellence
@@ -104,6 +104,91 @@
                     :property="{}"
                     :isLoading="true"
                     status="completed"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ongoing Properties Section -->
+        <div class="property-category-section mb-5">
+          <div class="section-header">
+            <div class="header-content">
+              <div class="category-badge ongoing">
+                <i class="fas fa-hammer"></i>
+                <span>Ongoing</span>
+              </div>
+              <h2 class="category-title">Ongoing Projects</h2>
+              <p class="category-description">
+                Explore our current projects under construction with real-time
+                progress updates
+              </p>
+            </div>
+            <!-- Navigation Arrows -->
+            <div class="slider-navigation">
+              <button class="slider-nav-btn prev-btn" @click="prevOngoing">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button class="slider-nav-btn next-btn" @click="nextOngoing">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <div
+            class="property-cards-wrapper"
+            @mouseenter="stopAutoSlide('ongoing')"
+            @mouseleave="startAutoSlide('ongoing', 3000)"
+          >
+            <div class="properties-slider-container">
+              <!-- Navigation arrows directly on slider images -->
+              <div class="slider-image-navigation">
+                <button
+                  class="slider-image-nav-btn slider-image-prev"
+                  @click="prevOngoing"
+                >
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <button
+                  class="slider-image-nav-btn slider-image-next"
+                  @click="nextOngoing"
+                >
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+
+              <div
+                class="properties-slider"
+                ref="ongoingSlider"
+                :style="{
+                  transform: `translateX(-${
+                    ongoingCurrentIndex * slideWidth
+                  }%)`,
+                }"
+              >
+                <div
+                  v-for="property in ongoingProperties"
+                  :key="property.id"
+                  class="property-slide"
+                >
+                  <PropertySliderCard
+                    :property="property"
+                    :isLoading="loading"
+                    status="ongoing"
+                  />
+                </div>
+                <!-- Loading cards -->
+                <div
+                  v-if="loading"
+                  v-for="n in 3"
+                  :key="`ongoing-skeleton-${n}`"
+                  class="property-slide"
+                >
+                  <PropertySliderCard
+                    :property="{}"
+                    :isLoading="true"
+                    status="ongoing"
                   />
                 </div>
               </div>
@@ -455,10 +540,12 @@ export default {
     return {
       showTraditionalView: false,
       completedCurrentIndex: 0,
+      ongoingCurrentIndex: 0,
       upcomingCurrentIndex: 0,
       slideWidth: 25, // 25% for 4 items per row
       visibleSlides: 4, // Show 4 properties at a time
       completedAutoInterval: null,
+      ongoingAutoInterval: null,
       upcomingAutoInterval: null,
     };
   },
@@ -489,6 +576,7 @@ export default {
     window.removeEventListener("resize", this.updateSlideWidth);
     // Clean up auto-slide intervals
     this.stopAutoSlide("completed");
+    this.stopAutoSlide("ongoing");
     this.stopAutoSlide("upcoming");
   },
 
@@ -580,11 +668,55 @@ export default {
       }
     },
 
+    nextOngoing() {
+      if (this.ongoingProperties.length === 0) return;
+
+      const maxIndex = Math.max(
+        0,
+        this.ongoingProperties.length - this.visibleSlides
+      );
+
+      if (this.ongoingCurrentIndex < maxIndex) {
+        // Move by visible slides count for faster navigation
+        this.ongoingCurrentIndex = Math.min(
+          this.ongoingCurrentIndex + this.visibleSlides,
+          maxIndex
+        );
+      } else {
+        // Loop back to start
+        this.ongoingCurrentIndex = 0;
+      }
+    },
+
+    prevOngoing() {
+      if (this.ongoingProperties.length === 0) return;
+
+      const maxIndex = Math.max(
+        0,
+        this.ongoingProperties.length - this.visibleSlides
+      );
+
+      if (this.ongoingCurrentIndex > 0) {
+        // Move by visible slides count for faster navigation
+        this.ongoingCurrentIndex = Math.max(
+          this.ongoingCurrentIndex - this.visibleSlides,
+          0
+        );
+      } else {
+        // Loop to end
+        this.ongoingCurrentIndex = maxIndex;
+      }
+    },
+
     // Auto navigation methods for continuous looping
     startAutoSlide(section = "completed", interval = 4000) {
       if (section === "completed") {
         this.completedAutoInterval = setInterval(() => {
           this.nextCompleted();
+        }, interval);
+      } else if (section === "ongoing") {
+        this.ongoingAutoInterval = setInterval(() => {
+          this.nextOngoing();
         }, interval);
       } else {
         this.upcomingAutoInterval = setInterval(() => {
@@ -597,6 +729,9 @@ export default {
       if (section === "completed" && this.completedAutoInterval) {
         clearInterval(this.completedAutoInterval);
         this.completedAutoInterval = null;
+      } else if (section === "ongoing" && this.ongoingAutoInterval) {
+        clearInterval(this.ongoingAutoInterval);
+        this.ongoingAutoInterval = null;
       } else if (section === "upcoming" && this.upcomingAutoInterval) {
         clearInterval(this.upcomingAutoInterval);
         this.upcomingAutoInterval = null;
@@ -666,11 +801,25 @@ export default {
       );
     },
 
+    ongoingProperties() {
+      if (!this.properties?.data) return [];
+      // Filter properties that are ongoing/under construction
+      return this.properties.data.filter(
+        (property) =>
+          property.category?.name == "ongoing" ||
+          property.category?.name == "Ongoing" ||
+          property.category?.name == "under construction" ||
+          property.category?.name == "Under Construction"
+      );
+    },
+
     upcomingProperties() {
       if (!this.properties?.data) return [];
       // Filter properties that are upcoming/under construction
       return this.properties.data.filter(
-        (property) => property.category?.name == "upcoming"
+        (property) =>
+          property.category?.name == "upcoming" ||
+          property.category?.name == "Upcoming"
       );
     },
   },
@@ -859,6 +1008,11 @@ export default {
 
 .category-badge.completed {
   background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+}
+
+.category-badge.ongoing {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
   color: white;
 }
 

@@ -67,7 +67,7 @@
                 </p>
               </div>
 
-              <!-- {{ services }} -->
+              <!-- {{ services[0].key_features[0].title }} -->
 
               <!-- Professional Stats Preview -->
               <div class="professional-stats-grid">
@@ -85,14 +85,14 @@
                   <div class="stat-card-content">
                     <div class="stat-icon-wrapper">
                       <div class="stat-icon-bg"></div>
-                      <div class="stat-icon" v-html="icons[index]"></div>
+                      <div class="stat-icon" v-html="icons"></div>
                       <div class="stat-pulse-ring"></div>
                     </div>
                     <div class="stat-details">
                       <div class="stat-number-badge">
-                        <span class="stat-number">{{
+                        <!-- <span class="stat-number">{{
                           String(index + 1).padStart(2, "0")
-                        }}</span>
+                        }}</span> -->
                         <div class="number-highlight"></div>
                       </div>
                       <div class="stat-text-wrapper">
@@ -128,7 +128,12 @@
                             <img
                               :src="services[activeTabIndex]?.image"
                               alt=""
-                              style="border-radius: 5px"
+                              style="
+                                border-radius: 5px;
+
+                                width: 100%;
+                                object-fit: cover;
+                              "
                             />
                             <div class="icon-pulse"></div>
                             <div class="icon-pulse2"></div>
@@ -139,14 +144,6 @@
                       <!-- Enhanced Content Section -->
                       <div class="content-showcase">
                         <div class="content-header">
-                          <div class="content-badge">
-                            <div class="badge-indicator"></div>
-                            <span
-                              >Excellence {{ activeTabIndex + 1 }} of
-                              {{ services.length }}</span
-                            >
-                          </div>
-
                           <h3 class="content-title">
                             <span class="title-decorator"></span>
                             {{ services[activeTabIndex]?.title }}
@@ -164,30 +161,96 @@
 
                           <!-- Enhanced Feature List -->
                           <div class="modern-features">
-                            <div class="features-title">Key Highlights</div>
+                            <div class="features-title">
+                              <div class="title-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                  <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                                  />
+                                </svg>
+                              </div>
+                              Key Features
+
+                              <div class="title-accent"></div>
+                            </div>
                             <div class="features-grid">
+                              <!-- Debug info (remove in production) -->
                               <div
-                                class="feature-card"
-                                v-for="(feature, idx) in excellenceSlides[
-                                  activeTabIndex
-                                ]?.features"
-                                :key="idx"
+                                v-if="
+                                  !services[activeTabIndex]?.key_features
+                                    ?.length
+                                "
+                                class="debug-info"
                               >
-                                <div class="feature-icon">
-                                  <svg viewBox="0 0 20 20" fill="currentColor">
-                                    <path
-                                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                    />
-                                  </svg>
+                                <p>Debug: No key_features found</p>
+                                <p>Active Index: {{ activeTabIndex }}</p>
+                                <p>
+                                  Services Length: {{ services?.length || 0 }}
+                                </p>
+                                <p>
+                                  Current Service:
+                                  {{
+                                    services[activeTabIndex]?.title || "None"
+                                  }}
+                                </p>
+                                <pre>{{
+                                  JSON.stringify(
+                                    services[activeTabIndex]?.key_features,
+                                    null,
+                                    2
+                                  )
+                                }}</pre>
+                              </div>
+
+                              <div
+                                class="feature-card enhanced-highlight"
+                                v-for="(feature, idx) in services[
+                                  activeTabIndex
+                                ]?.key_features"
+                                :key="idx"
+                                :class="`feature-${idx + 1}`"
+                              >
+                                <div class="feature-icon-wrapper">
+                                  <div class="feature-icon">
+                                    <svg
+                                      v-if="getFeatureIcon(feature, idx)"
+                                      v-html="getFeatureIcon(feature, idx)"
+                                      viewBox="0 0 24 24"
+                                      fill="currentColor"
+                                    ></svg>
+                                    <svg
+                                      v-else
+                                      viewBox="0 0 24 24"
+                                      fill="currentColor"
+                                    >
+                                      <path
+                                        d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+                                      />
+                                    </svg>
+                                  </div>
+                                  <div class="icon-glow"></div>
                                 </div>
-                                <span class="feature-text">{{ feature }}</span>
+                                <div class="feature-content">
+                                  <span class="feature-text">{{
+                                    feature.title
+                                  }}</span>
+                                  <div class="feature-description">
+                                    {{
+                                      getFeatureDescription(
+                                        feature.description,
+                                        idx
+                                      )
+                                    }}
+                                  </div>
+                                </div>
                                 <div class="feature-accent"></div>
+                                <div class="feature-number">{{ idx + 1 }}</div>
                               </div>
                             </div>
                           </div>
 
                           <!-- Modern Progress Indicator -->
-                          <div class="modern-progress">
+                          <div class="modern-progress d-none">
                             <div class="progress-info">
                               <span class="progress-label"
                                 >Excellence Progress</span
@@ -257,33 +320,10 @@ export default {
       activeTabIndex: 0,
       autoAdvanceInterval: null,
       isMobile: false,
-      icons: [
-        `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="10" y="20" width="80" height="60" rx="5"/>
-                  <path d="M30 10 L30 30 M70 10 L70 30"/>
-                  <circle cx="50" cy="45" r="15"/>
-                 <path d="M50 35 L50 45 L58 50"/>
-               </svg>`,
-        `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+      icons: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M50 10 L65 25 L90 20 L75 45 L90 70 L65 65 L50 80 L35 65 L10 70 L25 45 L10 20 L35 25 Z"/>
                   <path d="M35 45 L45 55 L65 35"/>
                 </svg>`,
-        `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="50" cy="40" r="25"/>
-                  <path d="M40 50 Q50 60 60 50"/>
-                  <circle cx="42" cy="35" r="3" fill="currentColor"/>
-                  <circle cx="58" cy="35" r="3" fill="currentColor"/>
-                </svg>`,
-        `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="20" y="30" width="60" height="40" rx="5"/>
-                  <circle cx="30" cy="20" r="8"/>
-                  <circle cx="50" cy="15" r="6"/>
-                  <circle cx="70" cy="20" r="8"/>
-                  <path d="M30 28 L30 30 M50 21 L50 30 M70 28 L70 30"/>
-                  <rect x="35" y="40" width="30" height="15" rx="2"/>
-                </svg>`,
-      ],
-
       excellenceSlides: [
         {
           title: "On-Time Handover",
@@ -459,6 +499,139 @@ export default {
     // Tab navigation methods
     setActiveTab(index) {
       this.activeTabIndex = index;
+    },
+
+    // Get specific icon for feature based on content
+    getFeatureIcon(feature, index) {
+      // Handle both string and object formats
+      const featureText =
+        typeof feature === "string"
+          ? feature.toLowerCase()
+          : (feature.title || "").toLowerCase();
+
+      // Timeline/Schedule related
+      if (
+        featureText.includes("timeline") ||
+        featureText.includes("time") ||
+        featureText.includes("schedule") ||
+        featureText.includes("monitoring")
+      ) {
+        return `<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>`;
+      }
+
+      // Quality/Standards related
+      if (
+        featureText.includes("quality") ||
+        featureText.includes("standard") ||
+        featureText.includes("inspection") ||
+        featureText.includes("testing")
+      ) {
+        return `<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>`;
+      }
+
+      // Support/Service related
+      if (
+        featureText.includes("support") ||
+        featureText.includes("service") ||
+        featureText.includes("feedback") ||
+        featureText.includes("update")
+      ) {
+        return `<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 6L9.5 16.5l-4.5-4.5L6.41 10.5 9.5 13.5 15.5 6.5 17 8z"/>`;
+      }
+
+      // Technology/Innovation related
+      if (
+        featureText.includes("tech") ||
+        featureText.includes("modern") ||
+        featureText.includes("smart") ||
+        featureText.includes("innovation") ||
+        featureText.includes("sustainable")
+      ) {
+        return `<path d="M9 11H7v4h2v-4zm4 0h-2v4h2v-4zm4 0h-2v4h2v-4zm2-7h-3V2h-2v2H8V2H6v2H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H3V9h14v11z"/>`;
+      }
+
+      // Risk/Management related
+      if (
+        featureText.includes("risk") ||
+        featureText.includes("management") ||
+        featureText.includes("progress") ||
+        featureText.includes("adherence")
+      ) {
+        return `<path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>`;
+      }
+
+      // Default checkmark
+      return null;
+    },
+
+    // Get description for features
+    getFeatureDescription(feature, index) {
+      // Handle both string and object formats
+      if (typeof feature === "object" && feature.description) {
+        // If feature is an object with description property, use it
+        return feature.description;
+      }
+
+      // Fallback for legacy string format
+      const featureText =
+        typeof feature === "string"
+          ? feature.toLowerCase()
+          : (feature.title || "").toLowerCase();
+
+      if (
+        featureText.includes("timeline") ||
+        featureText.includes("time") ||
+        featureText.includes("adherence")
+      ) {
+        return "Ensuring projects are delivered on schedule";
+      } else if (
+        featureText.includes("monitoring") ||
+        featureText.includes("progress")
+      ) {
+        return "Real-time tracking of project milestones";
+      } else if (
+        featureText.includes("quality") ||
+        featureText.includes("standard")
+      ) {
+        return "Maintaining the highest construction standards";
+      } else if (
+        featureText.includes("inspection") ||
+        featureText.includes("testing")
+      ) {
+        return "Comprehensive quality assessment processes";
+      } else if (
+        featureText.includes("support") ||
+        featureText.includes("24/7")
+      ) {
+        return "Round-the-clock client assistance";
+      } else if (
+        featureText.includes("update") ||
+        featureText.includes("feedback")
+      ) {
+        return "Continuous communication with clients";
+      } else if (
+        featureText.includes("modern") ||
+        featureText.includes("tech")
+      ) {
+        return "Latest construction methodologies";
+      } else if (
+        featureText.includes("smart") ||
+        featureText.includes("innovation")
+      ) {
+        return "Innovative building solutions";
+      } else if (
+        featureText.includes("sustainable") ||
+        featureText.includes("practices")
+      ) {
+        return "Environmentally conscious construction";
+      } else if (
+        featureText.includes("risk") ||
+        featureText.includes("management")
+      ) {
+        return "Proactive project risk mitigation";
+      }
+
+      return "Excellence in every detail";
     },
 
     // Initialize stats counter animation
@@ -1457,6 +1630,47 @@ export default {
     gap: 1.5rem;
   }
 
+  // Enhanced Professional Stats Grid Mobile
+  .modern-excellence-section .professional-stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 0 0.25rem;
+
+    .professional-stat-card {
+      min-height: 220px;
+      padding: 1.25rem 1rem;
+      border-radius: 16px;
+
+      .stat-icon-wrapper {
+        width: 65px;
+        height: 65px;
+        margin-bottom: 1rem;
+
+        .stat-icon {
+          width: 35px;
+          height: 35px;
+          padding: 6px;
+        }
+      }
+
+      .stat-details {
+        .stat-number-badge .stat-number {
+          font-size: 1.6rem;
+        }
+
+        .stat-text-wrapper .stat-title {
+          font-size: 1rem;
+          padding: 0;
+        }
+      }
+
+      &.active {
+        min-height: 240px;
+        transform: translateY(-4px) scale(1.02);
+      }
+    }
+  }
+
   .hero-subtitle-section {
     padding: 30px 0;
     margin-bottom: 40px;
@@ -1541,6 +1755,69 @@ export default {
 
   .container {
     padding: 0 1rem;
+  }
+
+  // Enhanced Professional Stats Grid Small Mobile
+  .modern-excellence-section .professional-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0;
+
+    .professional-stat-card {
+      min-height: 250px;
+      padding: 1.5rem 1rem;
+      border-radius: 16px;
+
+      .stat-icon-wrapper {
+        width: 65px;
+        height: 65px;
+        margin-bottom: 1rem;
+
+        .stat-icon {
+          width: 40px;
+          height: 40px;
+          padding: 6px;
+        }
+
+        .stat-pulse-ring {
+          inset: -8px;
+          border-width: 2px;
+        }
+      }
+
+      .stat-details {
+        .stat-number-badge {
+          margin-bottom: 1rem;
+
+          .stat-number {
+            font-size: 1.4rem;
+          }
+
+          .number-highlight {
+            width: 30px;
+            height: 3px;
+            bottom: -4px;
+          }
+        }
+
+        .stat-text-wrapper .stat-title {
+          font-size: 0.95rem;
+          margin-bottom: 0.5rem;
+        }
+      }
+
+      &.active {
+        min-height: 270px;
+        transform: translateY(-6px) scale(1.02);
+      }
+
+      &::after {
+        width: 30px;
+        height: 30px;
+        top: 10px;
+        right: 10px;
+      }
+    }
   }
 
   // Mobile layout fix for small devices
@@ -1669,11 +1946,20 @@ export default {
   overflow: hidden;
 
   .container {
-    max-width: 1400px;
+    max-width: 1600px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1rem;
     position: relative;
     z-index: 10;
+
+    @media (min-width: 1400px) {
+      max-width: 1800px;
+      padding: 0 2rem;
+    }
+
+    @media (min-width: 1600px) {
+      max-width: 90vw;
+    }
   }
 
   // Animated Background Elements
@@ -1785,11 +2071,15 @@ export default {
 
   // Modern Header Styles
   .modern-header {
-    padding: 0rem 3rem 3rem;
+    padding: 0rem 2rem 3rem;
     box-shadow: 0 32px 64px rgba(0, 0, 0, 0.12),
       0 0 0 1px rgba(255, 255, 255, 0.5);
     position: relative;
     overflow: hidden;
+
+    @media (min-width: 1200px) {
+      padding: 0rem 2.5rem 3rem;
+    }
 
     &::after {
       content: "";
@@ -1844,7 +2134,7 @@ export default {
         margin-bottom: 1.5rem;
 
         .modern-title {
-          font-size: clamp(2.5rem, 5vw, 4rem);
+          font-size: clamp(1.4rem, 3vw, 2.8rem);
           font-weight: 800;
           line-height: 1.1;
           margin: 0;
@@ -1900,7 +2190,7 @@ export default {
       }
 
       .modern-subtitle {
-        font-size: 1.2rem;
+        font-size: 0.85rem;
         color: #64748b;
         line-height: 1.7;
         max-width: 600px;
@@ -1918,32 +2208,91 @@ export default {
 
     .professional-stats-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 2rem;
       margin-top: 2.5rem;
+      padding: 0 0.5rem;
+
+      @media (min-width: 1200px) {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2.5rem;
+        padding: 0;
+      }
 
       .professional-stat-card {
         position: relative;
+        // min-height: 320px;
         background: linear-gradient(
           135deg,
-          rgba(255, 255, 255, 0.95) 0%,
-          rgba(255, 255, 255, 0.9) 100%
+          rgba(255, 255, 255, 0.98) 0%,
+          rgba(248, 250, 252, 0.95) 50%,
+          rgba(255, 255, 255, 0.98) 100%
         );
-        border-radius: 20px;
-        border: 1px solid rgba(229, 9, 20, 0.1);
-        padding: 2rem 1.5rem;
+        border-radius: 24px;
+        border: 2px solid rgba(229, 9, 20, 0.08);
+        padding: 2.5rem 2rem;
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(20px);
         overflow: hidden;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06),
+          0 4px 16px rgba(0, 0, 0, 0.04);
+
+        // Enhanced background pattern
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: radial-gradient(
+              circle at 20% 20%,
+              rgba(229, 9, 20, 0.03) 0%,
+              transparent 30%
+            ),
+            radial-gradient(
+              circle at 80% 80%,
+              rgba(255, 107, 107, 0.02) 0%,
+              transparent 30%
+            ),
+            linear-gradient(
+              135deg,
+              rgba(229, 9, 20, 0.01) 0%,
+              transparent 50%,
+              rgba(229, 9, 20, 0.01) 100%
+            );
+          opacity: 0;
+          transition: opacity 0.4s ease;
+          pointer-events: none;
+        }
+
+        // Decorative corner elements
+        &::after {
+          content: "";
+          position: absolute;
+          top: 15px;
+          right: 15px;
+          width: 40px;
+          height: 40px;
+          background: linear-gradient(
+            135deg,
+            rgba(229, 9, 20, 0.1),
+            rgba(255, 107, 107, 0.05)
+          );
+          border-radius: 50%;
+          opacity: 0;
+          transition: all 0.4s ease;
+          transform: scale(0);
+        }
 
         .stat-card-background {
           position: absolute;
           inset: 0;
           background: linear-gradient(
             135deg,
-            transparent 0%,
-            rgba(229, 9, 20, 0.02) 50%,
-            transparent 100%
+            rgba(229, 9, 20, 0.04) 0%,
+            rgba(255, 107, 107, 0.02) 50%,
+            rgba(229, 9, 20, 0.04) 100%
           );
           opacity: 0;
           transition: opacity 0.4s ease;
@@ -1951,25 +2300,43 @@ export default {
 
         .stat-card-glow {
           position: absolute;
-          inset: -2px;
-          background: linear-gradient(45deg, #e50914, #ff6b6b, #e50914);
-          border-radius: 22px;
+          inset: -3px;
+          background: linear-gradient(
+            45deg,
+            #e50914,
+            #ff6b6b,
+            #e50914,
+            #ff4757
+          );
+          background-size: 300% 300%;
+          border-radius: 27px;
           opacity: 0;
           transition: opacity 0.4s ease;
           z-index: -1;
+          animation: glow-rotate 4s ease-in-out infinite;
         }
 
         &:hover {
-          transform: translateY(-8px) scale(1.02);
-          box-shadow: 0 20px 40px rgba(229, 9, 20, 0.15),
-            0 8px 16px rgba(0, 0, 0, 0.1);
+          transform: translateY(-12px) scale(1.02);
+          box-shadow: 0 25px 60px rgba(229, 9, 20, 0.15),
+            0 12px 24px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+          border-color: rgba(229, 9, 20, 0.2);
+
+          &::before {
+            opacity: 1;
+          }
+
+          &::after {
+            opacity: 1;
+            transform: scale(1) rotate(180deg);
+          }
 
           .stat-card-background {
             opacity: 1;
           }
 
           .stat-card-glow {
-            opacity: 0.7;
+            opacity: 0.6;
           }
 
           .stat-pulse-ring {
@@ -1978,6 +2345,12 @@ export default {
 
           .stat-title {
             color: #e50914;
+            transform: translateY(-2px);
+          }
+
+          .stat-icon-wrapper .stat-icon-bg {
+            opacity: 0.2;
+            transform: scale(1.1);
           }
         }
 
@@ -1991,52 +2364,73 @@ export default {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 70px;
-          height: 70px;
-          margin: 0 auto 1.5rem;
+          width: 90px;
+          height: 90px;
+          margin: 0 auto 2rem;
 
           .stat-icon-bg {
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, #e50914 0%, #ff6b6b 100%);
-            border-radius: 18px;
-            opacity: 0.1;
+            background: linear-gradient(
+              135deg,
+              #e50914 0%,
+              #ff6b6b 50%,
+              #e50914 100%
+            );
+            border-radius: 50%;
+            opacity: 0.08;
+            transition: all 0.4s ease;
           }
 
           .stat-pulse-ring {
             position: absolute;
-            inset: -8px;
-            border: 2px solid #e50914;
+            inset: -12px;
+            border: 3px solid rgba(229, 9, 20, 0.2);
             border-radius: 50%;
-            opacity: 0.3;
+            opacity: 0;
+            transition: all 0.4s ease;
           }
 
           .stat-icon {
-            width: 45px;
-            height: 45px;
-            color: white;
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #e50914;
             position: relative;
             z-index: 3;
-            padding: 5px;
+            padding: 12px;
+            box-shadow: 0 8px 25px rgba(229, 9, 20, 0.15),
+              inset 0 2px 0 rgba(255, 255, 255, 0.8);
+            transition: all 0.4s ease;
 
             svg {
               width: 100%;
               height: 100%;
-              filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
+              color: #e50914;
+              filter: drop-shadow(0 2px 4px rgba(229, 9, 20, 0.2));
+              transition: all 0.4s ease;
             }
           }
         }
 
         .stat-details {
           text-align: center;
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
 
           .stat-number-badge {
             position: relative;
             display: inline-block;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
 
             .stat-number {
-              font-size: 1.5rem;
+              font-size: 1.8rem;
               font-weight: 800;
               color: #e50914;
               background: linear-gradient(135deg, #e50914 0%, #ff6b6b 100%);
@@ -2045,39 +2439,43 @@ export default {
               background-clip: text;
               position: relative;
               z-index: 2;
+              display: block;
+              line-height: 1;
             }
 
             .number-highlight {
               position: absolute;
-              bottom: -4px;
+              bottom: -6px;
               left: 50%;
               transform: translateX(-50%);
-              width: 30px;
-              height: 3px;
+              width: 40px;
+              height: 4px;
               background: linear-gradient(90deg, #e50914, #ff6b6b);
               border-radius: 2px;
-              opacity: 0.7;
+              opacity: 0.6;
+              transition: all 0.4s ease;
             }
           }
 
           .stat-text-wrapper {
             .stat-title {
-              font-size: 1rem;
+              font-size: 0.95rem;
               font-weight: 600;
               color: #334155;
-              margin-bottom: 0.5rem;
-              transition: color 0.3s ease;
+              margin-bottom: 0.75rem;
+              transition: all 0.4s ease;
               line-height: 1.4;
+              padding: 0 0.5rem;
             }
 
             .stat-underline {
-              width: 40px;
-              height: 2px;
+              width: 50px;
+              height: 3px;
               background: linear-gradient(90deg, #e50914, #ff6b6b);
               margin: 0 auto;
-              border-radius: 1px;
-              opacity: 0.3;
-              transition: all 0.3s ease;
+              border-radius: 2px;
+              opacity: 0.4;
+              transition: all 0.4s ease;
             }
           }
         }
@@ -2099,6 +2497,326 @@ export default {
         &:hover .stat-hover-overlay {
           opacity: 1;
         }
+
+        // Enhanced Active State Styling
+        &.active {
+          background: linear-gradient(
+            135deg,
+            rgba(229, 9, 20, 0.12) 0%,
+            rgba(255, 107, 107, 0.08) 50%,
+            rgba(229, 9, 20, 0.12) 100%
+          );
+          border: 3px solid rgba(229, 9, 20, 0.25);
+          transform: translateY(-16px) scale(1.08);
+          box-shadow: 0 30px 80px rgba(229, 9, 20, 0.25),
+            0 15px 35px rgba(0, 0, 0, 0.15),
+            inset 0 1px 0 rgba(255, 255, 255, 0.7);
+          // min-height: 340px;
+
+          &::before {
+            opacity: 1;
+            background: radial-gradient(
+                circle at 20% 20%,
+                rgba(229, 9, 20, 0.08) 0%,
+                transparent 40%
+              ),
+              radial-gradient(
+                circle at 80% 80%,
+                rgba(255, 107, 107, 0.06) 0%,
+                transparent 40%
+              ),
+              linear-gradient(
+                135deg,
+                rgba(229, 9, 20, 0.04) 0%,
+                transparent 50%,
+                rgba(229, 9, 20, 0.04) 100%
+              );
+          }
+
+          &::after {
+            opacity: 1;
+            transform: scale(1.2) rotate(360deg);
+            background: linear-gradient(
+              135deg,
+              rgba(229, 9, 20, 0.2),
+              rgba(255, 107, 107, 0.15)
+            );
+            animation: active-corner-pulse 2s ease-in-out infinite;
+          }
+
+          .stat-card-background {
+            opacity: 1;
+            background: linear-gradient(
+              135deg,
+              rgba(229, 9, 20, 0.08) 0%,
+              rgba(255, 107, 107, 0.04) 50%,
+              rgba(229, 9, 20, 0.08) 100%
+            );
+          }
+
+          .stat-card-glow {
+            opacity: 0.8;
+            animation: active-glow-pulse 2s ease-in-out infinite;
+          }
+
+          .stat-icon-wrapper {
+            .stat-icon-bg {
+              opacity: 0.4;
+              transform: scale(1.2);
+              background: linear-gradient(
+                135deg,
+                #e50914 0%,
+                #ff6b6b 50%,
+                #fff 100%
+              );
+              animation: active-icon-bg-pulse 2s ease-in-out infinite;
+            }
+
+            .stat-pulse-ring {
+              opacity: 0.8;
+              border-color: #ffffff;
+              border-width: 3px;
+              animation: active-pulse-ring 1.2s ease-in-out infinite;
+              box-shadow: 0 0 20px rgba(229, 9, 20, 0.6);
+            }
+
+            .stat-icon {
+              background: linear-gradient(135deg, #ffffff, #f8f9fa);
+              border-radius: 50%;
+              padding: 10px;
+              box-shadow: 0 8px 25px rgba(229, 9, 20, 0.4),
+                inset 0 2px 0 rgba(255, 255, 255, 0.8);
+              color: #e50914;
+              transform: scale(1.1);
+              animation: active-icon-bounce 2.5s ease-in-out infinite;
+
+              svg {
+                color: #e50914;
+                filter: drop-shadow(0 2px 4px rgba(229, 9, 20, 0.3));
+                animation: active-icon-glow 2s ease-in-out infinite alternate;
+              }
+            }
+          }
+
+          .stat-details {
+            .stat-number-badge .stat-number {
+              font-size: 1.7rem;
+              background: linear-gradient(
+                135deg,
+                #e50914 0%,
+                #ff6b6b 50%,
+                #e50914 100%
+              );
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              background-clip: text;
+              text-shadow: 0 2px 8px rgba(229, 9, 20, 0.3);
+              animation: active-number-shine 2s ease-in-out infinite;
+            }
+
+            .stat-text-wrapper {
+              .stat-title {
+                color: #1f2937;
+                font-weight: 700;
+                transform: scale(1.02);
+                text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                animation: active-text-highlight 2s ease-in-out infinite;
+              }
+
+              .stat-underline {
+                width: 60px;
+                height: 3px;
+                opacity: 1;
+                background: linear-gradient(90deg, #e50914, #ff6b6b, #e50914);
+                background-size: 200% 100%;
+                box-shadow: 0 2px 8px rgba(229, 9, 20, 0.3);
+                animation: active-underline-flow 2s linear infinite;
+              }
+            }
+          }
+
+          .stat-hover-overlay {
+            opacity: 1;
+            background: linear-gradient(
+              135deg,
+              rgba(229, 9, 20, 0.05) 0%,
+              rgba(255, 107, 107, 0.03) 100%
+            );
+          }
+
+          // Additional emphasis border
+          &::before {
+            content: "";
+            position: absolute;
+            inset: -3px;
+            background: linear-gradient(
+              45deg,
+              #e50914,
+              #ff6b6b,
+              #e50914,
+              #ff6b6b
+            );
+            background-size: 200% 200%;
+            border-radius: 25px;
+            z-index: -2;
+            animation: active-border-shine 3s linear infinite;
+          }
+        }
+
+        // Enhanced hover state when not active
+        &:hover:not(.active) {
+          background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.98) 0%,
+            rgba(248, 250, 252, 0.95) 100%
+          );
+        }
+      }
+    }
+
+    // Active state animations
+    @keyframes glow-rotate {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    @keyframes active-corner-pulse {
+      0%,
+      100% {
+        transform: scale(1.2) rotate(360deg);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.4) rotate(450deg);
+        opacity: 0.7;
+      }
+    }
+
+    @keyframes active-glow-pulse {
+      0%,
+      100% {
+        opacity: 0.8;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.02);
+      }
+    }
+    @keyframes active-glow-pulse {
+      0%,
+      100% {
+        opacity: 0.9;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.02);
+      }
+    }
+
+    @keyframes active-pulse-ring {
+      0% {
+        transform: scale(1);
+        opacity: 0.8;
+      }
+      50% {
+        transform: scale(1.2);
+        opacity: 0.4;
+      }
+      100% {
+        transform: scale(1.4);
+        opacity: 0;
+      }
+    }
+
+    @keyframes active-border-shine {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    @keyframes active-icon-bg-pulse {
+      0%,
+      100% {
+        transform: scale(1.2);
+        opacity: 0.4;
+      }
+      50% {
+        transform: scale(1.3);
+        opacity: 0.6;
+      }
+    }
+
+    @keyframes active-icon-bounce {
+      0%,
+      100% {
+        transform: scale(1.1);
+      }
+      25% {
+        transform: scale(1.15) rotate(2deg);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      75% {
+        transform: scale(1.15) rotate(-2deg);
+      }
+    }
+
+    @keyframes active-icon-glow {
+      0% {
+        filter: drop-shadow(0 2px 4px rgba(229, 9, 20, 0.3));
+      }
+      100% {
+        filter: drop-shadow(0 4px 8px rgba(229, 9, 20, 0.6))
+          drop-shadow(0 0 12px rgba(229, 9, 20, 0.4));
+      }
+    }
+
+    @keyframes active-number-shine {
+      0%,
+      100% {
+        background-position: 0% 50%;
+        text-shadow: 0 2px 8px rgba(229, 9, 20, 0.3);
+      }
+      50% {
+        background-position: 100% 50%;
+        text-shadow: 0 2px 8px rgba(229, 9, 20, 0.5),
+          0 0 15px rgba(229, 9, 20, 0.3);
+      }
+    }
+
+    @keyframes active-text-highlight {
+      0%,
+      100% {
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+      50% {
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15),
+          0 0 8px rgba(229, 9, 20, 0.2);
+      }
+    }
+
+    @keyframes active-underline-flow {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 200% 50%;
       }
     }
 
@@ -2339,7 +3057,7 @@ export default {
 
 // Modern Content Area
 .modern-content-area {
-  padding: 4rem 3rem;
+  padding: 3rem 1.5rem;
   background: #ffffff;
   position: relative;
 
@@ -2370,21 +3088,32 @@ export default {
       gap: 2rem;
       align-items: center;
       text-align: center;
+      max-width: 100%;
 
       // Desktop layout - horizontal
       @media (min-width: 769px) {
         display: grid;
-        grid-template-columns: 1fr 1.2fr;
-        gap: 4rem;
+        grid-template-columns: 1.2fr 1.3fr;
+        gap: 2.5rem;
         align-items: start;
         text-align: left;
+        max-width: none;
+      }
+
+      @media (min-width: 1200px) {
+        gap: 3rem;
       }
     }
 
     // Visual Showcase Styles
     .visual-showcase {
       position: relative;
-      padding: 2rem;
+      padding: 1rem;
+      width: 100%;
+
+      @media (min-width: 769px) {
+        padding: 1.5rem;
+      }
 
       .showcase-background {
         position: absolute;
@@ -2446,7 +3175,7 @@ export default {
         .icon-container {
           position: relative;
           display: inline-block;
-          margin-bottom: 2rem;
+          // margin-bottom: 2rem;
 
           .icon-backdrop {
             position: absolute;
@@ -2563,7 +3292,7 @@ export default {
     // Content Showcase Styles
     .content-showcase {
       .content-header {
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
 
         .content-badge {
           display: inline-flex;
@@ -2575,7 +3304,7 @@ export default {
           border-radius: 50px;
           font-size: 0.85rem;
           font-weight: 600;
-          margin-bottom: 1rem;
+          margin-bottom: 0.75rem;
 
           .badge-indicator {
             width: 8px;
@@ -2587,7 +3316,7 @@ export default {
         }
 
         .content-title {
-          font-size: 2.5rem;
+          font-size: 2rem;
           font-weight: 800;
           color: #1e293b;
           margin-bottom: 1rem;
@@ -2626,7 +3355,7 @@ export default {
 
       .content-body {
         .content-description {
-          font-size: 1.1rem;
+          font-size: 0.95rem;
           color: #64748b;
           line-height: 1.8;
           margin-bottom: 2.5rem;
@@ -2634,80 +3363,206 @@ export default {
 
         .modern-features {
           margin-bottom: 2.5rem;
+          background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+          border-radius: 20px;
+          padding: 2rem;
+          border: 1px solid #e2e8f0;
+          box-shadow: 0 10px 30px rgba(148, 4, 4, 0.1);
+          position: relative;
+          overflow: hidden;
+
+          &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #940404, #dc2626, #940404);
+            animation: gradientShift 3s ease-in-out infinite;
+          }
 
           .features-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: #374151;
-            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1a202c;
+            margin-bottom: 2rem;
             position: relative;
-            padding-left: 1rem;
+            padding-left: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
 
-            &::before {
-              content: "";
+            .title-icon {
               position: absolute;
               left: 0;
-              top: 50%;
-              width: 4px;
-              height: 20px;
-              background: #940404;
-              border-radius: 2px;
-              transform: translateY(-50%);
+              width: 2rem;
+              height: 2rem;
+              background: linear-gradient(135deg, #940404, #dc2626);
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: white;
+              animation: pulse 2s infinite;
+
+              svg {
+                width: 1.2rem;
+                height: 1.2rem;
+              }
+            }
+
+            .title-accent {
+              flex: 1;
+              height: 2px;
+              background: linear-gradient(90deg, #940404, transparent);
+              margin-left: 1rem;
             }
           }
 
           .features-grid {
             display: grid;
-            gap: 1rem;
+            gap: 1.5rem;
 
-            .feature-card {
+            .feature-card.enhanced-highlight {
               display: flex;
               align-items: center;
-              gap: 1rem;
-              padding: 1rem 1.5rem;
-              background: #f8fafc;
-              border-radius: 12px;
-              border-left: 3px solid transparent;
-              transition: all 0.3s ease;
+              gap: 1.5rem;
+              padding: 2rem;
+              background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.9) 0%,
+                rgba(248, 250, 252, 0.8) 100%
+              );
+              border-radius: 16px;
+              transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
               position: relative;
               overflow: hidden;
+              backdrop-filter: blur(10px);
+              box-shadow: 0 4px 20px rgba(148, 4, 4, 0.08);
 
               &:hover {
-                background: #f1f5f9;
-                border-left-color: #940404;
-                transform: translateX(5px);
+                transform: translateY(-8px) scale(1.02);
+                box-shadow: 0 20px 40px rgba(148, 4, 4, 0.2);
+
+                .feature-icon-wrapper .icon-glow {
+                  opacity: 1;
+                  transform: scale(1.2);
+                }
 
                 .feature-accent {
+                  width: 100%;
                   opacity: 1;
+                }
+
+                .feature-number {
+                  opacity: 1;
+                  transform: scale(1.1) rotate(360deg);
                 }
               }
 
-              .feature-icon {
-                width: 24px;
-                height: 24px;
-                color: #940404;
+              .feature-icon-wrapper {
+                position: relative;
                 flex-shrink: 0;
+
+                .feature-icon {
+                  width: 3rem;
+                  height: 3rem;
+                  background: linear-gradient(135deg, #940404, #dc2626);
+                  border-radius: 12px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: white;
+                  position: relative;
+                  z-index: 2;
+                  box-shadow: 0 8px 20px rgba(148, 4, 4, 0.3);
+
+                  svg {
+                    width: 1.5rem;
+                    height: 1.5rem;
+                  }
+                }
+
+                .icon-glow {
+                  position: absolute;
+                  inset: -10px;
+                  background: radial-gradient(
+                    circle,
+                    rgba(148, 4, 4, 0.3) 0%,
+                    transparent 70%
+                  );
+                  border-radius: 50%;
+                  opacity: 0;
+                  transition: all 0.4s ease;
+                  z-index: 1;
+                }
               }
 
-              .feature-text {
-                font-weight: 500;
-                color: #374151;
-                font-size: 0.95rem;
+              .feature-content {
+                flex: 1;
+                min-width: 0;
+
+                .feature-text {
+                  font-weight: 700;
+                  color: #1a202c;
+                  font-size: 0.95rem;
+                  display: block;
+                  margin-bottom: 0.5rem;
+                  line-height: 1.4;
+                }
+
+                .feature-description {
+                  font-size: 0.9rem;
+                  color: #64748b;
+                  line-height: 1.5;
+                  font-weight: 500;
+                }
               }
 
               .feature-accent {
                 position: absolute;
-                right: -20px;
-                top: 0;
                 bottom: 0;
-                width: 40px;
-                background: linear-gradient(
-                  90deg,
-                  transparent,
-                  rgba(99, 102, 241, 0.1)
-                );
+                left: 0;
+                height: 3px;
+                width: 0;
+                background: linear-gradient(90deg, #940404, #dc2626);
+                transition: all 0.4s ease;
                 opacity: 0;
-                transition: opacity 0.3s ease;
+              }
+
+              .feature-number {
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                width: 2rem;
+                height: 2rem;
+                background: linear-gradient(
+                  135deg,
+                  rgba(148, 4, 4, 0.1),
+                  rgba(220, 38, 38, 0.1)
+                );
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 800;
+                font-size: 0.8rem;
+                color: #940404;
+                opacity: 0;
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                border: 1px solid rgba(148, 4, 4, 0.2);
+              }
+
+              // Staggered animation classes
+              &.feature-1 {
+                animation-delay: 0.1s;
+              }
+              &.feature-2 {
+                animation-delay: 0.2s;
+              }
+              &.feature-3 {
+                animation-delay: 0.3s;
               }
             }
           }
@@ -4413,8 +5268,20 @@ export default {
 
     .professional-stats-grid {
       grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-      padding: 2rem;
+      gap: 0.75rem;
+      padding: 1rem;
+
+      .professional-stat-card {
+        padding: 1rem 0.75rem;
+
+        .stat-text-wrapper {
+          .stat-title {
+            font-size: 0.8rem;
+            line-height: 1.3;
+            padding: 0 0.25rem;
+          }
+        }
+      }
     }
 
     .stat-card {
@@ -4478,8 +5345,20 @@ export default {
     // Professional Footer Mobile
     .professional-stats-grid {
       grid-template-columns: 1fr;
-      gap: 1rem;
-      padding: 1.5rem;
+      gap: 0.75rem;
+      padding: 1rem;
+
+      .professional-stat-card {
+        padding: 0.75rem 0.5rem;
+
+        .stat-text-wrapper {
+          .stat-title {
+            font-size: 0.7rem;
+            line-height: 1.2;
+            padding: 0 0.25rem;
+          }
+        }
+      }
     }
 
     .stat-card {
@@ -4569,10 +5448,10 @@ export default {
   // Modern Excellence Section Responsive
   @media (max-width: 768px) {
     .modern-excellence-section {
-      padding: 4rem 0;
+      padding: 2rem 0;
 
       .container {
-        padding: 0 1rem;
+        padding: 0 0.5rem;
       }
 
       // Mobile layout fix for panel
@@ -4597,14 +5476,17 @@ export default {
 
     .excellence-showcase-card {
       .modern-header {
-        padding: 3rem 2rem 2rem;
+        padding: 1.5rem 1rem 1rem;
 
         .modern-title {
-          font-size: clamp(2rem, 8vw, 3rem);
+          font-size: clamp(1.2rem, 5vw, 1.8rem);
+          line-height: 1.2;
         }
 
         .modern-subtitle {
-          font-size: 1rem;
+          font-size: 0.75rem;
+          line-height: 1.5;
+          padding: 0 1rem;
         }
 
         .header-stats {
@@ -4772,17 +5654,75 @@ export default {
 
         .content-showcase {
           order: 2;
+          padding: 0.75rem 0.5rem;
 
-          .content-header .content-title {
-            font-size: 2rem;
+          .content-header {
+            margin-bottom: 0.75rem;
 
-            .title-decorator {
-              display: none;
+            .content-badge {
+              padding: 0.375rem 0.75rem;
+              font-size: 0.75rem;
+              margin-bottom: 0.5rem;
+            }
+
+            .content-title {
+              font-size: 1.8rem;
+              line-height: 1.2;
+              margin-bottom: 0.4rem;
+
+              .title-decorator {
+                display: none;
+              }
+            }
+
+            .title-underline {
+              width: 60px;
+              height: 2px;
             }
           }
 
-          .content-body .modern-features .features-grid .feature-card {
-            padding: 0.75rem 1rem;
+          .content-body {
+            .content-description {
+              font-size: 0.95rem;
+              line-height: 1.6;
+              margin-bottom: 0.75rem;
+            }
+
+            .modern-features {
+              padding: 0.75rem 0.5rem;
+              margin-bottom: 0.75rem;
+
+              .features-title {
+                font-size: 1.2rem;
+                margin-bottom: 0.75rem;
+                padding-left: 1.75rem;
+
+                .title-icon {
+                  width: 1.25rem;
+                  height: 1.25rem;
+                }
+              }
+
+              .features-grid .feature-card {
+                padding: 0.75rem 1rem;
+
+                .feature-content {
+                  .feature-text {
+                    font-size: 0.8rem;
+                    line-height: 1.3;
+                  }
+                }
+
+                .feature-title {
+                  font-size: 0.9rem;
+                }
+
+                .feature-description {
+                  font-size: 0.8rem;
+                  line-height: 1.4;
+                }
+              }
+            }
           }
         }
       }
@@ -4793,7 +5733,7 @@ export default {
     .modern-excellence-section {
       .excellence-showcase-card {
         .modern-header {
-          padding: 2rem 1rem;
+          padding: 1rem 0.75rem;
 
           .header-badge {
             padding: 0.5rem 1rem;
@@ -4801,12 +5741,25 @@ export default {
           }
 
           .modern-title {
-            font-size: clamp(1.5rem, 10vw, 2.5rem);
+            font-size: clamp(0.9rem, 6vw, 1.4rem);
+            line-height: 1.2;
+          }
+
+          .subtitle-emphasis {
+            font-size: 0.85rem;
+            display: block;
+            margin-top: 0.5rem;
+          }
+
+          .modern-subtitle {
+            font-size: 0.65rem;
+            line-height: 1.4;
+            padding: 0 0.5rem;
           }
         }
 
         .modern-tab-navigation {
-          padding: 1.5rem 1rem;
+          padding: 1rem 0.75rem;
 
           .nav-background {
             display: none !important;
@@ -4821,7 +5774,7 @@ export default {
 
           .modern-tab-btn {
             position: relative !important;
-            padding: 0.875rem 1rem !important;
+            padding: 0.75rem 0.875rem !important;
             background: transparent !important;
             border: 1px solid rgba(99, 102, 241, 0.2) !important;
             border-radius: 12px !important;
@@ -4915,23 +5868,96 @@ export default {
         }
 
         .modern-content-area {
-          padding: 1.5rem;
+          padding: 1rem;
 
           .modern-panel .panel-layout {
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1rem;
           }
 
           .visual-showcase {
             order: 1;
-            padding: 1rem;
+            padding: 0.75rem;
           }
 
           .content-showcase {
             order: 2;
+            padding: 0.5rem 0.375rem;
 
-            .content-header .content-title {
-              font-size: 1.75rem;
+            .content-header {
+              margin-bottom: 0.75rem;
+
+              .content-badge {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.7rem;
+                margin-bottom: 0.4rem;
+              }
+
+              .content-title {
+                font-size: 1.5rem;
+                line-height: 1.1;
+                margin-bottom: 0.375rem;
+              }
+
+              .title-underline {
+                width: 40px;
+                height: 2px;
+              }
+            }
+
+            .content-body {
+              .content-description {
+                font-size: 0.85rem;
+                line-height: 1.5;
+                margin-bottom: 0.75rem;
+              }
+
+              .modern-features {
+                padding: 0.5rem 0.375rem;
+                margin-bottom: 0.75rem;
+
+                .features-title {
+                  font-size: 1rem;
+                  margin-bottom: 0.6rem;
+                  padding-left: 1.5rem;
+
+                  .title-icon {
+                    width: 1rem;
+                    height: 1rem;
+                  }
+                }
+
+                .features-grid {
+                  gap: 0.5rem;
+
+                  .feature-card {
+                    padding: 0.3rem 0.5rem;
+
+                    .feature-content {
+                      .feature-text {
+                        font-size: 0.7rem;
+                        line-height: 1.2;
+                      }
+                    }
+
+                    .feature-title {
+                      font-size: 0.8rem;
+                      line-height: 1.2;
+                    }
+
+                    .feature-description {
+                      font-size: 0.75rem;
+                      line-height: 1.3;
+                    }
+
+                    .feature-number {
+                      font-size: 0.7rem;
+                      width: 1.5rem;
+                      height: 1.5rem;
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -4946,6 +5972,317 @@ export default {
   }
   .modern-tab-navigation .nav-background {
     display: none !important;
+  }
+}
+
+/* Enhanced Key Highlights Animations */
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+@keyframes featureCardSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px) translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+}
+
+/* Feature card entrance animations */
+.feature-card.enhanced-highlight {
+  animation: featureCardSlideIn 0.6s ease-out forwards;
+}
+
+.feature-card.enhanced-highlight:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.feature-card.enhanced-highlight:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.feature-card.enhanced-highlight:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* Responsive design for Key Highlights */
+@media (max-width: 768px) {
+  .modern-features {
+    padding: 1.5rem !important;
+    margin-bottom: 2rem !important;
+
+    .features-title {
+      font-size: 1.25rem !important;
+      margin-bottom: 1.5rem !important;
+      padding-left: 2.5rem !important;
+
+      .title-icon {
+        width: 1.5rem !important;
+        height: 1.5rem !important;
+
+        svg {
+          width: 1rem !important;
+          height: 1rem !important;
+        }
+      }
+    }
+
+    .features-grid {
+      gap: 1rem !important;
+
+      .feature-card.enhanced-highlight {
+        padding: 1.5rem !important;
+        gap: 1rem !important;
+
+        .feature-icon-wrapper .feature-icon {
+          width: 2.5rem !important;
+          height: 2.5rem !important;
+
+          svg {
+            width: 1.25rem !important;
+            height: 1.25rem !important;
+          }
+        }
+
+        .feature-content {
+          .feature-text {
+            font-size: 1rem !important;
+          }
+
+          .feature-description {
+            font-size: 0.85rem !important;
+          }
+        }
+
+        .feature-number {
+          width: 1.5rem !important;
+          height: 1.5rem !important;
+          font-size: 0.7rem !important;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .modern-features {
+    .features-title {
+      font-size: 1.1rem !important;
+      padding-left: 2rem !important;
+
+      .title-icon {
+        width: 1.25rem !important;
+        height: 1.25rem !important;
+      }
+
+      .title-accent {
+        display: none !important;
+      }
+    }
+
+    .features-grid .feature-card.enhanced-highlight {
+      padding: 1.25rem !important;
+      flex-direction: column !important;
+      text-align: center !important;
+
+      .feature-content {
+        .feature-text {
+          font-size: 0.95rem !important;
+          margin-bottom: 0.25rem !important;
+        }
+
+        .feature-description {
+          font-size: 0.8rem !important;
+        }
+      }
+
+      .feature-number {
+        position: static !important;
+        margin-top: 0.5rem !important;
+        align-self: center !important;
+      }
+    }
+  }
+}
+
+/* Extra Small Mobile Devices (375px and below) */
+@media (max-width: 375px) {
+  .excellence-showcase-card {
+    .modern-header {
+      padding: 1rem 0.5rem;
+
+      .header-content {
+        margin-top: 1rem !important;
+
+        .title-wrapper {
+          margin-bottom: 0.75rem;
+
+          .modern-title {
+            font-size: clamp(0.8rem, 8vw, 1.2rem);
+            line-height: 1.1;
+
+            .title-main {
+              font-size: 1em;
+            }
+          }
+
+          .title-accent {
+            width: 50px;
+            height: 3px;
+            margin: 0.5rem auto;
+          }
+        }
+
+        .modern-subtitle {
+          font-size: 0.55rem;
+          line-height: 1.3;
+          padding: 0 0.25rem;
+
+          .subtitle-emphasis {
+            font-size: 0.75rem;
+            display: block;
+            margin-top: 0.25rem;
+          }
+        }
+      }
+    }
+
+    .content-showcase {
+      padding: 0.375rem 0.2rem;
+
+      .content-header {
+        margin-bottom: 0.4rem;
+
+        .content-badge {
+          padding: 0.25rem 0.5rem;
+          font-size: 0.65rem;
+          margin-bottom: 0.3rem;
+        }
+
+        .content-title {
+          font-size: 1.2rem;
+          line-height: 1.1;
+          margin-bottom: 0.2rem;
+        }
+
+        .title-underline {
+          width: 30px;
+          height: 1.5px;
+        }
+      }
+
+      .content-body {
+        .content-description {
+          font-size: 0.75rem;
+          line-height: 1.4;
+          margin-bottom: 0.5rem;
+        }
+
+        .modern-features {
+          padding: 0.375rem 0.2rem;
+          margin-bottom: 0.5rem;
+
+          .features-title {
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+            padding-left: 1.75rem;
+
+            .title-icon {
+              width: 1rem;
+              height: 1rem;
+            }
+          }
+
+          .features-grid {
+            gap: 0.3rem;
+
+            .feature-card {
+              padding: 0.25rem 0.3rem;
+
+              .feature-content {
+                .feature-text {
+                  font-size: 0.6rem;
+                  line-height: 1.1;
+                }
+              }
+
+              .feature-title {
+                font-size: 0.7rem;
+                line-height: 1.1;
+                margin-bottom: 0.15rem;
+              }
+
+              .feature-description {
+                font-size: 0.65rem;
+                line-height: 1.2;
+                margin-bottom: 0.15rem;
+              }
+
+              .feature-number {
+                font-size: 0.6rem;
+                width: 1rem;
+                height: 1rem;
+                line-height: 1rem;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .professional-stats-grid {
+      padding: 0.75rem 0.25rem;
+      gap: 0.5rem;
+
+      .professional-stat-card {
+        padding: 0.5rem 0.25rem;
+        min-height: 160px;
+
+        .stat-text-wrapper {
+          .stat-title {
+            font-size: 0.6rem;
+            line-height: 1.1;
+            padding: 0 0.15rem;
+            margin-bottom: 0.5rem;
+          }
+        }
+
+        .stat-icon-wrapper {
+          width: 60px;
+          height: 60px;
+          margin-bottom: 1rem;
+        }
+      }
+    }
+  }
+}
+
+// Debug styles
+.debug-info {
+  background: #f0f0f0;
+  padding: 1rem;
+  border-radius: 5px;
+  margin: 1rem 0;
+  font-family: monospace;
+  font-size: 12px;
+
+  pre {
+    background: #fff;
+    padding: 0.5rem;
+    border-radius: 3px;
+    margin: 0.5rem 0;
+    overflow: auto;
   }
 }
 </style>

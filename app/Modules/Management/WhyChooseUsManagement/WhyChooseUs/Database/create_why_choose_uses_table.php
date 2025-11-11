@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('title', 100)->nullable();
             $table->text('description')->nullable();
             $table->string('image', 200)->nullable();
+            $table->json('key_features')->nullable();
 
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();

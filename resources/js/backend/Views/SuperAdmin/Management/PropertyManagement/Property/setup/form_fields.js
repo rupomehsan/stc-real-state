@@ -29,8 +29,8 @@ export default [
         value: "featured",
       },
       {
-        label: "Ongoing",
-        value: "ongoing",
+        label: "Latest",
+        value: "latest",
       },
     ],
     value: "",

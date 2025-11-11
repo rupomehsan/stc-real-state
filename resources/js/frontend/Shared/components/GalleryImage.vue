@@ -1,13 +1,13 @@
 <template>
   <div class="footer-bottom-community">
     <div class="content">
-      <h4 class="box-title">Nice Gallery</h4>
+      <h4 class="box-title"></h4>
     </div>
     <div class="footer-gallery-wrapper">
       <div class="simple-gallery-card" v-for="image in images" :key="image.id">
         <div class="gallery-img">
           <img :src="'/' + image.image" :alt="image.title" />
-            <a :href="'/' + image.image" class="icon-btn popup-image"
+          <a :href="'/' + image.image" class="icon-btn popup-image"
             ><i class="fa-solid fa-eye"></i
           ></a>
         </div>

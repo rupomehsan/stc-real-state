@@ -264,6 +264,11 @@ export default {
   color: white;
 }
 
+.status-badge.ongoing {
+  background: rgba(59, 130, 246, 0.9);
+  color: white;
+}
+
 .status-badge.upcoming {
   background: rgba(245, 158, 11, 0.9);
   color: white;

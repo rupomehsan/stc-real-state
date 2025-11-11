@@ -1,0 +1,1223 @@
+/* ===========================
+   MISSION VISION PROFESSIONAL SECTION
+   =========================== */
+
+/* Main Section */
+.mission-vision-professional-section {
+  padding: 80px 0;
+  position: relative;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f1f3f4 100%);
+  overflow: hidden;
+}
+
+.mission-vision-professional-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="%23e9ecef" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+  opacity: 0.4;
+  z-index: 1;
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Section Header */
+.section-title-area {
+  margin-bottom: 60px;
+}
+
+.subtitle-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--theme-color, #d4af37), var(--theme-color2, #f4d03f));
+  color: #1a1a1a;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.badge-icon {
+  font-size: 16px;
+}
+
+.section-title {
+  font-size: 48px;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  position: relative;
+}
+
+.title-underline {
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--theme-color, #d4af37), var(--theme-color2, #f4d03f));
+  border-radius: 2px;
+  margin: 20px auto;
+}
+
+.section-subtitle {
+  font-size: 18px;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Professional Content Wrapper */
+.professional-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+/* Responsive Wrapper - Large devices 60%, smaller devices 100% */
+.responsive-wrapper {
+  width: 80%;
+  margin: 0 auto;
+  transition: width 0.3s ease;
+}
+
+/* Large Desktop - 60% width */
+@media (min-width: 1200px) {
+  .responsive-wrapper {
+    width: 80%;
+  }
+}
+
+/* Medium Desktop - 70% width */
+@media (max-width: 1199px) and (min-width: 992px) {
+  .responsive-wrapper {
+    width: 70%;
+  }
+}
+
+/* Tablet - 85% width */
+@media (max-width: 991px) and (min-width: 768px) {
+  .responsive-wrapper {
+    width: 85%;
+  }
+}
+
+/* Mobile and Small Tablets - 100% width */
+@media (max-width: 767px) {
+  .responsive-wrapper {
+    width: 100%;
+    padding: 0 15px;
+  }
+}
+
+/* Extra Small Mobile - 100% width with reduced padding */
+@media (max-width: 576px) {
+  .responsive-wrapper {
+    width: 100%;
+    padding: 0 10px;
+  }
+}
+
+/* Professional Cards */
+.professional-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 60px 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.professional-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, var(--theme-color, #d4af37), var(--theme-color2, #f4d03f));
+  transition: all 0.3s ease;
+}
+
+.professional-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15);
+}
+
+.professional-card:hover::before {
+  height: 8px;
+}
+
+/* Card-specific gradients */
+.mission-card::before {
+  background: linear-gradient(90deg, #ff6b6b, #ee5a24);
+}
+
+.vision-card::before {
+  background: linear-gradient(90deg, #00d2d3, #54a0ff);
+}
+
+.values-card::before {
+  background: linear-gradient(90deg, #5f27cd, #341f97);
+}
+
+/* Card Content Area */
+.card-content-area {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Content Header */
+.content-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.content-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: white;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.mission-icon {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+}
+
+.vision-icon {
+  background: linear-gradient(135deg, #00d2d3, #54a0ff);
+}
+
+.values-icon {
+  background: linear-gradient(135deg, #5f27cd, #341f97);
+}
+
+.content-badge {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.mission-badge {
+  background: rgba(255, 107, 107, 0.1);
+  color: #ee5a24;
+}
+
+.vision-badge {
+  background: rgba(0, 210, 211, 0.1);
+  color: #00a3a4;
+}
+
+.values-badge {
+  background: rgba(95, 39, 205, 0.1);
+  color: #5f27cd;
+}
+
+/* Content Title */
+.content-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 24px;
+  line-height: 1.3;
+}
+
+/* Content Description */
+.content-description {
+  color: #555;
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.content-description p {
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  background: rgba(0, 0, 0, 0.02);
+  border-left: 4px solid var(--theme-color, #d4af37);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.content-description p:hover {
+  background: rgba(212, 175, 55, 0.08);
+  transform: translateX(5px);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.15);
+}
+
+.content-description p:first-child {
+  border-left-color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.05);
+}
+
+.content-description p:first-child:hover {
+  background: rgba(255, 107, 107, 0.1);
+}
+
+.content-description strong {
+  color: #333;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 14px;
+}
+
+/* Values card specific styling */
+.values-card .content-description p {
+  border-left-color: #5f27cd;
+  background: rgba(95, 39, 205, 0.03);
+}
+
+.values-card .content-description p:hover {
+  background: rgba(95, 39, 205, 0.08);
+}
+
+/* Mission card specific styling */
+.mission-card .content-description p {
+  border-left-color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.03);
+  position: relative;
+  padding-left: 40px;
+}
+
+.mission-card .content-description p:hover {
+  background: rgba(255, 107, 107, 0.08);
+}
+
+.mission-card .content-description p:before {
+  position: absolute;
+  left: 16px;
+  font-weight: bold;
+  font-size: 18px;
+  top: 12px;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+.mission-card .content-description p:nth-child(1):before {
+  content: "🎯";
+  color: #ff6b6b;
+}
+
+.mission-card .content-description p:nth-child(2):before {
+  content: "🎯";
+  color: #ff6b6b;
+}
+
+/* Mission dynamic content styling */
+.mission-card .content-description .fw-bolder p {
+  border-left-color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.03);
+  position: relative;
+  padding-left: 40px;
+  margin-bottom: 16px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.mission-card .content-description .fw-bolder p:hover {
+  background: rgba(255, 107, 107, 0.08);
+  transform: translateX(5px);
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.15);
+}
+
+.mission-card .content-description .fw-bolder p:before {
+  content: "🎯";
+  position: absolute;
+  left: 16px;
+  color: #ff6b6b;
+  font-weight: bold;
+  font-size: 18px;
+  top: 12px;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+/* Mission dynamic content - Li tags with P tags inside */
+.mission-card .content-description .fw-bolder li {
+  list-style: none;
+  margin-bottom: 16px;
+}
+
+.mission-card .content-description .fw-bolder li p {
+  border-left-color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.03);
+  position: relative;
+  padding-left: 40px;
+  margin-bottom: 0;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  border-left-width: 4px;
+  border-left-style: solid;
+}
+
+.mission-card .content-description .fw-bolder li p:hover {
+  background: rgba(255, 107, 107, 0.08);
+  transform: translateX(5px);
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.15);
+}
+
+.mission-card .content-description .fw-bolder li p:before {
+  content: "🎯";
+  position: absolute;
+  left: 16px;
+  color: #ff6b6b;
+  font-weight: bold;
+  font-size: 18px;
+  top: 12px;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+/* Vision card specific styling */
+.vision-card .content-description p {
+  border-left-color: #00d2d3;
+  background: rgba(0, 210, 211, 0.03);
+  position: relative;
+  padding-left: 40px;
+}
+
+.vision-card .content-description p:hover {
+  background: rgba(0, 210, 211, 0.08);
+}
+
+.vision-card .content-description p:before {
+  position: absolute;
+  left: 16px;
+  font-weight: bold;
+  font-size: 18px;
+  top: 12px;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+.vision-card .content-description p:nth-child(1):before {
+  content: "🎯";
+  color: #00d2d3;
+}
+
+.vision-card .content-description p:nth-child(2):before {
+  content: "🎯";
+  color: #00d2d3;
+}
+
+/* Vision dynamic content styling */
+.vision-card .content-description .fw-bolder p {
+  border-left-color: #00d2d3;
+  background: rgba(0, 210, 211, 0.03);
+  position: relative;
+  padding-left: 40px;
+  margin-bottom: 16px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.vision-card .content-description .fw-bolder p:hover {
+  background: rgba(0, 210, 211, 0.08);
+  transform: translateX(5px);
+  box-shadow: 0 4px 15px rgba(0, 210, 211, 0.15);
+}
+
+.vision-card .content-description .fw-bolder p:before {
+  content: "🎯";
+  position: absolute;
+  left: 16px;
+  color: #00d2d3;
+  font-weight: bold;
+  font-size: 18px;
+  top: 12px;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+/* Vision dynamic content - Li tags with P tags inside */
+.vision-card .content-description .fw-bolder li {
+  list-style: none;
+  margin-bottom: 16px;
+}
+
+.vision-card .content-description .fw-bolder li p {
+  border-left-color: #00d2d3;
+  background: rgba(0, 210, 211, 0.03);
+  position: relative;
+  padding-left: 40px;
+  margin-bottom: 0;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  border-left-width: 4px;
+  border-left-style: solid;
+}
+
+.vision-card .content-description .fw-bolder li p:hover {
+  background: rgba(0, 210, 211, 0.08);
+  transform: translateX(5px);
+  box-shadow: 0 4px 15px rgba(0, 210, 211, 0.15);
+}
+
+.vision-card .content-description .fw-bolder li p:before {
+  content: "🎯";
+  position: absolute;
+  left: 16px;
+  color: #00d2d3;
+  font-weight: bold;
+  font-size: 18px;
+  top: 12px;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+/* Content Features */
+.content-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.03);
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.feature-item:hover {
+  background: rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
+  border-color: var(--theme-color, #d4af37);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.feature-item i {
+  color: var(--theme-color, #d4af37);
+  font-size: 16px;
+}
+
+/* Special highlight for key points */
+.content-description p span[style*="display: inline"] {
+  background: linear-gradient(120deg, transparent 0%, rgba(212, 175, 55, 0.2) 20%, rgba(212, 175, 55, 0.1) 80%, transparent 100%);
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+/* Special styling for dynamic content from database */
+.mission-card .content-description div[class="fw-bolder"] p,
+.vision-card .content-description div[class="fw-bolder"] p {
+  position: relative;
+  padding-left: 40px;
+}
+
+.mission-card .content-description div[class="fw-bolder"] p:before,
+.vision-card .content-description div[class="fw-bolder"] p:before {
+  position: absolute;
+  left: 16px;
+  font-weight: bold;
+  font-size: 18px;
+  top: 12px;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+.mission-card .content-description div[class="fw-bolder"] p:nth-child(odd):before {
+  content: "🎯";
+  color: #ff6b6b;
+}
+
+.mission-card .content-description div[class="fw-bolder"] p:nth-child(even):before {
+  content: "🎯";
+  color: #ff6b6b;
+}
+
+.vision-card .content-description div[class="fw-bolder"] p:nth-child(odd):before {
+ content: "🎯";
+  color: #00d2d3;
+}
+
+.vision-card .content-description div[class="fw-bolder"] p:nth-child(even):before {
+ content: "🎯";
+  color: #00d2d3;
+}
+
+/* Enhanced styling for values list items */
+.values-card .content-description p:not(:first-child) {
+  position: relative;
+  padding-left: 40px;
+  background: rgba(95, 39, 205, 0.03);
+  border-left-color: #5f27cd;
+}
+
+.values-card .content-description p:before {
+  content: "🎯";
+  position: absolute;
+  left: 16px;
+  color: #5f27cd;
+  font-weight: bold;
+  font-size: 18px;
+  top: 12px;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+.values-card .content-description p:nth-child(2):before {
+  content: "🎯";
+}
+
+.values-card .content-description p:nth-child(3):before {
+  content: "🎯";
+}
+
+.values-card .content-description p:nth-child(4):before {
+  content: "🎯";
+}
+
+.values-card .content-description p:nth-child(5):before {
+  content: "🎯";
+}
+
+.values-card .content-description p:nth-child(6):before {
+  content: "🎯";
+}
+
+.values-card .content-description p:nth-child(7):before {
+  content: "🎯";
+}
+
+.values-card .content-description p:nth-child(8):before {
+  content: "🎯";
+}
+
+/* Core Values dynamic content styling */
+.values-card .content-description .fw-bolder p {
+  border-left-color: #5f27cd;
+  background: rgba(95, 39, 205, 0.03);
+  position: relative;
+  padding-left: 40px;
+  margin-bottom: 16px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.values-card .content-description .fw-bolder p:hover {
+  background: rgba(95, 39, 205, 0.08);
+  transform: translateX(5px);
+  box-shadow: 0 4px 15px rgba(95, 39, 205, 0.15);
+}
+
+.values-card .content-description .fw-bolder p:before {
+  content: "🎯";
+  position: absolute;
+  left: 16px;
+  color: #5f27cd;
+  font-weight: bold;
+  font-size: 18px;
+  top: 12px;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+/* Core Values dynamic content - Li tags with P tags inside */
+.values-card .content-description .fw-bolder li {
+  list-style: none;
+  margin-bottom: 16px;
+}
+
+.values-card .content-description .fw-bolder li p {
+  border-left-color: #5f27cd;
+  background: rgba(95, 39, 205, 0.03);
+  position: relative;
+  padding-left: 40px;
+  margin-bottom: 0;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  border-left-width: 4px;
+  border-left-style: solid;
+}
+
+.values-card .content-description .fw-bolder li p:hover {
+  background: rgba(95, 39, 205, 0.08);
+  transform: translateX(5px);
+  box-shadow: 0 4px 15px rgba(95, 39, 205, 0.15);
+}
+
+.values-card .content-description .fw-bolder li p:before {
+  content: "🎯";
+  position: absolute;
+  left: 16px;
+  color: #5f27cd;
+  font-weight: bold;
+  font-size: 18px;
+  top: 12px;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+/* Image Card */
+.content-image-card {
+  position: relative;
+  height: 100%;
+  min-height: 400px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  transition: all 0.4s ease;
+}
+
+.content-image-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+}
+
+.content-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.4s ease;
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1));
+  z-index: 1;
+}
+
+.image-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--theme-color, #d4af37);
+  z-index: 2;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.image-decoration {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.mission-decoration {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+}
+
+.vision-decoration {
+  background: linear-gradient(135deg, #00d2d3, #54a0ff);
+}
+
+.values-decoration {
+  background: linear-gradient(135deg, #5f27cd, #341f97);
+}
+
+/* Skeleton Loading States */
+.skeleton-image-card {
+  height: 100%;
+  min-height: 400px;
+  border-radius: 20px;
+  background: linear-gradient(90deg, #f0f4f8 25%, #ffffff 37%, #f0f4f8 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: -200% 0%;
+  }
+}
+
+.skeleton-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+}
+
+.skeleton-decoration {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .mission-vision-professional-section {
+    padding: 60px 0;
+  }
+
+  .professional-card {
+    padding: 40px 30px;
+  }
+
+  .section-title {
+    font-size: 40px;
+  }
+
+  .content-title {
+    font-size: 28px;
+  }
+
+  .professional-content-wrapper {
+    gap: 60px;
+  }
+
+  /* Enhanced mobile styling for paragraphs */
+  .content-description p {
+    padding: 10px 12px;
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+
+  /* Mission and Vision card mobile icons */
+  .mission-card .content-description p,
+  .vision-card .content-description p,
+  .mission-card .content-description .fw-bolder li p,
+  .vision-card .content-description .fw-bolder li p {
+    padding-left: 35px;
+  }
+
+  .mission-card .content-description p:before,
+  .vision-card .content-description p:before,
+  .mission-card .content-description .fw-bolder li p:before,
+  .vision-card .content-description .fw-bolder li p:before,
+  .values-card .content-description p:not(:first-child):before,
+  .values-card .content-description .fw-bolder li p:before {
+    left: 12px;
+    font-size: 16px;
+  }
+
+  .values-card .content-description p:not(:first-child) {
+    padding-left: 35px;
+  }
+}
+
+@media (max-width: 768px) {
+  .mission-vision-professional-section {
+    padding: 40px 0;
+  }
+
+  .professional-card {
+    padding: 30px 20px;
+    margin: 0;
+    border-radius: 16px;
+  }
+
+  .section-title {
+    font-size: 32px;
+    line-height: 1.2;
+  }
+
+  .content-title {
+    font-size: 24px;
+    line-height: 1.3;
+    margin-bottom: 20px;
+  }
+
+  .content-description {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 28px;
+  }
+
+  .content-description p {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 14px;
+    padding: 10px 14px;
+  }
+
+  .content-badge {
+    font-size: 12px;
+    padding: 8px 16px;
+  }
+
+  .subtitle-badge {
+    font-size: 12px;
+    padding: 10px 20px;
+  }
+
+  .section-subtitle {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .professional-content-wrapper {
+    gap: 40px;
+  }
+
+  .content-features {
+    flex-direction: column;
+  }
+
+  .feature-item {
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  .content-image-card {
+    min-height: 300px;
+    margin-bottom: 30px;
+  }
+
+  .content-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .mission-vision-professional-section {
+    padding: 30px 0;
+  }
+
+  .professional-card {
+    padding: 25px 15px;
+    margin: 0;
+    border-radius: 16px;
+  }
+
+  .section-title {
+    font-size: 26px;
+    line-height: 1.2;
+  }
+
+  .content-title {
+    font-size: 20px;
+    line-height: 1.3;
+    margin-bottom: 18px;
+  }
+
+  .section-subtitle {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .content-description {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .content-description p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    padding: 8px 12px;
+  }
+
+  .content-badge {
+    font-size: 11px;
+    padding: 6px 14px;
+  }
+
+  .subtitle-badge {
+    font-size: 11px;
+    padding: 8px 16px;
+  }
+
+  .feature-item {
+    font-size: 13px;
+  }
+
+  .feature-item i {
+    font-size: 14px;
+  }
+
+  .professional-content-wrapper {
+    gap: 30px;
+  }
+
+  .content-image-card {
+    min-height: 250px;
+    border-radius: 16px;
+  }
+
+  /* Ensure full width on mobile */
+  .responsive-wrapper {
+    width: 100% !important;
+    padding: 0 5px !important;
+  }
+
+  .professional-card {
+    margin: 0 !important;
+  }
+}
+
+/* Extra Small Mobile Devices (below 480px) */
+@media (max-width: 480px) {
+  .mission-vision-professional-section {
+    padding: 25px 0;
+  }
+
+  .professional-card {
+    padding: 20px 12px;
+    border-radius: 14px;
+  }
+
+  .section-title {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  .content-title {
+    font-size: 18px;
+    line-height: 1.3;
+    margin-bottom: 16px;
+  }
+
+  .content-description {
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
+  .content-description p {
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    padding: 6px 10px;
+  }
+
+  .content-badge {
+    font-size: 10px;
+    padding: 5px 12px;
+  }
+
+  .subtitle-badge {
+    font-size: 10px;
+    padding: 6px 14px;
+  }
+
+  .section-subtitle {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .feature-item {
+    font-size: 12px;
+  }
+
+  .feature-item i {
+    font-size: 13px;
+  }
+
+  .content-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .professional-content-wrapper {
+    gap: 25px;
+  }
+
+  .content-image-card {
+    min-height: 200px;
+  }
+}
+
+/* Very Small Devices (below 375px) */
+@media (max-width: 375px) {
+  .section-title {
+    font-size: 22px;
+  }
+
+  .content-title {
+    font-size: 17px;
+    margin-bottom: 14px;
+  }
+
+  .content-description {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .content-description p {
+    font-size: 12px;
+    line-height: 1.5;
+    padding: 5px 8px;
+  }
+
+  .professional-card {
+    padding: 18px 10px;
+  }
+
+  .content-badge {
+    font-size: 9px;
+    padding: 4px 10px;
+  }
+
+  .feature-item {
+    font-size: 11px;
+  }
+
+  .content-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 14px;
+  }
+}
+
+/* WOW.js Animation Enhancement */
+.fadeInUp {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+}
+
+.fadeInUp.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Mobile Device Optimization - Ensure content visibility */
+@media (max-width: 768px) {
+  /* Force visibility on mobile devices to prevent content being hidden */
+  .fadeInUp {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    transition: none;
+  }
+  
+  /* Alternative: Use reduced motion for mobile */
+  .fadeInUp.wow {
+    opacity: 0.9;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+  }
+  
+  .fadeInUp.wow.animated {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fallback for devices with reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .fadeInUp {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Fallback for older mobile browsers or slow connections */
+@media (max-width: 576px) {
+  .professional-card {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  
+  .fadeInUp {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}
+
+/* No-JS fallback - ensure content is visible if JavaScript fails */
+.no-js .fadeInUp {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Loading state optimization */
+.professional-card.loading .fadeInUp {
+  opacity: 1;
+  transform: none;
+}
+
+/* Mobile optimized class for forced visibility */
+.fadeInUp.mobile-optimized {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition: none !important;
+}
+
+/* Quick visibility timeout fallback */
+@keyframes quickFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fadeInUp:not(.animated):not(.mobile-optimized) {
+  animation: quickFadeIn 0.3s ease-out 0.5s forwards;
+}

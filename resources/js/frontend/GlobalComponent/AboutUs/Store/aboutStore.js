@@ -13,7 +13,7 @@ export const store = defineStore("about_us_store", {
     async fetch_about_us_data(forceRefresh = false) {
       // If we already have data and it's fresh (less than 5 minutes old), don't refetch
       if (!forceRefresh && this.about_us && this.lastFetched) {
-        const fiveMinutesAgo = Date.now() - (5 * 60 * 1000);
+        const fiveMinutesAgo = Date.now() - 5 * 60 * 1000;
         if (this.lastFetched > fiveMinutesAgo) {
           console.log("Using cached about us data");
           return { success: true, data: this.about_us };
@@ -24,16 +24,16 @@ export const store = defineStore("about_us_store", {
       this.error = null;
 
       try {
-        const response = await axios.get("/about-uses",{
+        const response = await axios.get("/about-uses", {
           params: {
             latest_data: 1,
-            page_type: 'about_us'
+            page_type: "about_us",
           },
         });
         this.about_us = response.data.data || response.data;
         this.lastFetched = Date.now();
 
-        // console.log("About data fetched successfully:", this.about_us);
+        console.log("About data fetched successfully:", this.about_us);
         return { success: true, data: this.about_us };
       } catch (error) {
         this.error = "Failed to fetch about data";
@@ -50,6 +50,4 @@ export const store = defineStore("about_us_store", {
       this.error = null;
     },
   },
-
-
 });

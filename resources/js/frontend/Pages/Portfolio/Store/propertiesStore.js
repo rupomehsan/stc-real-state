@@ -9,7 +9,7 @@ export const store = defineStore("properties_main_store", {
       current_page: 1,
       last_page: 1,
       total: 0,
-      per_page: 10,
+      per_page: 50,
     },
     property_category_id: null,
     property_categories: [],
@@ -48,12 +48,12 @@ export const store = defineStore("properties_main_store", {
       try {
         const params = {
           page,
-          limit: 10,
+          limit: 50,
           property_category_id: this.property_category_id,
         };
         if (search) {
           params.search = search;
-          params.limit = 10;
+          params.limit = 50;
         }
 
         const response = await axios.get("properties", { params });
@@ -99,7 +99,7 @@ export const store = defineStore("properties_main_store", {
         const response = await axios.get("property-categories", {
           params: {
             get_all: 1,
-            limit: 10,
+            limit: 50,
           },
         });
 
@@ -156,7 +156,6 @@ export const store = defineStore("properties_main_store", {
         } else {
           this.searched_properties = result;
         }
-        
       } catch (error) {
         this.error = error;
         this.searched_properties = { data: [] };

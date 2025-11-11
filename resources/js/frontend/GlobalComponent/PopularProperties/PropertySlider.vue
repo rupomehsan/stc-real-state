@@ -1164,14 +1164,14 @@ export default {
 
   .content-panel {
     flex: none;
-    padding: 40px 30px;
-    order: 2;
+    padding: 25px 20px;
+    order: 1;
   }
 
   .image-panel {
     flex: none;
     height: auto;
-    order: 1;
+    order: 2;
     flex-direction: column;
     gap: 0;
     padding: 0;
@@ -1238,11 +1238,29 @@ export default {
   }
 
   .main-title {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
+    line-height: 1.2;
+    margin-bottom: 20px;
   }
 
   .project-name {
     font-size: 1.3rem;
+    margin-bottom: 15px;
+  }
+
+  .project-info {
+    margin-top: 15px;
+  }
+
+  .project-meta {
+    gap: 10px;
+    font-size: 0.9rem;
+  }
+
+  .project-type,
+  .project-series,
+  .project-location {
+    font-size: 0.9rem;
   }
 
   /* Hide desktop controls on mobile */
@@ -1297,7 +1315,7 @@ export default {
   }
 
   .content-panel {
-    padding: 30px 20px;
+    padding: 20px 15px;
   }
 
   .image-panel {
@@ -1311,11 +1329,30 @@ export default {
   }
 
   .main-title {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
+    line-height: 1.2;
+    margin-bottom: 15px;
   }
 
   .project-name {
-    font-size: 1.1rem;
+    font-size: 1rem;
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+
+  .project-info {
+    margin-top: 10px;
+  }
+
+  .project-meta {
+    gap: 8px;
+    font-size: 0.8rem;
+  }
+
+  .project-type,
+  .project-series,
+  .project-location {
+    font-size: 0.8rem;
   }
 
   .project-meta {
@@ -1361,6 +1398,40 @@ export default {
   .thumb-item {
     width: 60px;
     height: 45px;
+  }
+}
+
+/* Extra Small Mobile Devices (375px and below) */
+@media (max-width: 375px) {
+  .main-title {
+    font-size: 1.3rem;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  .project-name {
+    font-size: 0.9rem;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+
+  .content-panel {
+    padding: 15px 12px;
+  }
+
+  .project-info {
+    margin-top: 8px;
+  }
+
+  .project-meta {
+    font-size: 0.75rem;
+    gap: 6px;
+  }
+
+  .project-type,
+  .project-series,
+  .project-location {
+    font-size: 0.75rem;
   }
 }
 

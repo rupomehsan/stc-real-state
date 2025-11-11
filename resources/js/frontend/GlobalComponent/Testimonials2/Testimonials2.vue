@@ -72,9 +72,7 @@
                     </svg>
                   </div>
                   <div class="stat-info">
-                    <div class="stat-number">
-                      {{ testimonials?.length || 50 }}+
-                    </div>
+                    <div class="stat-number">1000+</div>
                     <div class="stat-text">Happy Clients</div>
                   </div>
                 </div>
@@ -397,7 +395,9 @@ export default {
   --glass-bg: rgba(255, 255, 255, 0.25);
   --glass-border: rgba(255, 255, 255, 0.18);
 }
-
+.box-text {
+  text-align: justify !important;
+}
 // Modern Testimonials Section
 .modern-testimonial-section {
   position: relative;
@@ -695,7 +695,7 @@ export default {
 
       .header-content {
         .modern-title {
-          font-size: 2.5rem;
+          font-size: clamp(1.5rem, 4vw, 2.5rem);
           font-weight: 700;
           color: #1e293b;
           margin-bottom: 1rem;
@@ -719,7 +719,7 @@ export default {
         }
 
         .modern-subtitle {
-          font-size: 1.1rem;
+          font-size: clamp(0.9rem, 3vw, 1.1rem);
           color: #64748b;
           max-width: 600px;
           margin: 0 auto;
@@ -1074,11 +1074,14 @@ export default {
     .modern-header {
       .header-content {
         .modern-title {
-          font-size: 2rem;
+          font-size: clamp(1.3rem, 6vw, 2rem);
+          line-height: 1.2;
         }
 
         .modern-subtitle {
-          font-size: 1rem;
+          font-size: clamp(0.85rem, 4vw, 1rem);
+          line-height: 1.5;
+          padding: 0 1rem;
         }
       }
 
@@ -1165,6 +1168,177 @@ export default {
       .header-content {
         .modern-title {
           font-size: 1.8rem;
+        }
+      }
+    }
+  }
+}
+
+/* Mobile Devices (480px and below) */
+@media (max-width: 480px) {
+  .modern-testimonial-section {
+    padding: 1.5rem 0;
+  }
+
+  .testimonials-showcase-card {
+    margin: 0.5rem;
+    padding: 1.5rem 1rem;
+
+    .modern-header {
+      margin-bottom: 2rem;
+
+      .header-content {
+        .modern-title {
+          font-size: clamp(1.1rem, 8vw, 1.5rem);
+          line-height: 1.1;
+          margin-bottom: 0.75rem;
+        }
+
+        .title-accent {
+          width: 60px;
+          height: 3px;
+          margin: 0.75rem auto;
+        }
+
+        .modern-subtitle {
+          font-size: clamp(0.75rem, 5vw, 0.9rem);
+          line-height: 1.4;
+          padding: 0 0.5rem;
+
+          .subtitle-emphasis {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+          }
+        }
+      }
+
+      .header-stats {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+
+        .stat-preview {
+          padding: 0.75rem;
+          flex-direction: column;
+          text-align: center;
+          gap: 0.5rem;
+
+          .stat-icon {
+            width: 28px;
+            height: 28px;
+          }
+
+          .stat-info {
+            .stat-number {
+              font-size: 1rem;
+              margin-bottom: 0.2rem;
+            }
+
+            .stat-text {
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .modern-slider-controls {
+    margin-top: 1.5rem;
+
+    .navigation-wrapper {
+      gap: 0.75rem;
+
+      .modern-nav-btn {
+        width: 40px;
+        height: 40px;
+        margin-top: 40px;
+
+        svg {
+          width: 18px;
+          height: 18px;
+        }
+      }
+    }
+  }
+}
+
+/* Extra Small Mobile Devices (375px and below) */
+@media (max-width: 375px) {
+  .testimonials-showcase-card {
+    margin: 0.25rem;
+    padding: 1rem 0.75rem;
+
+    .modern-header {
+      margin-bottom: 1.5rem;
+
+      .header-content {
+        .modern-title {
+          font-size: clamp(0.95rem, 10vw, 1.3rem);
+          line-height: 1.1;
+          margin-bottom: 0.5rem;
+        }
+
+        .title-accent {
+          width: 50px;
+          height: 2.5px;
+          margin: 0.5rem auto;
+        }
+
+        .modern-subtitle {
+          font-size: clamp(0.65rem, 6vw, 0.8rem);
+          line-height: 1.3;
+          padding: 0 0.25rem;
+
+          .subtitle-emphasis {
+            font-size: 0.7rem;
+            margin-top: 0.4rem;
+          }
+        }
+      }
+
+      .header-stats {
+        gap: 0.5rem;
+        margin-top: 1rem;
+
+        .stat-preview {
+          padding: 0.5rem;
+
+          .stat-icon {
+            width: 24px;
+            height: 24px;
+          }
+
+          .stat-info {
+            .stat-number {
+              font-size: 0.9rem;
+              margin-bottom: 0.15rem;
+            }
+
+            .stat-text {
+              font-size: 0.7rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .modern-slider-controls {
+    margin-top: 1rem;
+
+    .navigation-wrapper {
+      gap: 0.5rem;
+
+      .modern-nav-btn {
+        width: 36px;
+        height: 36px;
+        margin-top: 30px;
+
+        svg {
+          width: 16px;
+          height: 16px;
         }
       }
     }

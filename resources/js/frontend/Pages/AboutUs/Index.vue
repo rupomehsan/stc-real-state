@@ -29,7 +29,7 @@
               <i class="fas fa-award"></i>
             </div>
             <div class="trust-text">
-              <span class="trust-number">10+</span>
+              <span class="trust-number">8+</span>
               <span class="trust-label">Years Experience</span>
             </div>
           </div>
@@ -38,7 +38,7 @@
               <i class="fas fa-users"></i>
             </div>
             <div class="trust-text">
-              <span class="trust-number">500+</span>
+              <span class="trust-number">1000+</span>
               <span class="trust-label">Satisfied Clients</span>
             </div>
           </div>
@@ -47,7 +47,7 @@
               <i class="fas fa-star"></i>
             </div>
             <div class="trust-text">
-              <span class="trust-number">99%</span>
+              <span class="trust-number">100%</span>
               <span class="trust-label">Success Rate</span>
             </div>
           </div>

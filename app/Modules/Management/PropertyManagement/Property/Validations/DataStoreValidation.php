@@ -47,7 +47,7 @@ class DataStoreValidation extends FormRequest
             'property_video_thmbnail' => 'required | sometimes',
             'property_group_id' => 'required | sometimes',
             'property_category_id' => 'required | sometimes',
-            'property_status' => 'required | sometimes',
+            'property_status' => 'sometimes',
             'date' => 'required | sometimes',
             'property_name' => 'required | sometimes',
             'property_address' => 'required | sometimes',

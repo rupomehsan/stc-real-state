@@ -2446,7 +2446,7 @@
 .video-canvas-container {
   position: relative;
   width: 100%;
-  height: 350px;
+  height: 400px;
   border-radius: 16px;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.9);
@@ -2982,6 +2982,37 @@
 
 /* Mobile Responsive Design for Professional Video Showcase */
 @media (max-width: 768px) {
+  .professional-video-showcase {
+    padding: 20px 15px !important;
+    margin: 20px 0;
+    display: block !important;
+    min-height: 300px;
+  }
+
+  .professional-video-theater {
+    min-height: 250px;
+    display: block !important;
+  }
+
+  .direct-video-display {
+    min-height: 200px;
+    display: block !important;
+  }
+
+  .direct-autoplay-video {
+    
+    width: 100% !important;
+    height: auto !important;
+    min-height: 280px !important;
+    display: block !important;
+    object-fit: cover;
+  }
+
+  /* Ensure video container is visible */
+  .video-canvas-container {
+    min-height: 200px;
+    display: block !important;
+  }
   .professional-video-showcase {
     padding: 20px;
     border-radius: 20px;
@@ -5299,15 +5330,48 @@
 
 /* Mobile Responsiveness for Modern Content */
 @media (max-width: 768px) {
+  /* FORCE about wrapper visibility on mobile */
+  .about-1-wrapper {
+    min-height: 100vh !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    padding: 60px 0 !important;
+  }
+  
+  /* FORCE content visibility regardless of v-if state */
+  .about-1-wrapper[style*="display: none"] {
+    display: block !important;
+  }
+  
+  /* Fix container and content visibility */
+  .container {
+    min-height: auto !important;
+    display: block !important;
+    padding: 0 15px !important;
+  }
+  
   .modern-content-card {
-    padding: 0px 0px;
-    margin: 0px;
+    padding: 20px 15px !important;
+    margin: 15px 0 !important;
+    display: block !important;
+    visibility: visible !important;
+    min-height: 300px !important;
+    opacity: 1 !important;
   }
+  
+  /* Force all child elements to be visible */
+  .modern-content-card * {
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
   .description-container {
-    padding: 5px;
+    padding: 15px;
   }
-.content-card-background {
-    padding: 10px;
+  
+  .content-card-background {
+    padding: 15px;
   }
   .floating-element {
     width: 15px;
@@ -6343,6 +6407,44 @@
   border: none;
 }
 
+/* Modal Video Element Styles */
+.modal-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 12px;
+  object-fit: cover;
+  background: #000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-video:focus {
+  outline: 2px solid var(--theme-color, #d4af37);
+  outline-offset: 2px;
+}
+
+/* Video hover effect */
+.video-wrapper:hover .modal-video {
+  transform: scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Video loading state */
+.modal-video:not([data-loaded="true"]) {
+  background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+  background-size: 200% 200%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
 /* Modal fade transition */
 .modal-fade-enter-active,
 .modal-fade-leave-active {
@@ -6380,6 +6482,15 @@
 
   .video-wrapper {
     padding-bottom: 56.25%;
+  }
+
+  .modal-video {
+    border-radius: 8px;
+  }
+
+  /* Ensure video controls are touch-friendly on mobile */
+  .modal-video::-webkit-media-controls-panel {
+    background-color: rgba(0, 0, 0, 0.8);
   }
 }
 
@@ -6591,6 +6702,15 @@ body.modal-open {
   /* Further reduce padding */
   .about-1-wrapper {
     padding: 30px 0 !important;
+    min-height: 50vh !important;
+    display: block !important;
+    visibility: visible !important;
+  }
+  
+  /* Force show content on small mobile screens */
+  .about-1-wrapper[v-if],
+  .about-1-wrapper[v-show] {
+    display: block !important;
   }
   
   .container {
@@ -6643,6 +6763,194 @@ body.modal-open {
   
   .modern-content-card {
     padding: 20px 12px !important;
+  }
+}
+
+/* ===========================
+   DIRECT AUTOPLAY VIDEO STYLES
+   =========================== */
+
+/* Direct Video Display Container */
+.direct-video-display {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.direct-video-display:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 35px 70px rgba(0, 0, 0, 0.25);
+}
+
+/* Direct Autoplay Video Element */
+.direct-autoplay-video {
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  object-fit: cover;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.direct-autoplay-video:hover {
+  transform: scale(1.02);
+}
+
+.direct-autoplay-video:focus {
+  outline: 3px solid rgba(212, 175, 55, 0.6);
+  outline-offset: 3px;
+}
+
+/* Video Overlay Information */
+.video-overlay-info {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.video-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  padding: 10px 16px;
+  border-radius: 25px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: fadeInDown 0.8s ease 0.5s both;
+}
+
+.video-badge i {
+  color: var(--theme-color, #d4af37);
+  font-size: 16px;
+  animation: pulse 2s infinite;
+}
+
+/* Professional fade-in animation */
+.professional-fade-in {
+  animation: professionalFadeIn 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  opacity: 0;
+}
+
+@keyframes professionalFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(0.98) translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* Video Information Panel Enhancement for Direct Video */
+.direct-video-display .video-information-panel {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.direct-video-display .meta-item {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 13px;
+}
+
+.direct-video-display .meta-item i {
+  color: var(--theme-color, #d4af37);
+}
+
+/* Responsive Design for Direct Video */
+@media (max-width: 1024px) {
+  .direct-autoplay-video {
+    min-height: 350px;
+  }
+  
+  .video-overlay-info {
+    top: 15px;
+    left: 15px;
+  }
+  
+  .video-badge {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .direct-autoplay-video {
+    min-height: 300px;
+    border-radius: 15px;
+  }
+  
+  .direct-video-display {
+    border-radius: 15px;
+  }
+  
+  .video-overlay-info {
+    top: 12px;
+    left: 12px;
+  }
+  
+  .video-badge {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 576px) {
+  .direct-autoplay-video {
+    min-height: 250px;
+    border-radius: 12px;
+  }
+  
+  .direct-video-display {
+    border-radius: 12px;
+  }
+  
+  .video-overlay-info {
+    top: 10px;
+    left: 10px;
+  }
+  
+  .video-badge {
+    padding: 5px 8px;
+    font-size: 11px;
+    gap: 6px;
   }
 }
 
