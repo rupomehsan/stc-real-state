@@ -42,11 +42,11 @@ class DataStoreValidation extends FormRequest
     public function rules(): array
     {
         return [
-            'price' => 'required | sometimes',
+            // 'price' => 'sometimes',
             'banner_image' => 'required | sometimes|array',
-            'property_video_thmbnail' => 'required | sometimes',
-            'property_group_id' => 'required | sometimes',
-            'property_category_id' => 'required | sometimes',
+            'property_video_thmbnail' => 'sometimes',
+            'property_group_id' => 'sometimes',
+            'property_category_id' => 'sometimes',
             'property_status' => 'sometimes',
             'date' => 'required | sometimes',
             'property_name' => 'required | sometimes',
@@ -54,12 +54,12 @@ class DataStoreValidation extends FormRequest
             'property_description' => 'required | sometimes',
             'property_detail' => 'required | sometimes',
             'facts_and_features' => 'required | sometimes',
-            'gallery' => 'required | sometimes|array',
+            'gallery' => ' sometimes|array',
             'amenities' => 'required | sometimes',
-            'floor_plan' => 'required | sometimes',
-            'floor_plan_details' => 'required | sometimes',
-            'property_video_url' => 'required | sometimes',
-            'map_location_url' => 'required | sometimes',
+            'floor_plan' => ' sometimes',
+            'floor_plan_details' => ' sometimes',
+            'property_video_url' => ' sometimes',
+            'map_location_url' => 'sometimes',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
         ];
     }

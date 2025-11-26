@@ -32,12 +32,6 @@ export default [
         type: "text",
         placeholder: "Enter feature title",
       },
-      {
-        name: "description",
-        label: "Feature Description",
-        type: "textarea",
-        placeholder: "Enter feature description",
-      },
     ],
   },
 ];

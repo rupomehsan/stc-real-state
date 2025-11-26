@@ -1267,8 +1267,8 @@ export default {
 /* Extra Small Mobile Devices (375px and below) */
 @media (max-width: 375px) {
   .testimonials-showcase-card {
-    margin: 0.25rem;
-    padding: 1rem 0.75rem;
+    margin: 0.25rem !important;
+    padding: 0.75rem !important;
 
     .modern-header {
       margin-bottom: 1.5rem;

@@ -43,6 +43,11 @@ class GetAllData
                 });
             }
 
+            if (request()->has('property_status') && request()->input('property_status') != '') {
+                $property_status = request()->input('property_status');
+                // dd($property_status);
+                $data = $data->where('property_status', $property_status);
+            }
             if ($start_date && $end_date) {
                 if ($end_date > $start_date) {
                     $data->whereBetween('created_at', [$start_date . ' 00:00:00', $end_date . ' 23:59:59']);
@@ -56,7 +61,7 @@ class GetAllData
             }
 
             if (request()->has('random_data') && request()->input('random_data') == 1) {
-             
+
                 $data = $data
                     ->with($with)
                     ->select($fields)

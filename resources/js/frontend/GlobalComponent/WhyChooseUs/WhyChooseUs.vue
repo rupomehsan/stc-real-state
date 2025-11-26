@@ -182,24 +182,9 @@
                                 "
                                 class="debug-info"
                               >
-                                <p>Debug: No key_features found</p>
-                                <p>Active Index: {{ activeTabIndex }}</p>
-                                <p>
-                                  Services Length: {{ services?.length || 0 }}
+                                <p class="debug-text alert alert-danger">
+                                  No Data Available
                                 </p>
-                                <p>
-                                  Current Service:
-                                  {{
-                                    services[activeTabIndex]?.title || "None"
-                                  }}
-                                </p>
-                                <pre>{{
-                                  JSON.stringify(
-                                    services[activeTabIndex]?.key_features,
-                                    null,
-                                    2
-                                  )
-                                }}</pre>
                               </div>
 
                               <div
@@ -213,13 +198,6 @@
                                 <div class="feature-icon-wrapper">
                                   <div class="feature-icon">
                                     <svg
-                                      v-if="getFeatureIcon(feature, idx)"
-                                      v-html="getFeatureIcon(feature, idx)"
-                                      viewBox="0 0 24 24"
-                                      fill="currentColor"
-                                    ></svg>
-                                    <svg
-                                      v-else
                                       viewBox="0 0 24 24"
                                       fill="currentColor"
                                     >
@@ -234,14 +212,14 @@
                                   <span class="feature-text">{{
                                     feature.title
                                   }}</span>
-                                  <div class="feature-description">
+                                  <!-- <div class="feature-description">
                                     {{
                                       getFeatureDescription(
                                         feature.description,
                                         idx
                                       )
                                     }}
-                                  </div>
+                                  </div> -->
                                 </div>
                                 <div class="feature-accent"></div>
                                 <div class="feature-number">{{ idx + 1 }}</div>
@@ -1681,7 +1659,7 @@ export default {
   }
 
   .hero-sub-title-text {
-    font-size: 18px;
+    font-size: 18px !important;
     letter-spacing: 2px;
   }
 
@@ -3629,6 +3607,19 @@ export default {
               transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
             }
           }
+        }
+      }
+    }
+  }
+
+  // Mobile Responsive Styles
+  @media (max-width: 768px) {
+    .content-showcase {
+      .content-header {
+        display: contents;
+
+        .content-title {
+          font-size: 1.5rem !important;
         }
       }
     }
@@ -5666,7 +5657,7 @@ export default {
             }
 
             .content-title {
-              font-size: 1.8rem;
+              font-size: 1.8rem !important;
               line-height: 1.2;
               margin-bottom: 0.4rem;
 
@@ -5894,7 +5885,7 @@ export default {
               }
 
               .content-title {
-                font-size: 1.5rem;
+                font-size: 1.5rem !important;
                 line-height: 1.1;
                 margin-bottom: 0.375rem;
               }
@@ -6171,7 +6162,7 @@ export default {
         }
 
         .content-title {
-          font-size: 1.2rem;
+          font-size: 1.2rem !important;
           line-height: 1.1;
           margin-bottom: 0.2rem;
         }

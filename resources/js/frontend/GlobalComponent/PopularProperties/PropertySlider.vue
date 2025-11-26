@@ -32,7 +32,7 @@
                 {{
                   currentSlide?.property_name ||
                   currentSlide?.title ||
-                  "Sheltech Cityscape Heights"
+                  "STC Cityscape Heights"
                 }}
               </h3>
               <div class="project-meta">

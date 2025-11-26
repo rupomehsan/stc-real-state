@@ -72,7 +72,7 @@
                             :name="`key_features[${featureIndex}][title]`"
                           />
                         </div>
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                           <label>Feature Description</label>
                           <textarea
                             class="form-control"
@@ -81,7 +81,7 @@
                             :name="`key_features[${featureIndex}][description]`"
                             rows="3"
                           ></textarea>
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                     <button
@@ -143,7 +143,7 @@ export default {
         (field) => field.name === "key_features"
       );
       if (keyFeaturesField) {
-        keyFeaturesField.value = [{ title: "", description: "" }];
+        keyFeaturesField.value = [{ title: "" }];
       }
     }
 
@@ -162,7 +162,7 @@ export default {
     reset_fields: function () {
       this.form_fields.forEach((item) => {
         if (item.type === "dynamic_array") {
-          item.value = [{ title: "", description: "" }];
+          item.value = [{ title: "" }];
         } else {
           item.value = "";
         }
@@ -180,9 +180,7 @@ export default {
                 if (Array.isArray(value[1]) && value[1].length > 0) {
                   this.form_fields[index].value = value[1];
                 } else {
-                  this.form_fields[index].value = [
-                    { title: "", description: "" },
-                  ];
+                  this.form_fields[index].value = [{ title: "" }];
                 }
               } else {
                 this.form_fields[index].value = value[1];
@@ -201,7 +199,7 @@ export default {
         (field) => field.name === "key_features"
       );
       if (keyFeaturesField) {
-        keyFeaturesField.value.push({ title: "", description: "" });
+        keyFeaturesField.value.push({ title: "" });
       }
     },
 
@@ -252,23 +250,13 @@ export default {
 
         // Create new hidden inputs for key_features
         keyFeaturesField.value.forEach((feature, index) => {
-          if (feature.title && feature.description) {
-            // Create hidden input for title
+          if (feature.title && feature.title.trim() !== "") {
+            // Create hidden input for title only
             const titleInput = document.createElement("input");
             titleInput.setAttribute("name", `key_features[${index}][title]`);
             titleInput.setAttribute("type", "hidden");
             titleInput.value = feature.title;
             document.querySelector("form").appendChild(titleInput);
-
-            // Create hidden input for description
-            const descriptionInput = document.createElement("input");
-            descriptionInput.setAttribute(
-              "name",
-              `key_features[${index}][description]`
-            );
-            descriptionInput.setAttribute("type", "hidden");
-            descriptionInput.value = feature.description;
-            document.querySelector("form").appendChild(descriptionInput);
           }
         });
       }

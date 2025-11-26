@@ -46,7 +46,6 @@ class DataStoreValidation extends FormRequest
             'image' => 'sometimes|image|mimes:jpeg,jpg,png,gif,webp|max:2048',
             'key_features' => 'sometimes|array',
             'key_features.*.title' => 'required_with:key_features|string|max:255',
-            'key_features.*.description' => 'required_with:key_features|string|max:1000',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
         ];
     }
@@ -66,8 +65,6 @@ class DataStoreValidation extends FormRequest
             'image.uploaded' => 'The image must not be greater than 2MB.',
             'key_features.*.title.required_with' => 'Each key feature must have a title.',
             'key_features.*.title.max' => 'Key feature title must not exceed 255 characters.',
-            'key_features.*.description.required_with' => 'Each key feature must have a description.',
-            'key_features.*.description.max' => 'Key feature description must not exceed 1000 characters.',
         ];
     }
 }

@@ -28,7 +28,7 @@
     <div v-if="loading || banners.length === 0" class="loading-container">
       <div class="loading-content">
         <div class="loading-spinner"></div>
-        <h3>Loading Amazing Properties...</h3>
+        <h3>STC Amazing Properties...</h3>
       </div>
     </div>
 
@@ -63,11 +63,17 @@
       <swiper-slide v-for="(banner, index) in banners" :key="index">
         <div class="slide-content">
           <div class="hero-img-shape-1">
-            <div class="logo-icon-wrap border">
-              <a href="javascript:void(0)" class="logo-icon popup-video fs-3"
-                ><i class="fa-solid fa-people-roof"></i
-              ></a>
-              <CircleText />
+            <div class="logo-icon-wrap">
+              <div class="circle-container">
+                <CircleText />
+                <div class="logo-icon popup-video fs-3">
+                  <img
+                    src="/assets/frontend/img/year.png"
+                    alt=""
+                    class="year-image"
+                  />
+                </div>
+              </div>
             </div>
           </div>
           <div class="parallax-bg" data-swiper-parallax="-23%">
@@ -234,7 +240,71 @@ export default {
   margin: 0;
   padding: 0;
 }
+/* Logo icon override for full image adjustment */
+.logo-icon {
+  width: 100px !important;
+  height: 100px !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 10 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 2px solid rgba(255, 255, 255, 0.2) !important;
+}
 
+.year-image {
+  width: 80px !important;
+  height: 80px !important;
+  object-fit: cover !important;
+  border-radius: 50% !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transition: transform 0.3s ease !important;
+}
+
+/* Mobile-specific overrides for better visibility */
+@media (max-width: 768px) {
+  .logo-icon {
+    width: 90px !important;
+    height: 90px !important;
+  }
+
+  .year-image {
+    width: 100px !important;
+    height: 100px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-icon {
+    width: 90px !important;
+    height: 90px !important;
+  }
+
+  .year-image {
+    width: 50px !important;
+    height: 50px !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .logo-icon {
+    width: 90px !important;
+    height: 90px !important;
+  }
+
+  .year-image {
+    width: 45px !important;
+    height: 45px !important;
+  }
+}
 /* Static Category Blocks */
 .category-blocks-wrapper {
   position: absolute;
@@ -764,6 +834,29 @@ export default {
     font-size: 16px;
   }
 
+  .circle-container {
+    width: 220px;
+    height: 220px;
+    min-width: 100px !important;
+    min-height: 100px !important;
+    flex-shrink: 0;
+    /* border: 1px solid rgba(255, 255, 255, 0.2); */
+  }
+
+  .logo-icon {
+    width: 50px;
+    height: 50px;
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  .year-image {
+    width: 90px !important;
+    height: 90px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+  }
+
   :deep(.swiper-pagination) {
     right: 25px !important;
     gap: 12px;
@@ -789,6 +882,7 @@ export default {
   .slide-text {
     padding: 0 20px;
     text-align: center;
+    margin-top: -130px;
   }
 
   .slide-text h3 {
@@ -860,6 +954,28 @@ export default {
     font-size: 14px;
   }
 
+  .circle-container {
+    width: 130px;
+    height: 130px;
+    min-width: 120px !important;
+    min-height: 120px !important;
+    flex-shrink: 0;
+  }
+
+  .logo-icon {
+    width: 80px;
+    height: 80px;
+    min-width: 60px;
+    min-height: 60px;
+  }
+
+  .year-image {
+    width: 90px !important;
+    height: 90px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+  }
+
   :deep(.swiper-pagination) {
     right: 20px !important;
     gap: 10px;
@@ -879,6 +995,7 @@ export default {
 @media (max-width: 480px) {
   .slide-text {
     padding: 0 15px;
+    margin-top: -130px;
   }
 
   .slide-text h3 {
@@ -957,6 +1074,28 @@ export default {
     font-size: 13px;
   }
 
+  .circle-container {
+    width: 120px;
+    height: 120px;
+    min-width: 110px !important;
+    min-height: 110px !important;
+    flex-shrink: 0;
+  }
+
+  .logo-icon {
+    width: 80px;
+    height: 80px;
+    min-width: 60px;
+    min-height: 60px;
+  }
+
+  .year-image {
+    width: 80px !important;
+    height: 80px !important;
+    min-width: 35px !important;
+    min-height: 35px !important;
+  }
+
   :deep(.swiper-pagination) {
     right: 10px !important;
     gap: 6px;
@@ -977,6 +1116,7 @@ export default {
 @media (max-width: 375px) {
   .slide-text {
     padding: 0 12px;
+    margin-top: -130px;
   }
 
   .slide-text h3 {
@@ -1016,6 +1156,74 @@ export default {
   .category-block h4 {
     font-size: 12px;
   }
+
+  .circle-container {
+    width: 110px;
+    height: 110px;
+    min-width: 100px !important;
+    min-height: 100px !important;
+    flex-shrink: 0;
+  }
+
+  .logo-icon {
+    width: 60px;
+    height: 60px;
+    min-width: 55px;
+    min-height: 55px;
+  }
+
+  .year-image {
+    width: 80px !important;
+    height: 80px !important;
+    min-width: 35px !important;
+    min-height: 35px !important;
+  }
+}
+
+/* Circle container and year image styling */
+.circle-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 140px;
+  height: 140px;
+  min-width: 100px !important;
+  min-height: 100px !important;
+  flex-shrink: 0;
+}
+
+.logo-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  width: 60px;
+  height: 60px;
+  min-width: 40px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.logo-icon:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translate(-50%, -50%) scale(1.1);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+/* Removed conflicting year-image styles - using top override instead */
+
+.logo-icon:hover .year-image {
+  transform: scale(1.1) !important;
 }
 
 /* Fade effect enhancement */
@@ -1105,6 +1313,43 @@ export default {
   }
   100% {
     clip-path: inset(0 100% 0 0);
+  }
+}
+
+/* Mobile responsive styles for hero-img-shape-1 */
+@media (max-width: 768px) {
+  .hero-img-shape-1 {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    width: auto;
+    height: auto;
+  }
+
+  .hero-img-shape-1 .logo-icon-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Ensure proper positioning for tablets */
+@media (min-width: 769px) and (max-width: 991px) {
+  .hero-img-shape-1 {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    z-index: 5;
   }
 }
 </style>

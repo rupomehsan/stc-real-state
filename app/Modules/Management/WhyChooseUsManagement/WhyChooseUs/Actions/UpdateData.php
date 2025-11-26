@@ -24,7 +24,7 @@ class UpdateData
             if (isset($requestData['key_features']) && is_array($requestData['key_features'])) {
                 // Filter out empty entries and ensure proper structure
                 $keyFeatures = array_filter($requestData['key_features'], function ($feature) {
-                    return !empty($feature['title']) && !empty($feature['description']);
+                    return !empty($feature['title']);
                 });
 
                 $requestData['key_features'] = array_values($keyFeatures);

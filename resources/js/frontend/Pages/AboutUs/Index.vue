@@ -283,30 +283,18 @@
           <!-- Professional Content Section -->
           <div class="professional-content-area">
             <!-- Section Badge -->
-            <div
-              class="content-badge fadeinup wow"
-              data-wow-duration="1.5s"
-              data-wow-delay="0.1s"
-            >
+            <div class="company-badge">
               <i class="fas fa-building"></i>
               <span>About Our Company</span>
             </div>
 
             <!-- Enhanced Title -->
-            <h2
-              class="professional-title fadeinup wow"
-              data-wow-duration="1.5s"
-              data-wow-delay="0.3s"
-            >
+            <h2 class="professional-title">
               {{ about_us?.title || "Excellence in Every Endeavor" }}
             </h2>
 
             <!-- Professional Description -->
-            <div
-              class="professional-description fadeinup wow"
-              data-wow-duration="1.5s"
-              data-wow-delay="0.5s"
-            >
+            <div class="professional-description">
               <div
                 v-if="about_us?.description"
                 v-html="about_us.description"
@@ -941,18 +929,54 @@ export default {
   margin-bottom: 60px;
 }
 
-.content-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 24px;
-  background: linear-gradient(135deg, #b72e26, #1d4ed8);
-  color: white;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  margin-bottom: 30px;
-  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+.company-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  padding: 14px 28px !important;
+  background: linear-gradient(
+    135deg,
+    #dc2626 0%,
+    #991b1b 50%,
+    #7f1d1d 100%
+  ) !important;
+  color: #ffffff !important;
+  border-radius: 50px !important;
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+  margin-bottom: 30px !important;
+  box-shadow: 0 8px 30px rgba(220, 38, 38, 0.4) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) !important;
+  transition: all 0.3s ease !important;
+  border: 2px solid rgba(255, 255, 255, 0.2) !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+.company-badge:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 12px 40px rgba(220, 38, 38, 0.5) !important;
+}
+
+.company-badge i {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  font-size: 1.2rem !important;
+  display: inline-block !important;
+}
+
+.company-badge span {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px !important;
+  display: inline-block !important;
+  text-transform: uppercase !important;
 }
 
 .professional-title {
@@ -1005,12 +1029,17 @@ export default {
 .highlight-icon {
   width: 55px;
   height: 55px;
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  background: linear-gradient(
+    135deg,
+    #dc2626 0%,
+    #991b1b 50%,
+    #7f1d1d 100%
+  ) !important;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: white !important;
   font-size: 1.3rem;
   flex-shrink: 0;
 }
@@ -1079,7 +1108,12 @@ export default {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  background: linear-gradient(
+    135deg,
+    #dc2626 0%,
+    #991b1b 50%,
+    #7f1d1d 100%
+  ) !important;
   transform: scaleX(0);
   transition: transform 0.3s ease;
 }
@@ -1110,7 +1144,12 @@ export default {
 .feature-icon {
   width: 65px;
   height: 65px;
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  background: linear-gradient(
+    135deg,
+    #dc2626 0%,
+    #991b1b 50%,
+    #7f1d1d 100%
+  ) !important;
   border-radius: 16px;
   display: flex;
   align-items: center;
@@ -1351,6 +1390,18 @@ export default {
   .hero-text-content {
     margin-top: 6rem; /* Extra large device spacing */
   }
+}
+
+/* Debug override: ensure the company-badge text is visible in this component */
+.company-badge {
+  opacity: 1 !important;
+  visibility: visible !important;
+  color: #ffffff !important;
+}
+.company-badge > span {
+  opacity: 1 !important;
+  visibility: visible !important;
+  color: #ffffff !important;
 }
 
 /* Large Devices */

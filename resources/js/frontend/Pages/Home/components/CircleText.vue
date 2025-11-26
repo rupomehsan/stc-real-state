@@ -17,7 +17,7 @@ export default {
   props: {
     text: {
       type: String,
-      default: "STC BUILDING & PROPERTIES ** stc **", // max 36 characters
+      default: "STC BUILDING & PROPERTIES**8 YEARS**", // max 36 characters
     },
   },
   computed: {

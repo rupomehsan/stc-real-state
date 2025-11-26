@@ -12,12 +12,12 @@ export default [
     value: "",
     data_list: [],
   },
-  {
-    name: "price",
-    label: "property price ",
-    type: "number",
-    value: "",
-  },
+  // {
+  //   name: "price",
+  //   label: "property price ",
+  //   type: "number",
+  //   value: "",
+  // },
   {
     name: "property_status",
     label: "Select property status",

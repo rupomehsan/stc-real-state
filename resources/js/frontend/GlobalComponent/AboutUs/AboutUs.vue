@@ -278,7 +278,7 @@
                   <div class="badge-indicator">
                     <div class="indicator-pulse"></div>
                   </div>
-                  <span class="badge-text">OUR COMPANY OVERVIEW</span>
+                  <span class="badge-text">COMPANY OVERVIEW</span>
                 </div>
               </div>
             </div>

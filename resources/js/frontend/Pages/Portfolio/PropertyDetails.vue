@@ -23,10 +23,10 @@
       <div class="row gx-50 justify-content-center" v-show="single_property">
         <div class="col-10">
           <h2 class="page-title my-4">
+            Projects Overview & Specifications :
             <span class="text-primary">{{
               single_property?.property_name
             }}</span>
-            : Projects Overview & Specifications
           </h2>
         </div>
       </div>
@@ -55,6 +55,9 @@
                   ---------------------- PropertyDetail Component ----------------------
                   ---------------------------------------------------------------------- -->
                   <PropertyDetail
+                    :property_description="
+                      single_property?.property_description
+                    "
                     :property_detail="single_property?.property_detail"
                     :property_status="
                       single_property?.property_status == 'sale'
